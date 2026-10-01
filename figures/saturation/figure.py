@@ -57,7 +57,7 @@ def draw():
     a.semilogy(tc / 1e3, alpha * g, c=ns.PAL["theory"], ls="--")
     a.set_xlim(0, 11.1); a.set_ylim(0.03, 1.5)
     a.set_xlabel(r"$t\;(10^3L_{\rm ref}/c_{\rm ref})$"); a.set_ylabel(r"frequency $(c_{\rm ref}/L_{\rm ref})$")
-    traces.label(a, 5.2, 0.62, r"$\omega_{\rm tr}$", c="k"); traces.label(a, 2.0, 0.27, r"$\alpha\gamma_{\rm R}$", c=ns.PAL["theory"])
+    traces.label(a, 5.2, 0.62, r"$\omega_{\rm tr}$", c="k"); traces.label(a, 2.0, 0.27, r"$C\gamma_{\rm R}$", c=ns.PAL["theory"])
     gg = np.array([4e-3, 0.12])
     b.loglog(gg, alpha * gg, c=ns.PAL["theory"], ls="--")
     b.loglog(g, w, "o", c="k", ms=3.2)
@@ -66,7 +66,7 @@ def draw():
         print(run, "ratio", C[f"w_{run}"] / C[f"g_{run}"])
     b.set_xlim(4e-3, 0.12); b.set_ylim(0.03, 1.5)
     b.set_xlabel(r"$\gamma_{\rm R}\;(c_{\rm ref}/L_{\rm ref})$"); b.set_ylabel(r"$\omega_{\rm tr}\;(c_{\rm ref}/L_{\rm ref})$")
-    traces.label(b, 0.0075, 0.2, r"$\omega_{\rm tr}=\alpha\gamma_{\rm R}$", c=ns.PAL["theory"])
+    traces.label(b, 0.0075, 0.2, r"$\omega_{\rm tr}=C\gamma_{\rm R}$", c=ns.PAL["theory"])
     ns.tag(a, "(a)", y=0.14, va="bottom"); ns.tag(b, "(b)")
     ns.save(fig, "saturation")
 

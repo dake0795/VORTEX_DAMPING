@@ -1,0 +1,108 @@
+% ===========================================================================
+\section{Landau damping of the non-flute part of a vortex}\label{app:landau}
+% ===========================================================================
+
+Here we derive the rate \(L\) at which a vortex loses electrostatic energy to entropy, used in \cref{sec:dissipation}. The calculation has four steps: the motion of a particle along the field line, the response of the particles to a potential that varies along the line, the part of the vortex potential that does so, and the work that this part does on the particles.
+
+\subsection{Motion along the field line}
+
+To lowest order, a particle slides along its field line with its energy \(\varepsilon = mv^2/2\) and its pitch-angle variable \(\lambda = v_\perp^2/Bv^2\) conserved, so its parallel velocity is
+\begin{equation}
+\frac{\rmd l}{\rmd t} = v_\parallel = \pm v\sqrt{1 - \lambda B(l)}.
+\label{eq:Horbit}
+\end{equation}
+If \(\lambda B < 1\) everywhere, the particle is \textit{passing}: it travels the whole length of the field line and, in the periodic flux tube, comes round again. Otherwise it is \textit{trapped}: it is reflected where \(\lambda B(l) = 1\) and bounces between two such points. Either way the motion is periodic. Its period is \(\tau = \hat\tau(\lambda)/v\) for a passing particle and \(\tau = 2\hat\tau(\lambda)/v\) for a trapped one, with \(\hat\tau\) the integral defined in \cref{eq:orbit}, and we call \(\omega_\tau \equiv 2\pi/\tau\) the \textit{orbit frequency}. It is proportional to \(v\), so there are particles with every orbit frequency from zero upwards; for a thermal particle, \(\omega_\tau\) is of the order of the transit frequency, viz., the thermal speed divided by the length of the field line. We describe the position of a particle on its orbit by the angle \(\theta = \omega_\tau t\), which increases by \(2\pi\) per period, so that any function of position along the line is, for that particle, a periodic function of \(\theta\). In particular, the potential that the particle sees is
+\begin{equation}
+\varphi\left(l(\theta)\right) = \sum_{n=-\infty}^{\infty}\varphi_n\,\rme^{\rmi n\theta},
+\qquad
+\varphi_n(\lambda) = \frac{1}{2\pi}\oint\varphi\left(l(\theta)\right)\rme^{-\rmi n\theta}\,\rmd\theta .
+\label{eq:Hharmonics}
+\end{equation}
+The harmonic \(n = 0\) is the orbit average \(\overline\varphi\) of \cref{eq:orbit}. If the potential is flute-like, i.e., the same at every point of the field line, all the other harmonics vanish. The harmonics \(\varphi_n\) depend on \(\lambda\), which fixes the shape of the orbit, but not on the speed.
+
+\subsection{Response of the particles}
+
+Let the vortex be \(\phi = \varphi(x, l)\,\rme^{\rmi ky - \rmi\omega t}\). Its particles are carried in \(y\) by the zonal flow \(U(x)\), so that, at the radius \(x\), they see the vortex oscillate at the Doppler-shifted frequency
+\begin{equation}
+\wt(x) = \omega - kU(x),
+\label{eq:Hdoppler}
+\end{equation}
+which vanishes at the critical layers and is largest in the middle of the jet. Following a particle along its orbit, the non-adiabatic part of its distribution, \(g_a\rme^{\rmi ky - \rmi\omega t}\), obeys
+\begin{equation}
+\left(\frac{\rmd}{\rmd t} - \rmi\wt\right)g_a = -\rmi\wt\,\frac{e_af_0}{T}\,\varphi\left(l(t)\right),
+\label{eq:Hkinetic}
+\end{equation}
+where \(\rmd/\rmd t\) is the rate of change along the orbit \cref{eq:Horbit}. This is \cref{eq:kinetic} before the average over the orbit has been taken: the left-hand side is the change of \(g_a\) seen by the moving particle in the frame of the zonal flow, and the right-hand side is the rate at which the potential changes the energy of a particle, \(e_a\,\partial\phi/\partial t\), times the slope \(-f_0/T\) of the Maxwellian in energy. We have left out the magnetic drift, which is smaller than \(\wt\) by orders of magnitude, and the gradients of the equilibrium, whose contributions to the charge are equal and opposite for the two species.
+
+Since everything in \cref{eq:Hkinetic} is periodic in \(\theta\), and \(\rmd/\rmd t = \omega_\tau\,\partial/\partial\theta\), each harmonic can be solved for separately:
+\begin{equation}
+g_a = \frac{e_af_0}{T}\sum_n\frac{\wt}{\wt - n\omega_\tau}\,\varphi_n\,\rme^{\rmi n\theta}.
+\label{eq:Hresponse}
+\end{equation}
+The term \(n = 0\) is the response to the orbit-averaged potential and is all that the transit-averaged equations of \cref{sec:equations} retain. The other terms are resonant: the particles for which \(n\omega_\tau = \wt\), i.e., those that complete \(n\) orbits in one period of the vortex as they see it, respond without limit. As in any such problem, the resonance is resolved by causality. A response that has been built up from the past is obtained by giving \(\omega\) a small positive imaginary part, and then
+\begin{equation}
+\frac{1}{\wt - n\omega_\tau + \rmi0} = \PV\frac{1}{\wt - n\omega_\tau} - \rmi\pi\,\delta\left(\wt - n\omega_\tau\right),
+\label{eq:Hplemelj}
+\end{equation}
+where \(\PV\) denotes the principal value. To see this, replace \(\rmi0\) by \(\rmi\epsilon\): the imaginary part of \(1/(X + \rmi\epsilon)\) is \(-\epsilon/(X^2 + \epsilon^2)\), a peak of width \(\epsilon\) and area \(\pi\), which becomes \(-\pi\delta(X)\) as \(\epsilon\to0\), while the real part, \(X/(X^2 + \epsilon^2)\), is \(1/X\) with the neighbourhood of \(X = 0\) cut out symmetrically. The first term of \cref{eq:Hplemelj} is a response in phase with the potential, which exchanges no energy on average. The second is a quarter of a period out of phase: it is the resonant particles, and only they, that take energy from the potential. This is Landau damping \citep{Landau1946}, with the orbit frequency in place of the frequency \(k_\parallel v_\parallel\) of a particle streaming along a straight field.
+
+The charge density that the two species carry between them follows by integrating \cref{eq:Hresponse} over velocities. In the units of \cref{eq:poisson}, the right-hand side of that equation becomes
+\begin{equation}
+\frac{1}{2n_0}\intv\left(h_p - h_e\right) = \frac{e}{T}\,\rho[\varphi],
+\qquad
+\rho[\varphi](l) \equiv \frac{1}{n_0}\intv f_0\sum_n\frac{\wt}{\wt - n\omega_\tau + \rmi0}\,\varphi_n\,\rme^{\rmi n\theta(l)},
+\label{eq:Hrho}
+\end{equation}
+where \(\theta(l)\) is the orbit angle at which the particle of velocity \(\vv\) passes the point \(l\). For a flute-like potential, only \(n = 0\) survives and \(\rho[\varphi] = \varphi\): the particles screen a flute-like potential exactly as a Boltzmann response would, and exchange no energy with it.
+
+\subsection{The non-flute part of the vortex}
+
+A vortex cannot be exactly flute-like, because the left-hand side of \cref{eq:poisson} is not. In the flux tube, \(\nabla_\perp^2 = g^{xx}(l)\,\partial_x^2 + g^{yy}(l)\,\partial_y^2\), where the metric coefficients \(g^{xx}\) and \(g^{yy}\) measure how the distances between neighbouring field lines change along them, and they do not vary in proportion to each other. Let us write \(\varphi = \varphi_0(x) + \varphi_1(x, l)\), where \(\varphi_0\) is the average of \(\varphi\) along the field line, weighted by the volume of the flux tube, and \(\varphi_1\) is the small non-flute part. The charge moment of the kinetic equation, taken at one point of the field line, states that the charge \(-\lambdaD^2\nabla_\perp^2\phi\) of a fluid element changes only through the divergence of the current along the line. Averaged along the line, this divergence vanishes, and what remains is the Euler equation of \cref{app:rayleigh}: the average charge, \(-\lambdaD^2(\langle g^{xx}\rangle\partial_x^2 + \langle g^{yy}\rangle\partial_y^2)\phi\), is carried with the flow. The part of the charge that varies along the line,
+\begin{equation}
+-\lambdaD^2\left[\left(g^{xx} - \langle g^{xx}\rangle\right)\partial_x^2 + \left(g^{yy} - \langle g^{yy}\rangle\right)\partial_y^2\right]\phi,
+\label{eq:Hcharge}
+\end{equation}
+is carried with the same flow, and since the average charge is conserved, the rate of change of \(\partial_x^2\phi\) following the flow is \(-\langle g^{yy}\rangle/\langle g^{xx}\rangle\) times that of \(\partial_y^2\phi\), which, for the vortex, is \(\rmi\wt k^2\varphi_0\). Hence the charge \cref{eq:Hcharge} changes at the rate \(\rmi\wt\,S(l)\,\varphi_0\), with
+\begin{equation}
+S(l) = k^2\lambdaD^2\,s(l),
+\qquad
+s(l) \equiv \langle g^{yy}\rangle\left[\frac{g^{xx}(l)}{\langle g^{xx}\rangle} - \frac{g^{yy}(l)}{\langle g^{yy}\rangle}\right].
+\label{eq:Hsource}
+\end{equation}
+A charge that varies along the line can change only through currents along the line, and only a potential that varies along the line drives such currents. The charge that \(\varphi_1\) induces is, in the units of \cref{eq:poisson}, the response \cref{eq:Hrho} less the Boltzmann part, viz., \(\rho[\varphi_1] - \varphi_1\), and it changes at the rate \(-\rmi\wt\,(\rho[\varphi_1] - \varphi_1)\). Equating the two rates, we find
+\begin{equation}
+\varphi_1 - \rho[\varphi_1] = S(l)\,\varphi_0 ,
+\label{eq:Hfield}
+\end{equation}
+which is the part of \cref{eq:poisson} that varies along the line. In other words, the non-flute part of a vortex is forced by its flute-like part through the geometry of the field, in proportion to \(k^2\lambdaD^2\); it does not depend on the radial structure of the vortex, and it is linear in its amplitude. Writing \(\varphi_1 = k^2\lambdaD^2\,\chi(l;\wt)\,\varphi_0\), we have
+\begin{equation}
+\chi - \rho[\chi] = s(l),
+\label{eq:Hchi}
+\end{equation}
+a linear equation along the field line whose only parameter is the ratio of \(\wt\) to the transit frequency. We solve it numerically, by expanding \(\chi\) in Fourier harmonics along the line and computing the orbits \cref{eq:Horbit} and the harmonics \cref{eq:Hharmonics} in the magnetic field of the flux tube. Because of the resonant term of \cref{eq:Hplemelj}, \(\chi\) is complex: the non-flute part of the vortex lags behind the forcing.
+
+\subsection{The loss of energy}
+
+The electrostatic energy changes at the rate \(\int\phi\,\partial_t\varrho\), where \(\varrho\) is the charge density. The part of \(\partial_t\varrho\) that is due to the motion of the particles along the field line is minus the divergence of the parallel current, so the corresponding change of energy is minus the work done by the parallel electric field on the particles. Only \(\varphi_1\) has a parallel electric field, and, by \cref{eq:Hplemelj}, only the resonant particles absorb work on average. Carrying out the average over the orbits with \cref{eq:Hresponse}, we find that, per unit volume, the two species together absorb the power
+\begin{equation}
+\frac{\pi n_0e^2}{T}\left\langle\!\!\left\langle\,\wt^2\sum_{n\neq0}|\varphi_{1,n}|^2\,\delta\left(\wt - n\omega_\tau\right)\right\rangle\!\!\right\rangle
+= \frac{n_0e^2}{T}\,\wt\,\operatorname{Im}\left\langle\varphi_1^*\,S\,\varphi_0\right\rangle,
+\label{eq:Hpower}
+\end{equation}
+where the double angle brackets denote the average over the Maxwellian and over the flux tube, the single ones the volume-weighted average along the field line, and the equality follows by multiplying \cref{eq:Hfield} by \(\varphi_1^*\), averaging, and taking the imaginary part. The left-hand side is manifestly positive: every resonance damps. The right-hand side expresses the same power through the lag of \(\varphi_1\) behind its forcing. With \cref{eq:Hchi}, it is \(k^4\lambdaD^4\,|\varphi_0|^2\,(n_0e^2/T)\,\Dfn(\wt)\), where
+\begin{equation}
+\Dfn(\wt) \equiv -\wt\left\langle s(l)\operatorname{Im}\chi(l;\wt)\right\rangle \geq 0
+\label{eq:Hdissipation}
+\end{equation}
+is a function of the Doppler-shifted frequency that the magnetic geometry fixes once and for all [see \cref{fig:landau}(a)]. It vanishes as \(\wt\to0\), where the particles average over the field line many times in a period of the vortex and the transit-averaged description applies; it is largest where \(\wt\) is a few times the transit frequency; and it falls again at large \(\wt\), where few particles are fast enough to resonate.
+
+Finally, we integrate over the radius and divide by the electrostatic energy of the vortex, \((n_0e^2\lambdaD^2/2T)\int\rmd x\,(\langle g^{xx}\rangle|\partial_x\varphi_0|^2 + \langle g^{yy}\rangle k^2|\varphi_0|^2)\) per unit volume of the flux tube and unit length in \(y\). The result is
+\begin{equation}
+\frac{L}{\Enz} = 2\,k^2\lambdaD^2\,
+\frac{\displaystyle k^2\int\rmd x\,|\varphi_0|^2\,\Dfn\!\left(\omega - kU\right)}
+{\displaystyle\int\rmd x\left(\langle g^{xx}\rangle|\partial_x\varphi_0|^2 + \langle g^{yy}\rangle k^2|\varphi_0|^2\right)},
+\label{eq:Hrate}
+\end{equation}
+summed over the two vortices in the numerator and in the denominator. It contains no adjustable parameter: given the flute-like structure of the vortices and the jets, which are those of the Rayleigh problem of \cref{app:rayleigh}, it is fixed by the geometry of the field.
+
+Three properties of \cref{eq:Hrate} can be tested. Firstly, it is independent of the amplitude of the vortex. Secondly, it is of the order of \(k^2\lambdaD^2\) times the transit frequency, so it is small, and the smaller the longer the vortex is compared with the Debye length. Thirdly, the dissipative response, \(\Dfn\), is a universal function of the local Doppler-shifted frequency, on which measurements at different radii, on either vortex and at different times must all fall.
