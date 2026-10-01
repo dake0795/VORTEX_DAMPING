@@ -31,7 +31,17 @@ def rebuild():
     tc = np.arange(T0, T1 + 1, 100.0)
     g = np.array([gR[(tg > c - WIN / 2) & (tg < c + WIN / 2)].mean() for c in tc])
     w = np.array([np.exp(np.log(wtr[(tt > c - WIN / 2) & (tt < c + WIN / 2)]).mean()) for c in tc])
-    np.savez(CACHE, tc=tc, gR=g, wtr=w)
+    # the two amplitude-reduced restarts: gamma_R on their own jets (scripts/rayleigh/growth_restarts.py)
+    R = np.load(os.path.join(HERE, "..", "..", "scripts", "rayleigh", "cache", "growth_restarts.npz"))["rows"]
+    Tc = np.load(os.path.join(HERE, "..", "trapping", "cache.npz"), allow_pickle=True)
+    extra = {}
+    for k, run in enumerate(("a03", "a003")):
+        gk = R[R[:, 0] == k]; tr = Tc[run]
+        cc = np.arange(6050.0, 6651.0, 150.0)
+        extra[f"g_{run}"] = np.array([0.5 * (gk[(gk[:, 1] > c - 75) & (gk[:, 1] < c + 75), 2] + gk[(gk[:, 1] > c - 75) & (gk[:, 1] < c + 75), 4]).mean() for c in cc])
+        wt = np.sqrt(tr[:, 6] * tr[:, 7])
+        extra[f"w_{run}"] = np.array([np.exp(np.log(wt[(tr[:, 0] > c - 75) & (tr[:, 0] < c + 75)]).mean()) for c in cc])
+    np.savez(CACHE, tc=tc, gR=g, wtr=w, **extra)
 
 
 def draw():
@@ -51,6 +61,9 @@ def draw():
     gg = np.array([4e-3, 0.12])
     b.loglog(gg, alpha * gg, c=ns.PAL["theory"], ls="--")
     b.loglog(g, w, "o", c="k", ms=3.2)
+    for run, mk in (("a03", "s"), ("a003", "^")):
+        b.loglog(C[f"g_{run}"], C[f"w_{run}"], mk, c=ns.PAL[run], mfc="w", ms=5, mew=1.0, zorder=5)
+        print(run, "ratio", C[f"w_{run}"] / C[f"g_{run}"])
     b.set_xlim(4e-3, 0.12); b.set_ylim(0.03, 1.5)
     b.set_xlabel(r"$\gamma_{\rm R}\;(c_{\rm ref}/L_{\rm ref})$"); b.set_ylabel(r"$\omega_{\rm tr}\;(c_{\rm ref}/L_{\rm ref})$")
     traces.label(b, 0.0075, 0.2, r"$\omega_{\rm tr}=\alpha\gamma_{\rm R}$", c=ns.PAL["theory"])
