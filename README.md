@@ -17,7 +17,11 @@ simulations (house rule, `STYLE_GUIDE.md` section 7a).
 - **They decay because the jets slowly lose their instability**, and collapse when the jets become stable.
 - **The loss rate is calculated** (no adjustable parameter) and matches the measured one in the reduced box, its
   restarts and the production box.
-- **Open:** the constant C; what erodes the jets' corrugation (the lifetime); grid scale against Debye scale. Five restarts that bear on these are running
+- **The rate of the decay is set by the perpendicular sink** eroding the corrugation (sink tests): changing the
+  velocity-space sink changes nothing; with the radial hyperdiffusion 16 times weaker the vortices all but stop
+  decaying, while the jets pay for their Landau damping.
+- **Open:** the constant C; the stability threshold in the corrugation; what erodes the corrugation in a real
+  (collisional) plasma; the long-time state when the vortices persist. Five restarts that bear on these are running
   (`DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy_sinktest`).
 
 ## Build
@@ -61,7 +65,8 @@ env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 | 10 | `landau` | The loss is Landau damping of the non-flute part, at the calculated rate, with no adjustable parameter, in every run. |
 | 11 | `dissipation` | The perpendicular sink acts on the zonal flow, the velocity-space sink on the vortices. |
 | 12 | `euler` | A fluid with the same jets has the same vortices but not their kinetic loss. |
-| 13 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
+| 13 | `sinktests` | The decay follows the perpendicular sink, not the velocity-space one; with a weak perpendicular sink the vortices persist. |
+| 14 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
 
 Appendices (`appendices/*.tex`): step-by-step derivations at undergraduate level - A: Euler limit and Rayleigh's
 equation; B: trapping and saturation; C: Landau damping of the non-flute part (the loss formula).

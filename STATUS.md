@@ -1,4 +1,4 @@
-# Status (1 Oct 2026, 11:15)
+# Status (1 Oct 2026, 15:15)
 
 - Notes restructured to the house rule "only the calculation that describes the simulations, written as though the
   answer was always known": theory (Euler limit, Rayleigh instability of the jets, trapping saturation, kinetic loss,
@@ -13,3 +13,7 @@
 - Running (submitted 1 Oct 09:00-09:15, ~28 h to reach the collapse): `rb_c0p3_hxy_sinktest/` hv_x4, hv_d4, hxy_x4,
   hxy_d4 (2 nodes each, -flat) and nx128 (4 nodes, hbm); `figures/sinktests/figure.py` will draw them.
 - Open: theory of alpha; rate of erosion of the jets' corrugation (lifetime); same analysis for the production run.
+- 15:15: sink tests have 380-520 time units each: hv_d4 = baseline; hxy_x4 collapses at once; hxy_d4 decays more slowly;
+  nx128 (radial hyperdiffusion /16 at fixed k_x) all but stops decaying, with the same loss rate to entropy. In the notes
+  as Sec. 4.7 and figure sinktests (rebuild the figure as the runs advance; they end 2 Oct ~19:00). hv_x4 was stopped
+  at t ~ 9500 and the hyp_x-off restart never ran; the from-noise hyp_x-off run rb_c0p3_hxoff is at t ~ 830 (past its burst).
