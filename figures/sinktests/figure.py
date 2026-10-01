@@ -54,7 +54,7 @@ def rebuild():
 
 def draw():
     C = np.load(CACHE)
-    tend = min(C[r][-1, 0] for r in C.files if r != "base")
+    tend = min(C[r][-1, 0] for r in ("hv_d4", "hxy_d4", "nx128"))        # hxy_x4 was stopped once it had collapsed
     ns.apply_style()
     fig, (a, b) = ns.two_panel()
     sty = {"base": ("k", "-", 1.5), "hv_d4": (ns.PAL["Z"], "--", 1.1), "hxy_x4": (ns.PAL["W"], "-", 1.1),
@@ -63,21 +63,20 @@ def draw():
     for r in ("base", "hxy_x4", "hxy_d4", "nx128", "hv_d4"):
         t, e = C[r][:, 0], C[r][:, 1]
         es = traces.runmean(t, e, WIN, log=True); ok = np.isfinite(es); ts, es = t[ok], es[ok]
-        m = ts <= (tend if r == "base" else ts[-1])
+        m = ts <= tend
         eb = traces.runmean(C["base"][:, 0], C["base"][:, 1], WIN, log=True); kb = np.isfinite(eb)
         e0 = eb[kb][0]
         c, ls, lw = sty[r]
         a.semilogy((ts[m] - T0), es[m] / e0, ls, c=c, lw=lw)
-        mm = (ts >= T0 + 60.0) & (ts <= tend - WIN / 2)
+        mm = (ts >= T0 + 60.0) & (ts <= min(tend, ts[-1]) - WIN / 2)
         rate[r] = -np.polyfit(ts[mm], np.log(es[mm]), 1)[0]
         print(r, f"mean Gamma_E over t0+60 .. {tend:.0f}: {rate[r]:.3e}")
-    a.set_xlim(0, tend - T0 + 20); a.set_ylim(0.03, 1.6)
+    a.set_xlim(0, tend - T0 + 20); a.set_ylim(0.02, 1.6)
     a.set_xlabel(r"$t-t_0\;(L_{\rm ref}/c_{\rm ref})$"); a.set_ylabel(r"$E_{\rm nz}(t)/E_{\rm nz}(t_0)$")
-    xe = tend - T0
-    traces.label(a, 0.40 * xe, 0.11, r"$\nu_\perp\times4$", c=ns.PAL["W"])
-    traces.label(a, 0.04 * xe, 0.40, r"reference and $\nu_v/4$", c="k")
-    traces.label(a, 0.60 * xe, 0.56, r"$\nu_\perp/4$", c=ns.PAL["W"])
-    traces.label(a, 0.62 * xe, 1.25, r"$\Delta x/2$", c=ns.PAL["aux"])
+    names = {"nx128": r"$\Delta x/2$", "hxy_d4": r"$\nu_\perp/4$", "base": "reference", "hv_d4": r"$\nu_v/4$", "hxy_x4": r"$\nu_\perp\times4$"}
+    from matplotlib.lines import Line2D
+    a.legend([Line2D([], [], c=sty[r][0], ls=sty[r][1], lw=sty[r][2]) for r in names], list(names.values()),
+             loc="lower left", handlelength=1.8, labelspacing=0.15, borderaxespad=0.2)
     xs = np.array([STRENGTH[r] for r in ("hxy_x4", "base", "hxy_d4", "nx128")])
     ys = np.array([rate[r] for r in ("hxy_x4", "base", "hxy_d4", "nx128")])
     b.loglog([1.0], [rate["hv_d4"]], "s", c=ns.PAL["Z"], mfc="w", ms=10, mew=1.1)
@@ -89,7 +88,7 @@ def draw():
     b.xaxis.set_major_locator(FixedLocator([1 / 16, 0.25, 1, 4])); b.set_xticklabels([r"$1/16$", r"$1/4$", r"$1$", r"$4$"])
     b.xaxis.set_minor_formatter(NullFormatter())
     traces.label(b, 0.04, 2.6e-3, r"loss to entropy", c=ns.PAL["theory"])
-    ns.tag(a, "(a)", y=0.14, va="bottom"); ns.tag(b, "(b)")
+    ns.tag(a, "(a)", x=0.86, y=0.14, va="bottom"); ns.tag(b, "(b)")
     ns.save(fig, "sinktests")
 
 
