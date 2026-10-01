@@ -21,8 +21,9 @@ simulations (house rule, `STYLE_GUIDE.md` section 7a).
   velocity-space sink changes nothing; with the radial hyperdiffusion 16 times weaker the vortices all but stop
   decaying, while the jets pay for their Landau damping.
 - **Open:** the constant C; the stability threshold in the corrugation; what erodes the corrugation in a real
-  (collisional) plasma; the long-time state when the vortices persist. Five restarts that bear on these are running
-  (`DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy_sinktest`).
+  (collisional) plasma; the long-time state when the vortices persist. Runs that bear on these are in progress
+  (sink and resolution restarts with a control, a from-noise run without radial hyperdiffusion, a Debye-length
+  scan): their state and what to do as each reports are in `STATUS.md`.
 
 ## Build
 
@@ -76,4 +77,5 @@ equation; B: trapping and saturation; C: Landau damping of the non-flute part (t
 
 CSD3 only (read only): the reduced-box eta = 1 run `DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy` (legs 1, 3-6), its
 amplitude-reduced restarts `rb_c0p3_hxy_ampltest/{amp0p3,amp0p03}`, the restarts `rb_c0p3_hxy_sinktest/*` (running),
-and, for one comparison, the production run `DIPOLE_TEST/eta1_production_NEW_sep26`.
+and, for one comparison, the production run `DIPOLE_TEST/eta1_production_NEW_sep26`. Still to be read in when they
+have run: `rb_c0p3_hxoff` and `rb_c0p3_debye_{x4,d4}` (see `STATUS.md`).
