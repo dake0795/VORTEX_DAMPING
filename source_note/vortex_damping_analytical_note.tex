@@ -1,0 +1,358 @@
+% Self-contained LaTeX edition of vortex_damping_analytical_note.pdf.
+% Reconstructed from the analytical note supplied in this conversation;
+% typography is not intended to reproduce the original PDF pixel for pixel.
+% Compile twice with: pdflatex vortex_damping_analytical_note.tex
+% No external figures, bibliography files, or custom fonts are required.
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=21mm,top=23mm,bottom=23mm,headheight=14pt,headsep=7mm,footskip=11mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=navy,citecolor=navy,urlcolor=navy]{hyperref}
+\definecolor{navy}{HTML}{183D50}
+\definecolor{muted}{HTML}{526574}
+\definecolor{pale}{HTML}{F0F5F8}
+\definecolor{rulecolor}{HTML}{C8D9E2}
+\hypersetup{pdftitle={Why the breathing vortices can damp},
+  pdfsubject={An analytical calculation of drift resonance and trapping}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small\color{muted}BREATHING VORTICES\quad /\quad ANALYTICAL NOTE}
+\fancyhead[R]{\sffamily\small\color{muted}30 September 2026}
+\fancyfoot[L]{\sffamily\small\color{muted}Reduced theory; not a fitted simulation result}
+\fancyfoot[R]{\sffamily\small\color{muted}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\titleformat{\section}{\large\sffamily\bfseries\color{navy}}{\thesection}{0.6em}{}
+\titlespacing*{\section}{0pt}{10pt}{7pt}
+\titleformat{\subsection}{\normalsize\sffamily\bfseries\color{navy}}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{8pt}{4pt}
+\tcbset{colback=pale,colframe=rulecolor,boxrule=0.45pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,before skip=7pt,after skip=7pt}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\Op}{\mathcal{L}}
+\newcommand{\Ham}{\mathcal{H}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\Zfun}{\mathcal{Z}}
+\newcommand{\phibar}{\bar\phi}
+\newcommand{\varphibar}{\bar\varphi}
+\newcommand{\vd}{\bar v_{da}}
+\newcommand{\nz}{\mathrm{nz}}
+\newcommand{\lin}{\mathrm{lin}}
+\newcommand{\tr}{\mathrm{tr}}
+\DeclareMathOperator{\PV}{PV}
+\DeclareMathOperator{\erfc}{erfc}
+\begin{document}
+\fontsize{10.5}{13}\selectfont
+{\LARGE\sffamily\bfseries\color{navy}Why the breathing vortices can damp\par}
+\vspace{3pt}
+{\large\sffamily\color{muted}An analytical calculation of drift resonance and trapping\par}
+\begin{tcolorbox}
+\textbf{Idea.} Calculate phase mixing through particles whose magnetic drift plus zonal advection matches the vortex speed. Then ask whether closed particle orbits suppress that transfer at finite vortex amplitude.\par
+\textbf{Status.} The linear response and the reduced integrals below are derived explicitly. Trapping is a candidate explanation for the accelerating decay, not a demonstrated result for the simulation. No numerical lifetime is claimed.
+\end{tcolorbox}
+
+\section{Start from the supplied kinetic equations}
+The working draft~\cite{draft} uses the orbit-averaged equations
+\begin{align}
+ \partial_t h_a+\{\phibar,h_a\}+\vd\partial_\alpha h_a
+ &=\frac{e_af_0}{T}\bigl(\partial_t\phibar-v_{*a}^{T}\partial_\alpha\phibar\bigr),\label{eq:kinetic}\\
+ (1-\lambda_D^2\nabla_\perp^2)\frac{e\phi}{T}
+ &=\frac{1}{2n_0}\int(h_p-h_e)\,\dd^3v.\label{eq:field}
+\end{align}
+Here $e_p=e$, $e_e=-e$ and $\{A,B\}=A_\psi B_\alpha-A_\alpha B_\psi$.
+The overbar is the draft's bounce/transit average at fixed energy $\varepsilon$ and pitch angle $\lambda$.
+
+Freeze a slowly evolving, flute-like zonal state $(\Phi,H_a)$ and consider a small travelling perturbation:
+\begin{equation}
+ \phi=\Phi(\psi)+\varphi(\psi,l)\E^{\ii k\alpha-\ii\omega t},
+ \qquad
+ h_a=H_a(\psi,\varepsilon,\lambda)+g_a\E^{\ii k\alpha-\ii\omega t}.
+ \label{eq:ansatz}
+\end{equation}
+Real parts are understood. Set $U=\partial_\psi\Phi$; this is an advection velocity in the draft's flux coordinates, not the flux-tube volume also denoted $U$ elsewhere in the draft. The fluctuation need not be flute-like.
+
+Since $\{\Phi,g_a\}=\ii kUg_a$ and $\{\varphibar,H_a\}=-\ii kH_a'\varphibar$, linearisation gives
+\begin{equation}
+ -\ii[\omega-kU-k\vd]g_a-\ii kH_a'\varphibar
+ =-\ii\frac{e_af_0}{T}(\omega+kv_{*a}^{T})\varphibar.
+ \label{eq:linear}
+\end{equation}
+Thus the particle response is
+\begin{equation}
+ \boxed{\begin{aligned}
+ g_a&=\frac{\N_a(\omega)}{\omega-\Omega_a}\,\varphibar,
+ &\Omega_a&=k(U+\vd),\\[-1pt]
+ &&\N_a(\omega)&=\frac{e_af_0}{T}(\omega+kv_{*a}^{T})-kH_a'.
+ \end{aligned}}\label{eq:response}
+\end{equation}
+The prime means $\partial_\psi$ at fixed $(\varepsilon,\lambda)$. Equation~\eqref{eq:response} is an analytical linear response, not a prescribed decay law. It retains the zonal distribution as well as the zonal potential. Neglecting the mean drive solely because its measured net injection is small would be unjustified.
+
+{\small\color{muted}Basis:~\cite{draft}, kinetic equations and definitions (supplied text, lines 43--62). The frozen-background approximation and subsequent derivations are introduced in this note.\par}
+
+\newpage
+\section{Close the field equation and extract the damping}
+Define $\mathcal P_k=1-\lambda_D^2\nabla_{\perp,k}^2$, with $\partial_\alpha$ replaced by $\ii k$.
+Substituting~\eqref{eq:response} into~\eqref{eq:field} gives a self-consistent mode equation:
+\begin{equation}
+ \Op(\omega)\varphi\equiv\mathcal P_k\varphi
+ -\frac{T}{2n_0e^2}\sum_a e_a\int\dd^3v\,
+ \frac{\N_a(\omega)}{\omega-\Omega_a}\varphibar=0.
+ \label{eq:operator}
+\end{equation}
+The velocity integral is evaluated at the field-line position of the field equation; the potential inside the integral is orbit averaged. This keeps the $l$--$\lambda$ coupling. A purely local Doppler-shift estimate does not replace~\eqref{eq:operator}.
+
+\subsection{The resonant contribution}
+For the $\E^{-\ii\omega t}$ convention, start in $\operatorname{Im}\omega>0$ and analytically continue the causal response. On the real-frequency boundary,
+\begin{equation}
+ \frac{1}{\omega_r-\Omega+\ii0}
+ =\PV\frac{1}{\omega_r-\Omega}-\ii\pi\delta(\omega_r-\Omega).
+ \label{eq:landau}
+\end{equation}
+Writing $\Op=\Op_R+\ii\Op_I$ gives
+\begin{equation}
+ \Op_I(\omega_r)\varphi
+ =\frac{\pi T}{2n_0e^2}\sum_a e_a\int\dd^3v\,
+ \N_a(\omega_r)\varphibar\,
+ \delta\!\bigl(\omega_r-k[U+\vd]\bigr).
+ \label{eq:imaginary}
+\end{equation}
+The delta function selects the drift-resonant particles:
+\begin{equation}
+ \omega_r/k=U(\psi)+\vd(\varepsilon,\lambda).
+ \label{eq:resonance}
+\end{equation}
+Magnetic-drift resonances also occur in the linear dipole theory of Ref.~\cite{mishchenko}; that calculation does not by itself describe a finite-amplitude zonal condensate.
+
+\subsection{Weak-damping formula}
+Suppose the principal-value problem has a simple real-frequency mode $\Op_R(\omega_r)\varphi=0$, and the resonant imaginary part is perturbatively small. Write $\omega=\omega_r-\ii\gamma_\lin$, with positive $\gamma_\lin$ denoting amplitude damping. Let $\varphi^\dagger$ be a left null mode of $\Op_R$, and $\langle f,g\rangle=\int f^*g\,\dd^3r$. Expanding~\eqref{eq:operator} and projecting gives
+\begin{equation}
+ \boxed{\gamma_\lin=
+ \frac{\langle\varphi^\dagger,\Op_I(\omega_r)\varphi\rangle}
+ {\langle\varphi^\dagger,[\partial_\omega\Op_R(\omega_r)]\varphi\rangle}.}
+ \label{eq:gamma}
+\end{equation}
+All explicit frequency dependence, including that in $\N_a$, is differentiated. In a scalar dispersion relation this is $\gamma_\lin=\mathcal D_I/\mathcal D_R'$. The denominator must be non-zero. The sign must be evaluated: resonance can damp or drive a mode, and negligible net injection is not a proof of positive $\gamma_\lin$.
+
+For an isolated mode of fixed shape,
+\begin{equation}
+ |\phi_\nz|\propto\E^{-\gamma_\lin t},\qquad
+ E_\nz\propto\E^{-2\gamma_\lin t},\qquad
+ \Gamma_E\equiv-\partial_t\ln E_\nz=2\gamma_\lin.
+ \label{eq:energy-rate}
+\end{equation}
+Equation~\eqref{eq:gamma} need not describe a strongly damped transient, a continuum response, or a Floquet mode of an appreciably time-periodic background.
+
+\newpage
+\section{An explicit analytical velocity integral}
+To evaluate the resonance rather than leave it as a formal pole, take a fixed pitch angle and use the quadratic-in-speed magnetic drift in the reduced form
+\begin{equation}
+ u=\varepsilon/T,\quad \Omega_a=kU+au,\quad
+ p(u)=\frac{2}{\sqrt\pi}u^{1/2}\E^{-u},\quad
+ \int_0^\infty p(u)\,\dd u=1.
+ \label{eq:maxwellian}
+\end{equation}
+Here $a=k\vd(u=1,\lambda)$ is a signed frequency. The pitch-angle/orbit measure is a separate weight. For this explicit example, approximate $\N_a/f_0$ by $b_0+b_1u$, as when the retained background distribution uses density and temperature moments. This is an additional closure, not a property inferred from the movie.
+
+The relevant energy integral is
+\begin{equation}
+ J(\omega)=\int_0^\infty
+ \frac{p(u)(b_0+b_1u)}{\omega-kU-au+\ii0}\,\dd u.
+ \label{eq:J}
+\end{equation}
+For $a>0$, put $z=(\omega-kU)/a$ and define
+$\K_n(z)=\int_0^\infty p(u)u^n/(z-u)\,\dd u$ with the causal continuation. Then
+\begin{equation}
+ J=\frac{b_0\K_0(z)+b_1\K_1(z)}{a},\qquad
+ \K_1=z\K_0-1.
+ \label{eq:J-reduced}
+\end{equation}
+With $u=s^2$, the remaining integral reduces to the plasma dispersion function:
+\begin{align}
+ \K_0(z)&=\frac{4}{\sqrt\pi}\int_0^\infty
+ \frac{s^2\E^{-s^2}}{z-s^2}\,\dd s
+ =-2\bigl[1+\sqrt z\,\Zfun(\sqrt z)\bigr],\label{eq:K0}\\
+ \Zfun(\zeta)&=\frac{1}{\sqrt\pi}\int_{-\infty}^{\infty}
+ \frac{\E^{-s^2}}{s-\zeta}\,\dd s
+ =\ii\sqrt\pi\E^{-\zeta^2}\erfc(-\ii\zeta),\qquad
+ \operatorname{Im}\zeta>0.\label{eq:plasma-function}
+\end{align}
+Choose $\sqrt z$ with positive imaginary part and continue causally. The symbol $\Zfun$ here is a special function, not the draft's entropy $Z$. Higher polynomial moments follow from
+$\K_{n+1}=z\K_n-\langle u^n\rangle$.
+
+More directly, the absorptive part for either sign of $a$ is
+\begin{equation}
+ \operatorname{Im}J(\omega_r)
+ =-\frac{2\sqrt\pi}{|a|}u_r^{1/2}\E^{-u_r}(b_0+b_1u_r)\Theta(u_r),
+ \qquad u_r=\frac{\omega_r-kU}{a}.
+ \label{eq:J-imag}
+\end{equation}
+This assumes real $b_0,b_1$ at $\omega_r$; the right-hand side is understood to vanish for $u_r<0$. For $a<0$, transform the causal prescription as well as $z$; the $a>0$ branch formula cannot be reused blindly. Equation~\eqref{eq:J-imag} makes the resonant population and its sign explicit. Spatial structure, both species and the pitch-angle integral still enter~\eqref{eq:gamma}.
+
+\subsection{A closed-form phase-mixing check, without field feedback}
+For comparison only, a passive perturbation obeying $\partial_tg+\ii(kU+au)g=0$ and initially proportional to the Maxwellian has the normalized moment
+\begin{equation}
+ \begin{aligned}
+ C(t)&=\E^{-\ii kUt}\int_0^\infty p(u)\E^{-\ii aut}\,\dd u
+ =\E^{-\ii kUt}(1+\ii at)^{-3/2},\\
+ |C(t)|^2&=(1+a^2t^2)^{-3/2}.
+ \end{aligned}\label{eq:passive}
+\end{equation}
+This is an exact reduced phase-mixing calculation, but $C$ is a distribution moment, not a self-consistent vortex solution. Its logarithmic decay rate is $3a^2t/(1+a^2t^2)$: it first rises and then falls as $3/t$. Its asymptotic law therefore does not explain accelerating late-time decay; whether the measured interval is asymptotic also has to be checked.
+
+\newpage
+\section{The nonlinear question: can trapping suppress mixing?}
+The linear response excludes the vortex's modification of particle trajectories. To estimate that effect analytically, use local physical coordinates $(x,y)$ and constant $B_0$, and define the electric-flow streamfunction $\Psi=\phibar/B_0$. These coordinates and velocities are distinct from the flux-coordinate variables in Sections~1--3.
+
+Let $\xi=y-ct$ be the coordinate moving with a nearly steady vortex. For a fixed orbit class, approximate $\vd$ as radially constant across the local region. The perpendicular trajectories satisfy
+\begin{equation}
+ \dot x=-\partial_\xi\Ham,\quad
+ \dot\xi=\partial_x\Ham,\quad
+ \Ham=\Psi_z(x)+\Psi_v(x,\xi)+(\vd-c)x.
+ \label{eq:hamiltonian}
+\end{equation}
+Thus closed contours must be sought in the moving, orbit-dependent Hamiltonian, not simply in instantaneous laboratory-frame $\mathbf E\times\mathbf B$ streamlines. This is a local reduction of the advective terms in Ref.~\cite{draft}.
+
+\subsection{Non-zero local shear: the pendulum calculation}
+Take a resonant radius $x_r$ satisfying $U_z(x_r)+\vd=c$, where $U_z=\Psi_z'$. If $S_r=U_z'(x_r)\ne0$ and the vortex's radial variation is negligible over the island, expansion gives
+\begin{equation}
+ \Ham=\text{constant}+\frac{S_r}{2}X^2-A\cos(k_y\xi)+\cdots,
+ \quad X=x-x_r,\quad A=|\phibar_v|/B_0.
+ \label{eq:pendulum}
+\end{equation}
+For $S_r>0$ the centre is at $X=\xi=0$. Linearising gives
+$\ddot\xi=-k_y^2S_rA\xi$. For $S_r<0$, use the stable point shifted by half a wavelength. The small-orbit frequency and separatrix half-width are therefore
+\begin{equation}
+ \boxed{\omega_\tr=|k_y|\sqrt{|S_r|A},\qquad
+ \Delta x_{\mathrm{half}}=2\sqrt{\frac{A}{|S_r|}}.}
+ \label{eq:trapping}
+\end{equation}
+The width follows by equating the centre-line kinetic term to the potential barrier $2A$. Both quantities decrease as $A^{1/2}$ in this limit.
+
+Trapping can modify a resonant response before linear damping removes the perturbation when $\omega_\tr$ is at least comparable to $\gamma_\lin$. This O'Neil-type comparison is motivated by nonlinear Landau-damping theory~\cite{oneil}, but its application here is a hypothesis. It suggests the crossover estimate
+\begin{equation}
+ \boxed{A_{\mathrm{crit}}\sim\frac{\gamma_\lin^2}{k_y^2|S_r|}.}
+ \label{eq:threshold}
+\end{equation}
+It is not a derivation of a full amplitude-dependent law $\gamma(A)$. In particular, it does not specify the trapped distribution or its replenishment and erosion by the sinks.
+
+\subsection{At a jet maximum the preceding estimate is singular}
+The supplied draft locates the vortices at maxima of the zonal velocity~\cite{draft}. There $U_z'=0$, so inserting the reported maximum shear into~\eqref{eq:threshold} is not valid. Resonances may lie on the jet flanks; otherwise the flow curvature and radial vortex shape must be retained. At an elliptic fixed point of the full $\Ham$, linearised Hamilton's equations give instead
+\begin{equation}
+ \boxed{\omega_\tr^2=\det(\nabla\nabla\Ham)
+ =\Ham_{xx}\Ham_{\xi\xi}-\Ham_{x\xi}^{\,2}>0.}
+ \label{eq:hessian}
+\end{equation}
+This formula includes the vortex's own radial curvature. Its amplitude scaling need not be $A^{1/2}$; an island's existence and its frequency must both be established in the relevant moving frame.
+
+\newpage
+\section{Phase mixing is not the irreversible energy sink}
+In the draft, magnetic drift and nonlinear advection conserve total free energy $W$. The budget and the nonlinear zonal--vortex exchange are~\cite{draft}
+\begin{equation}
+ \frac{\dd W}{\dd t}=P-D,\qquad
+ (\partial_tE_z)_{\mathrm{NL}}=-(\partial_tE_\nz)_{\mathrm{NL}}.
+ \label{eq:budget}
+\end{equation}
+A decrease in the coherent field can be accompanied by increasingly fine structure in the distribution without immediate destruction of $W$. The simulation's fourth-order hyperdiffusion, rather than physical collisions, supplies irreversible removal. The breathing exchange in~\eqref{eq:budget} cancels when the two field components are added; it is not itself a dissipation term.
+
+\subsection{An exactly solvable model of mixing plus hyperdiffusion}
+A second elementary calculation shows how mixing feeds a sink. Near a velocity-space resonance, linearise the orbit frequency as $\Omega(v)\simeq\Omega_r+\beta v$, with $v$ now a local velocity offset. Remove the constant phase and consider the illustrative equation
+\begin{equation}
+ \partial_tf+\ii\beta vf=-\nu_4\partial_v^4f,\qquad \nu_4>0.
+ \label{eq:sink-model}
+\end{equation}
+This models a local velocity-space sink, not the complete orbit-averaged form of the code's dissipation. With $\widehat f(\eta,t)=\int\E^{-\ii\eta v}f(v,t)\,\dd v$ ($\eta$ here is a Fourier coordinate, not the gradient ratio), it becomes
+\begin{equation}
+ \partial_t\widehat f-\beta\partial_\eta\widehat f
+ =-\nu_4\eta^4\widehat f.
+ \label{eq:fourier-sink}
+\end{equation}
+Along a Fourier characteristic $\eta(t)=\eta_0-\beta t$, the solution is
+\begin{align}
+ \widehat f(\eta_0-\beta t,t)
+ &=\widehat f(\eta_0,0)\exp\!\left[-\nu_4\int_0^t(\eta_0-\beta s)^4\,\dd s\right],\label{eq:characteristic}\\
+ \int_0^t(\eta_0-\beta s)^4\,\dd s
+ &=\frac{\eta_0^5-(\eta_0-\beta t)^5}{5\beta},\qquad\beta\ne0.
+ \label{eq:sink-integral}
+\end{align}
+For the characteristic launched at $\eta_0=0$,
+\begin{equation}
+ \boxed{\widehat f(-\beta t,t)=\widehat f(0,0)
+ \exp\!\left(-\frac{\nu_4\beta^4t^5}{5}\right),\qquad
+ t_{\mathrm{sink}}\sim(\nu_4\beta^4)^{-1/5}.}
+ \label{eq:sink-time}
+\end{equation}
+Mixing makes the velocity-space wavenumber grow as $|\eta|\sim|\beta|t$, and the fourth-order sink becomes stronger as $\eta^4$. This calculation explicitly separates transfer to fine structure from its removal. It applies away from a point where the frequency gradient $\beta$ vanishes.
+
+\begin{tcolorbox}
+\textbf{Do not identify~\eqref{eq:sink-time} with the vortex envelope.} It describes a moving Fourier component of the distribution, not $E_\nz(t)$ or even $\widehat f(0,t)$. Nevertheless, it shows that accelerating removal of fine-scale structure can occur without a trapping transition. Acceleration alone does not identify the mechanism.
+\end{tcolorbox}
+In the sink-free limit, this reduced mixing is reversible at the fine-grained level. The damping of a self-consistent macroscopic mode can still be collisionless; the dependence of the measured slow leak on $\nu_4$ must be established rather than assumed. For $k=0$, the magnetic-drift resonance channel used above disappears. This supports the distinction between the fading non-zonal vortices and the protected flute-like zonal component, without proving indefinite persistence in a more complete physical model.
+
+\newpage
+\section{What can be compared with the long run}
+The following are the rates supplied in the user's description~\cite{longrun}, not quantities independently extracted from the movie. The conversion uses~\eqref{eq:energy-rate} and applies to a locally exponential envelope of fixed shape.
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Time interval & Reported $\Gamma_E$ & Equivalent $\gamma_{\mathrm{amp}}=\Gamma_E/2$\\
+\midrule
+$4\,000$--$8\,000$   & $5\times10^{-4}$       & $2.5\times10^{-4}$\\
+$9\,000$--$9\,500$   & $1.2\times10^{-3}$     & $6\times10^{-4}$\\
+$10\,000$--$10\,300$ & $2.4\times10^{-3}$     & $1.2\times10^{-3}$\\
+$10\,600$--$11\,000$ & $(4\text{--}7)\times10^{-3}$ & $(2\text{--}3.5)\times10^{-3}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Rates are in the inverse simulation-time units quoted in the draft. They are benchmarks, not predictions of this note.
+
+\subsection{What the analytical work has actually supplied}
+Equation~\eqref{eq:response} is the linearised kinetic response about a zonal state. Equations~\eqref{eq:operator}--\eqref{eq:gamma} specify the self-consistent resonance calculation, including its sign. Equations~\eqref{eq:K0} and~\eqref{eq:J-imag} evaluate a Maxwellian energy integral analytically. Equations~\eqref{eq:trapping} and~\eqref{eq:hessian} calculate trapping frequencies in stated local limits. Equations~\eqref{eq:passive} and~\eqref{eq:sink-time} are explicitly solved checks, not replacements for the full field problem.
+
+A numerical value from~\eqref{eq:gamma} requires a specified zonal potential $\Phi$, the velocity-dependent $H_a'$ (or an explicit analytical closure for it), magnetic-drift/orbit coefficients, and a consistent spatial mode and frequency. The potential and box dimensions alone do not fix these. In particular, many distributions can share the same charge moment while differing at the resonances.
+
+The two amplitude-reduced restarts described in Ref.~\cite{longrun} probe whether finite amplitude matters. For a linear problem on the same fixed background, consistently scaling all non-zonal distributions and their self-consistent field gives exactly the same normalised linear evolution. Different normalised decay after such scaling would establish an amplitude-dependent effect, but would not uniquely identify trapping. Moving-frame closed orbits and their resonant populations are the additional physical connection.
+
+\begin{tcolorbox}
+\textbf{Conclusion.} Drift-resonant phase mixing provides a concrete candidate channel through which the vortex field can lose energy while the flute-like zonal flow avoids that channel. Nonlinear trapping could suppress it at larger amplitude. The derived response, resonance integral and trapping criteria make this testable; they do not yet establish the observed $\gamma(A)$ or a parameter-free lifetime.
+\end{tcolorbox}
+
+\begingroup
+\small
+\renewcommand{\refname}{Sources and scope}
+\begin{thebibliography}{9}
+\setlength{\itemsep}{3pt}
+\bibitem{draft}
+D.~Kennedy and G.~G.~Plunk,
+\emph{Explosive instability, quiet plasma: phase-space cascades, coherent vortices, and transport suppression in a dipole pair plasma}.
+User-supplied working draft, \texttt{Pasted text(3).txt}.
+Basis: kinetic equations (lines 43--62), invariants (64--77), sinks (87), phase mixing (98--100), vortices and breathing (115--124), and free-energy balance (136--150).
+\bibitem{longrun}
+User-supplied description of the smaller-box, $\eta=1$ run, $0\leq t\leq11\,000$, in a $52\times44\,\lambda_D$ box, with decay-rate estimates and amplitude-reduced restart tests. These newer observations are distinct from the draft's shorter run and are used here as reported.
+\bibitem{mishchenko}
+A.~Mishchenko, G.~G.~Plunk and P.~Helander,
+``Electrostatic stability of electron--positron plasmas in dipole geometry,''
+\emph{J. Plasma Phys.} \textbf{84}, 905840201 (2018).
+\href{https://doi.org/10.1017/S0022377818000193}{doi:10.1017/S0022377818000193}.
+External context for magnetic-drift resonances, not a damping calculation for this condensate.
+\bibitem{oneil}
+T.~O'Neil, ``Collisionless Damping of Nonlinear Plasma Oscillations,''
+\emph{Phys. Fluids} \textbf{8}, 2255--2262 (1965).
+\href{https://doi.org/10.1063/1.1761193}{doi:10.1063/1.1761193}.
+External context for trapping-modified damping; its result is not transplanted as a proven law here.
+\end{thebibliography}
+\endgroup
+\end{document}

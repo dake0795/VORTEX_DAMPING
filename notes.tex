@@ -1,0 +1,745 @@
+% Working notes: damping of breathing vortices (Kennedy & Plunk). Preamble and macros follow
+% ep_turbulence_paper/main.tex (lines 1-160 and 190-196) so that the notation matches the long paper.
+\documentclass{jpp}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{patterns,patterns.meta,decorations.pathreplacing}
+\usepackage[normalem]{ulem}
+\usepackage{placeins}
+
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+
+\interfootnotelinepenalty=10000
+
+\setlength{\paperwidth}{174mm}
+\setlength{\paperheight}{247mm}
+\usepackage[colorlinks=true,
+            linkcolor=blue!60!black,
+            citecolor=blue!60!black,
+            urlcolor=blue!60!black,
+            setpagesize=false,
+            hypertexnames=false]{hyperref}
+
+\usepackage{cleveref}
+\crefformat{section}{\S#2#1#3}
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+\crefformat{figure}{figure~#2#1#3}
+\crefformat{equation}{(#2#1#3)}
+\crefrangeformat{equation}{(#3#1#4)--(#5#2#6)}
+\crefrangeformat{figure}{figures #3#1#4--#5#2#6}
+\def\closesymbol{\!}
+\newcommand{\order}[1]{O\left(#1\right)}
+\newcommand{\orderinline}[1]{O(#1)}
+\newcommand{\rmd}{\text{d}}
+
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bB}{\mathbf{B}}
+
+\ifdefined\closesymbol
+	\relax
+\else
+	\def\closesymbol{\relax}
+\fi
+
+\newcommand{\pt}{\partial_t}
+\newcommand{\px}{\partial_x}
+\newcommand{\py}{\partial_y}
+\newcommand{\pz}{\partial_z}
+
+\ifdefined\partd
+	\renewcommand{\partd}[3][]{\frac{{\partial^{#1} #2}}{{\partial #3}^{#1}}}
+\else
+	\newcommand{\partd}[3][]{\frac{{\partial^{#1} #2}}{{\partial #3}^{#1}}}
+\fi
+
+\ifdefined\vec
+	\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\else
+	\newcommand{\vec}[1]{\boldsymbol{#1}}
+\fi
+
+\newcommand{\uvec}[1]{\hat{\boldsymbol{#1}}}
+\providecommand{\bcdot}{\vec{\cdot}}
+
+\newcommand{\grad}{{\vec{\nabla}}}
+\ifdefined\div
+	\renewcommand{\div}{{\grad\bcdot}}
+\else
+	\newcommand{\div}{{\grad\bcdot}}
+\fi
+
+\ifdefined\vr
+	\renewcommand{\vr}{{\vec{r}}}
+\else
+	\newcommand{\vr}{{\vec{r}}}
+\fi
+\newcommand{\vp}{{\vec{p}}}
+\newcommand{\vq}{{\vec{q}}}
+\newcommand{\vk}{{\vec{k}}}
+
+\ifdefined\vv
+	\renewcommand{\vv}{{\vec{v}}}
+\else
+	\newcommand{\vv}{{\vec{v}}}
+\fi
+
+\newcommand{\vkperp}{{\vk_\perp}}
+\newcommand{\kperp}{k_\perp}
+\newcommand{\kpar}{k_\parallel}
+\newcommand{\vperp}{v_\perp}
+\newcommand{\vvperp}{\vv_\perp}
+\newcommand{\vpar}{v_\parallel}
+\newcommand{\hvpar}{\hat v_\parallel}
+
+\newcommand{\intr}[1][3]{{\int \rmd^{#1} \vec{r} \ }}
+\newcommand{\intR}[1][3]{{\int \rmd^{#1} \vec{R} \ }}
+\newcommand{\intv}[1][3]{{\int \rmd^{#1} \vec{v} \ }}
+\newcommand{\intw}[1][3]{{\int \rmd^{#1} \vec{w} \ }}
+
+
+\newcommand{\s}{s}
+\newcommand{\vth}{v_\text{th}}
+\newcommand{\vths}{v_{\text{th}\s}}
+\newcommand{\vthi}{v_{\text{th}i}}
+\newcommand{\vthe}{v_{\text{th}e}}
+\newcommand{\mfp}{\lambda_\text{mfp}}
+\newcommand{\ope}{\omega_{\text{p}e}}
+\newcommand{\lDe}{\lambda_{\text{D}e}}
+\newcommand{\rhoi}{\rho_i}
+\newcommand{\rhoe}{\rho_e}
+\newcommand{\rhos}{\rho_s}
+
+\newcommand{\fs}{f_{\s}}
+\newcommand{\fos}{f_{0\s}}
+\newcommand{\Fs}{F_{\s}}
+\newcommand{\Fos}{F_{0\s}}
+\newcommand{\dfs}{\delta \closesymbol f_{\s}}
+
+\newcommand{\fe}{f_{e}}
+\newcommand{\foe}{f_{0e}}
+\newcommand{\Fe}{F_{e}}
+\newcommand{\Foe}{F_{0e}}
+\newcommand{\dfe}{\delta \closesymbol f_{e}}
+
+\newcommand{\fion}{f_{i}}
+\newcommand{\foi}{f_{0i}}
+\newcommand{\Fi}{F_{i}}
+\newcommand{\Foi}{F_{0i}}
+\newcommand{\dfi}{\delta \closesymbol f_{i}}
+
+\newcommand{\kperprhoisq}{\kperp^2\rhoi^2}
+\newcommand{\kperprhoisqq}{\kperp^4\rhoi^4}
+\newcommand{\kperprhoesq}{\kperp^2\rhoe^2}
+\newcommand{\kperprhoesqq}{\kperp^4\rhoe^4}
+\newcommand{\pbra}[2]{\left\lbrace #1, #2 \right\rbrace}
+\newcommand{\pbrainline}[2]{\lbrace #1, #2 \rbrace}
+
+\newcommand{\vR}{{\vec{R}}}
+\newcommand{\vE}{\vec{E}}
+\newcommand{\vB}{\vec{B}}
+\newcommand{\exb}{\(\vE\times\vB\)}
+
+\newcommand{\avgR}[1]{\left\langle #1 \right\rangle_\vec{R}}
+\newcommand{\avgRs}[1]{\left\langle #1 \right\rangle_{\vec{R}_\s}}
+\newcommand{\avgRinline}[1]{\langle #1 \rangle_\vec{R}}
+\newcommand{\avgr}[1]{\left\langle #1 \right\rangle_{\vec{r}}}
+\newcommand{\avgrinline}[1]{\langle #1 \rangle_\vec{r}}
+
+	
+\emergencystretch=3em
+\raggedbottom
+\newcommand{\lambdaD}{\lambda_D}
+\newcommand{\debye}{\lambda_D^2}
+\newcommand{\omstar}{\omega_*}
+\newcommand{\omd}{\omega_d}
+\newcommand{\Zhat}{\hat{Z}}
+\newcommand{\lavg}[1]{\langle #1 \rangle_\lambda}
+\newcommand{\gene}{\texttt{GENE}}
+
+% ---------------------------------------------------------------------------
+% Additional cleveref formats and notes-specific macros
+% ---------------------------------------------------------------------------
+\Crefformat{equation}{Equation~(#2#1#3)}
+\Crefformat{figure}{Figure~#2#1#3}
+\crefformat{table}{table~#2#1#3}
+\Crefformat{table}{Table~#2#1#3}
+\crefformat{appendix}{Appendix~#2#1#3}
+\Crefformat{appendix}{Appendix~#2#1#3}
+\crefformat{footnote}{footnote~#2#1#3}
+\crefmultiformat{equation}{(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+\crefmultiformat{section}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{ and~\S#2#1#3}
+\crefmultiformat{subsection}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{ and~\S#2#1#3}
+\crefmultiformat{figure}{figures~#2#1#3}{ and~#2#1#3}{, #2#1#3}{ and~#2#1#3}
+\crefrangeformat{section}{\S\S#3#1#4--#5#2#6}
+\usepackage{booktabs}
+
+\newcommand{\phibar}{\bar\phi}
+\newcommand{\varphibar}{\bar\varphi}
+\newcommand{\rme}{\text{e}}
+\newcommand{\rmi}{\text{i}}
+\newcommand{\vda}{\bar v_{da}}
+\newcommand{\nz}{\text{nz}}
+\newcommand{\zon}{\text{zon}}
+\newcommand{\Enz}{E_\text{nz}}
+\newcommand{\Ezon}{E_\text{zon}}
+\newcommand{\Znz}{Z_\text{nz}}
+\newcommand{\Wnz}{W_\text{nz}}
+\newcommand{\GammaE}{\Gamma_{\!E}}
+\newcommand{\gammaamp}{\gamma_\text{amp}}
+\newcommand{\omtr}{\omega_\text{tr}}
+\newcommand{\omb}{\omega_\text{b}}
+\newcommand{\wt}{\tilde\omega}
+\newcommand{\Lop}{\mathcal{L}}
+\newcommand{\Nop}{\mathcal{N}}
+\newcommand{\Ham}{\mathcal{H}}
+\newcommand{\Kfn}{\mathcal{K}}
+\newcommand{\Zfn}{\mathcal{Z}}
+\newcommand{\Dfn}{\mathcal{D}}
+\newcommand{\Pk}{\mathcal{P}}
+\newcommand{\PV}{\operatorname{PV}}
+\newcommand{\Cxy}{C_{xy}}
+\newcommand{\dx}{\Delta x}
+\newcommand{\Omstar}{\Omega_*}
+\newcommand{\what}{\hat\omega_d}
+
+\shorttitle{Damping of breathing vortices: working notes}
+\shortauthor{D. Kennedy and G.G. Plunk}
+
+\title{Damping of breathing vortices in a dipole pair-plasma condensate: working notes}
+
+\author{D.~Kennedy$^{1}$\thanks{Email address for correspondence: daniel.kennedy@ukaea.uk}
+  \and G.G.~Plunk$^{2}$}
+
+\affiliation{$^{1}$UKAEA (United Kingdom Atomic Energy Authority), Culham Campus, Abingdon, Oxfordshire, OX14 3DB, UK\\
+$^{2}$Max-Planck-Institut f\"ur Plasmaphysik, Greifswald, Germany}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Starting from the observation that the two box-scale vortices which breathe on the zonal condensate of a strongly driven, temperature-gradient-dominated dipole pair plasma do not persist but decay, at a rate that grows as their amplitude falls until they collapse, we assemble in these working notes what can and cannot presently be said about the mechanism. We correct and complete an earlier analytical calculation of the drift-resonant (Landau-type) damping of a vortex on a frozen zonal state, and we show that it has two distinct limits: a uniform-flow limit, in which the resonance is with the energy-dependent magnetic drift and the damping is exponentially weak at long wavelength; and a drift-free limit, in which the charge moment of the kinetic equation reduces to the two-dimensional Euler equation, the vortex obeys Rayleigh's equation, and the resonance becomes a hydrodynamic critical layer. The simulated vortices lie in the second limit. We then confront the theory with a reduced-box simulation and two amplitude-reduced restarts. The decay depends on amplitude, which excludes any linear explanation, but the trapping frequency exceeds the damping rate by one to three orders of magnitude throughout, so the decay is not an O'Neil-type crossover either. The data is consistent with a sink-limited nonlinear critical layer whose collapse coincides with the trapped region shrinking to one grid cell, which is also of the order of the Debye length. We close by listing what is established, what is open, and the simulations that would decide between the remaining possibilities.
+\end{abstract}
+
+% ===========================================================================
+\section{Introduction}\label{sec:intro}
+% ===========================================================================
+
+Strongly driven electron--positron plasmas in a dipole collapse, after a single explosive burst of interchange activity, into a box-scale zonal condensate on which two coherent vortices ride, one on each jet, carried in opposite directions and exchanging electrostatic energy with the zonal flow at twice their advection frequency --- the `breathing' of \citet{KennedyPlunkLetter}. Nothing in the collisionless transit-averaged model damps the flute-like zonal part of this state \citep{KennedyPlunkManuscript, KennedyPlunkLetter}, and the net injection of free energy by the gradients is negligible; the condensate is therefore long-lived, and the transport it carries is close to zero. The vortices, however, are not protected in the same way: in a reduced-box simulation of the same state, their energy falls slowly for several thousand time units, then ever faster, until they collapse into a weak, partly incoherent remnant. Coherent structures riding on sheared flows are common in zonally dominated plasma turbulence \citep{Ivanov2020, Ivanov2025}, and their lifetime can be as important as their existence. Since the vortices carry the large oscillating fluxes of the condensate, what removes them --- and whether it would also remove them in a less idealised plasma --- determines the long-time state of the system.
+
+The natural candidate is resonant phase mixing. The magnetic drift in a dipole is energy dependent, so a coherent structure moving through the plasma resonates with the particles whose drift (plus zonal advection) matches its speed, and loses energy to them in the manner of Landau damping \citep{Landau1946}; the same resonance underlies the kinetic instabilities of the dipole pair plasma \citep{MPH2018, Kennedy2020}. At finite amplitude, however, the vortex traps the resonant particles (or fluid elements), and since \citet{ONeil1965} it has been known that trapping suppresses resonant damping once the trapping frequency exceeds the linear damping rate. A nonlinear decay whose rate increases as the amplitude falls is what this picture suggests, and it was the hypothesis of an earlier analytical note (unpublished, dated 30 September 2026; hereafter `the earlier note'), on which the present notes build. That note left four questions open, viz., (i)~whether the resonance is really with the drift; (ii)~whether the damping has the sign of a damping; (iii)~whether the vortices sit where the note assumed; and (iv)~whether the observed acceleration is the trapping crossover or something else. We shall find that it is something else.
+
+In these notes, we first summarise the setting in \cref{sec:setting}, viz., the transit-averaged equations, the strongly driven condensate and the reduced-box simulation with its amplitude tests, and then, in \cref{sec:observations}, the observations that are to be explained. In \cref{sec:linear}, we derive the linear response of a vortex on a frozen zonal state, correcting the treatment of the zonal distribution, and show that it has two limits: a uniform-flow limit, which we work out in closed form, and a drift-free limit, in which the vortex obeys Rayleigh's equation and the resonance is a hydrodynamic critical layer. In \cref{sec:nonlinear}, we turn to trapping, both on the flanks of a jet and at its maximum, and to the interplay of phase mixing with the hyperdiffusive sinks of the simulation. In \cref{sec:data}, we confront these calculations with the simulation data, before finally stating, in \cref{sec:summary}, what is established, what is open, and which simulations would settle it. \Cref{app:kfunctions} collects the energy integrals of the uniform-flow limit.
+
+% ===========================================================================
+\section{The setting}\label{sec:setting}
+% ===========================================================================
+
+In this section, we recall the equations of \citet{KennedyPlunkLetter} and \citet{KennedyPlunkManuscript} to the extent needed here, describe the strongly driven condensate in which the vortices live, and specify the simulations analysed in \cref{sec:data}.
+
+\subsection{Transit-averaged equations}\label{sec:equations}
+
+We consider a symmetric electron--positron plasma, with charges \(e_p = -e_e = e\), a common Maxwellian \(f_0\) of density \(n_0\) and temperature \(T\), in the ordering \(\rho \ll \lambdaD \ll L\), where \(\rho\) is the Larmor radius, \(\lambdaD = \sqrt{\epsilon_0 T/2n_0e^2}\) the Debye length and \(L\) an equilibrium length. We use flux coordinates \((\psi, \alpha, l)\) with \(\vB = \grad\psi\times\grad\alpha\), and write \(\delta f_a = h_a - e_a\phi f_0/T\). Below the transit and bounce frequencies, \(h_a(\psi,\alpha,\varepsilon,\lambda,t)\) is independent of \(l\) \citep{Helander2014, MPH2018}, where \(\varepsilon = mv^2/2\) is the energy and \(\lambda = v_\perp^2/Bv^2\) the pitch-angle variable, and particles respond to the orbit-averaged potential
+\begin{equation}
+\phibar(\lambda) = \frac{1}{\hat\tau(\lambda)}\int_{l_1}^{l_2}\frac{\phi(l)\,\rmd l}{\sqrt{1-\lambda B(l)}},
+\qquad
+\hat\tau(\lambda) = \int_{l_1}^{l_2}\frac{\rmd l}{\sqrt{1-\lambda B(l)}},
+\label{eq:orbit}
+\end{equation}
+where \(l_1\) and \(l_2\) are the bounce points of a trapped particle or the ends of one field-line period for a passing one. To leading order in \(\kperp\rho\), the kinetic and field equations are \citep{Abel2013, MPH2018, KennedyPlunkManuscript}
+\begin{align}
+\pt h_a + \pbra{\phibar}{h_a} + \vda\,\partial_\alpha h_a
+&= \frac{e_af_0}{T}\left(\pt\phibar - v_{*a}^{T}\,\partial_\alpha\phibar\right),\label{eq:kinetic}\\
+\left(1-\lambdaD^2\nabla_\perp^2\right)\frac{e\phi}{T}
+&= \frac{1}{2n_0}\int\rmd^3\vv\,(h_p-h_e),\label{eq:poisson}
+\end{align}
+where \(\pbrainline{X}{Y} \equiv \partial_\psi X\,\partial_\alpha Y - \partial_\alpha X\,\partial_\psi Y\) is the \exb{} advection, \(\vda\) is the orbit-averaged binormal magnetic drift, which is energy dependent and of opposite sign for the two species, and \(v_{*a}^{T} = -(T/e_a)\,\partial_\psi\ln f_0\) is the gradient drive at fixed energy. The dipole has no radial magnetic drift, so the zonal flow suffers no collisionless damping.
+
+The nonlinearity of \cref{eq:kinetic} conserves the free energy \(W\) and the electrostatic energy \(E\) separately, and their difference \(Z = W - E \geq 0\) is the entropy of the orbit-averaged perturbation \citep{KennedyPlunkManuscript, KennedyPlunkLetter}; these invariants are the closed-field-line counterparts of those of two-dimensional gyrokinetics \citep{Plunk2010, PlunkTatsuno2011}. Here, we need only two further facts. Firstly, the free energy obeys
+\begin{equation}
+\frac{\rmd W}{\rmd t} = P - D,
+\label{eq:balance}
+\end{equation}
+where \(P\) is the injection by the gradients and \(D \geq 0\) is the irreversible removal, which, in the simulations, is entirely due to hyperdiffusion \citep{KrommesHu1994, Sugama1996}. Secondly, if we split \(E = \Ezon + \Enz\) into its zonal (\(k_y = 0\)) and non-zonal parts, the nonlinear transfer between the two satisfies
+\begin{equation}
+\left(\pt\Ezon\right)_\text{NL} = -\left(\pt\Enz\right)_\text{NL},
+\label{eq:exchange}
+\end{equation}
+i.e., the zonal flow and the vortices exchange electrostatic energy without loss; this exchange is the breathing \citep{KennedyPlunkLetter}. We shall write \(\Znz\) and \(\Wnz = \Enz + \Znz\) for the non-zonal parts of \(Z\) and \(W\), and \(\GammaE \equiv -\rmd\ln\Enz/\rmd t\) for the decay rate of the non-zonal electrostatic energy. For a structure of fixed shape, \(\GammaE = 2\gammaamp\), where \(\gammaamp\) is the decay rate of its amplitude.
+
+\subsection{The strongly driven condensate}\label{sec:condensate}
+
+At \(\eta \equiv L_n/L_T = 1\), the drive is above the fluid-interchange threshold \citep{MPH2018}, and the interchange grows at the same rate at every wavelength the box allows. A single \(k_y = 1\) streamer then collapses, in one burst, into \(k_x = 1\) zonal bands, viz., one jet in each direction across the periodic box, modulated by two box-scale vortices, one on each jet \citep{KennedyPlunkLetter}. The two vortices move in opposite directions, related by the symmetry of the pair-plasma equations under exchange of the species together with \(\phi\to-\phi\) and \(y\to-y\), and their relative phase sets the tilt of the flow between them, so the exchange \cref{eq:exchange} runs at \(\omb = 2|\omega_\text{adv}|\), twice the advection frequency of either vortex. Over a breathing cycle, the state changes little; over many cycles, the vortices decay. In what follows, we call \(k_y = 1\) the vortex and \(k_y = 0\) the jet, and the question of these notes is why the former decays while the latter does not.
+
+\subsection{The reduced-box simulation and the amplitude tests}\label{sec:runs}
+
+All the data in these notes comes from one nonlinear simulation with the gyrokinetic code \gene{} \citep{Jenko2000} in the dipole flux tube of \citet{KennedyPlunkLetter}, at \(\eta = 1\), started from noise, in a box a quarter of the production box in each perpendicular direction, together with two restarts of it. Its parameters are collected in \cref{tab:runs}. The box is \(L_x = 3689\,\rho_\text{ref}\) wide (about \(52\lambdaD\)) and \(L_y = 2\pi/k_{y,\text{min}}\approx 3142\,\rho_\text{ref}\) long (about \(44\lambdaD\)), with \(\lambdaD = 50\sqrt2\,\rho_\text{ref}\approx 70.7\,\rho_\text{ref}\); the radial grid spacing \(\dx = L_x/n_{x0} = 57.6\,\rho_\text{ref}\) is therefore \(0.82\lambdaD\), a fact that will matter in \cref{sec:collapse}. There is no collision operator: all irreversible removal is by fourth-order hyperdiffusion, spectral in \(x\) and \(y\) (rate \(\nu_\perp(\dx\,k_x/2)^4\) and likewise in \(y\)), and by finite-difference hyperdiffusion along the field line and in \(v_\parallel\). The burst occurs at \(t\approx 665\), after which the run is continued in six legs to \(t\approx 19\,000\); legs 1 and 3--6 are used here.\footnote{Leg 2 ran no steps, its start time equalling its time limit, and its checkpoint is identical to that of leg 1.} Times are in \(L_\text{ref}/c_\text{ref}\), lengths in \(\rho_\text{ref}\), and energies in the units of the \gene{} free-energy diagnostics \citep{BanonNavarro2011, BanonNavarro2016}.
+
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\toprule
+Quantity & Symbol & Value \\
+\midrule
+Gradient drives & \(\omega_n = \omega_T\) & \(2.7816\) (\(\eta = 1\)) \\
+Grid & \(n_{x0}\times n_{ky0}\times n_{z0}\) & \(64\times16\times32\) \\
+Velocity grid & \(n_v\), \(L_v\) & \(84\), \(4.5\) \\
+Box & \(L_x\), \(k_{y,\text{min}}\) & \(3689\,\rho_\text{ref}\), \(2\times10^{-3}\,\rho_\text{ref}^{-1}\) \\
+Debye length & \(\lambdaD\) & \(70.7\,\rho_\text{ref} = 1.23\,\dx\) \\
+Perpendicular hyperdiffusion & \(\nu_x = \nu_y\) & \(2.4\times10^{-3}\) (spectral, fourth order) \\
+Parallel hyperdiffusion & \(\nu_z\) & \(0.05\) (fourth order) \\
+Velocity-space hyperdiffusion & \(\nu_v\) & \(0.2\) (fourth order in \(v_\parallel\)) \\
+Collisions & --- & none \\
+Courant factor & --- & \(0.3\) \\
+\bottomrule
+\end{tabular}
+\caption{A summary of the parameters of the reduced-box simulation analysed in these notes. The amplitude-reduced restarts share them exactly.}
+\label{tab:runs}
+\end{table}
+
+The two restarts, which we call the \textit{amplitude tests}, start from the checkpoint of the original run at \(t = 5907\), with every \(k_y \geq 1\) component of the distribution function multiplied by \(\epsilon = 0.3\) or \(\epsilon = 0.03\) and the zonal component left untouched; the potential follows from \cref{eq:poisson}. Each is run for about \(800\) time units. If the vortex decay were linear on a frozen zonal state, these restarts would decay at exactly the same rate as the original, since the normalised linear evolution of a rescaled perturbation is unchanged; this is the null hypothesis that the tests were designed to probe.
+
+% ===========================================================================
+\section{Observations}\label{sec:observations}
+% ===========================================================================
+
+Before turning to the theory, let us state what is to be explained, leaving the detailed measurements to \cref{sec:data}.
+
+The energy \(\Enz\) of the vortices falls by five orders of magnitude between the burst and \(t\approx 11\,000\) (see \cref{fig:history}a). The decay is not exponential. Over \(4000\lesssim t\lesssim 8000\), \(\GammaE\approx 5\times10^{-4}\); it then accelerates through \(1.2\times10^{-3}\) (\(t\approx9000\)--\(9500\)), \(2.4\times10^{-3}\) (\(t\approx10\,000\)--\(10\,300\)), \(3.9\times10^{-3}\) (\(t\approx10\,300\)--\(10\,600\)) and \(6.0\times10^{-3}\) (\(t\approx10\,600\)--\(10\,900\)) to \(1.0\times10^{-2}\) at \(t\approx10\,900\)--\(11\,100\), where the vortices collapse; there is no plateau. After the collapse, a weak remnant persists, with \(\Enz\) smaller by about three orders of magnitude, decaying slowly and irregularly. Throughout, the zonal energy \(\Ezon\) decays at only about \((5\)--\(8)\times10^{-6}\) per unit time, and the net injection \(P\) is negligible. The ratio \(\Znz/\Enz\) of entropy to electrostatic energy in the non-zonal part rises steadily during the decay and sharply at the collapse (see \cref{fig:history}a).
+
+The amplitude tests decay faster than the original, not at the same rate, and the smaller the amplitude, the faster the decay (see \cref{fig:amplitude}a). Over the common window \(5908\leq t\leq6707\), the \(\epsilon = 0.3\) restart decays about twice as fast as the original and the \(\epsilon = 0.03\) restart about ten times as fast. Both restarts first grow, relative to their rescaled initial energy, before decaying.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/test4_entropy_energy.pdf}
+\caption{Non-zonal electrostatic energy, entropy and free energy of the reduced-box simulation. (a) The original run: \(\Enz\) (black), \(\Znz\) (red) and \(\Wnz = \Enz + \Znz\) (blue dashed) on the left axis, and the ratio \(\Znz/\Enz\) (green) on the right axis, all as \(37\)-time-unit running means, i.e., over about ten breathing periods. (b) The ratio \(\Znz/\Enz\) against the amplitude measure \((\Enz/\Ezon)^{1/2}\), with the amplitude decreasing to the right, for the original run (black) and the \(\epsilon = 0.3\) (blue) and \(\epsilon = 0.03\) (red) restarts of \cref{sec:runs}. The ratio rises steadily during the decay and sharply at the collapse (\(t\approx 10\,600\)--\(11\,000\)), but \(\Wnz\) falls almost as fast as \(\Enz\) through most of the decay (\cref{sec:entropy}). At matched amplitude, the restarts carry less entropy per unit electrostatic energy than the original.}
+\label{fig:history}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/test1_amplitude_dependence.pdf}
+\caption{Amplitude dependence of the vortex decay. (a) The non-zonal electrostatic energy of the \(\epsilon = 0.3\) (blue) and \(\epsilon = 0.03\) (red) restarts, divided by \(\epsilon^2\) and by the energy of the original run at the restart time, \(t = 5907\), compared with the original (black), all as \(37\)-time-unit running means; a linear process would make the three curves coincide. (b) The decay rate \(\GammaE = -\rmd\ln\Enz/\rmd t\) from \(200\)-time-unit windows against the amplitude measure \((\Enz/\Ezon)^{1/2}\), decreasing to the right, for the original (black circles) and the restarts after their initial transient (\(t > 5980\); blue and red squares), with fit errors as bars. (c) The per-vortex decay rate \(-\rmd\ln E_\pm/\rmd t\) against the per-vortex amplitude \(A_\pm = 2\max_x|\hat\phi_\pm(x)|/\Cxy\) at the mid-plane, for vortex \(+\) (filled) and \(-\) (open) of each run, colours as in (b). The decay accelerates as the amplitude falls in all three runs, and at matched amplitude the restarts fall close to, but not exactly on, the curve of the original run.}
+\label{fig:amplitude}
+\end{figure}
+
+% ===========================================================================
+\section{Linear theory of the vortex on a frozen zonal state}\label{sec:linear}
+% ===========================================================================
+
+In this section, we derive the linear response of a small vortex on a frozen zonal state, correct the treatment of the zonal distribution in the earlier note, and show that the resulting problem has two limits that behave entirely differently. The algebra of \cref{sec:response,sec:resonance} was rederived independently and checked numerically; the reductions of \cref{sec:euler} are introduced in these notes.
+
+\subsection{Linear response}\label{sec:response}
+
+Assuming that the zonal state evolves slowly compared with the vortex, we freeze a flute-like zonal state \((\Phi, H_a)\) and consider a small travelling perturbation,
+\begin{equation}
+\phi = \Phi(\psi) + \varphi(\psi, l)\,\rme^{\rmi k\alpha - \rmi\omega t},
+\qquad
+h_a = H_a(\psi,\varepsilon,\lambda) + g_a\,\rme^{\rmi k\alpha - \rmi\omega t},
+\label{eq:ansatz}
+\end{equation}
+where real parts are understood, \(k\) is the binormal wavenumber, and the perturbation need not be flute-like. Let \(U \equiv \partial_\psi\Phi\) be the zonal advection velocity in flux coordinates.\footnote{Not to be confused with the specific flux-tube volume \(U = \oint\rmd l/B\) of \citet{KennedyPlunkLetter}, which does not appear in these notes.} The pair \((\Phi, H_a)\) is an exact steady solution of \cref{eq:kinetic}, since \(\pbrainline{\Phi}{H_a} = 0\) for flute-like functions of \(\psi\) alone. With \(\pbrainline{\Phi}{g_a\rme^{\rmi k\alpha}} = \rmi kUg_a\rme^{\rmi k\alpha}\) and \(\pbrainline{\varphibar\rme^{\rmi k\alpha}}{H_a} = -\rmi kH_a'\varphibar\rme^{\rmi k\alpha}\), where the prime denotes \(\partial_\psi\) at fixed \((\varepsilon,\lambda)\), linearisation of \cref{eq:kinetic} gives the particle response
+\begin{equation}
+g_a = \frac{\Nop_a(\omega)}{\omega - \Omega_a}\,\varphibar,
+\qquad
+\Omega_a = k\left(U + \vda\right),
+\qquad
+\Nop_a(\omega) = \frac{e_af_0}{T}\,\omega - k\,\partial_\psi\left(f_0 + H_a\right),
+\label{eq:response}
+\end{equation}
+where we have used the identity \((e_af_0/T)\,v_{*a}^T = -\partial_\psi f_0\), so that the drive is the total radial gradient of the \(l\)-independent distribution \(f_0 + H_a\).
+
+The earlier note kept \(H_a'\) but did not identify its content, and that content matters. The zonal part of \cref{eq:poisson} forces \(H_a\) to contain a Boltzmann part,
+\begin{equation}
+H_a = \frac{e_af_0}{T}\,\Phi + \delta F_a,
+\label{eq:Hsplit}
+\end{equation}
+where \(\delta F_a(\psi,\varepsilon,\lambda)\) is the zonal modification of the distribution, i.e., the flattening (or steepening) of the gradients by the condensate. Then, to leading order in the ratio of the zonal scale to the equilibrium scale,\footnote{\label{fn:dropped}Strictly speaking, \(\partial_\psi H_a\) also contains \((e_a\Phi/T)\,\partial_\psi f_0\). Compared with \((e_af_0/T)\,\partial_\psi\Phi\), this is smaller by the ratio of the radial scale of the zonal flow to the equilibrium gradient length, which is small in a local flux tube; we neglect it throughout.}
+\begin{equation}
+\Nop_a(\omega) = \frac{e_af_0}{T}\left[\omega - kU + k\,\tilde v_{*a}(\varepsilon,\lambda,\psi)\right],
+\qquad
+\frac{e_af_0}{T}\,\tilde v_{*a} \equiv -\partial_\psi\left(f_0 + \delta F_a\right).
+\label{eq:Ndoppler}
+\end{equation}
+In other words, the drive depends on \(\omega\) only through the Doppler-shifted frequency \(\wt \equiv \omega - kU\): a locally uniform zonal flow, \(\Phi = U\psi\), is a pure Doppler shift, as it must be, and the effective diamagnetic drift \(\tilde v_{*a}\) is built from the gradients of the distribution as modified by the condensate. Without the Boltzmann part of \cref{eq:Hsplit}, the response \cref{eq:response} would not be Doppler invariant. Note also that the zonal part of \cref{eq:poisson} constrains the admissible frozen states: when \(|\grad\psi|^2\) varies along the field line, a flute-like \(\Phi\) requires the charge moment of \(\delta F_p - \delta F_e\) to vary with \(l\) accordingly.
+
+\subsection{The field equation and the resonant contribution}\label{sec:resonance}
+
+Let us define \(\Pk_k \equiv 1 - \lambdaD^2\nabla_{\perp,k}^2\), with \(\partial_\alpha\) replaced by \(\rmi k\). Substituting \cref{eq:response} into \cref{eq:poisson} gives the mode equation
+\begin{equation}
+\Lop(\omega)\,\varphi \equiv \Pk_k\varphi - \frac{T}{2n_0e^2}\sum_a e_a\int\rmd^3\vv\,\frac{\Nop_a(\omega)}{\omega - \Omega_a}\,\varphibar = 0,
+\label{eq:operator}
+\end{equation}
+where the velocity integral is evaluated at the position along the field line at which \cref{eq:poisson} is imposed and the potential inside it is orbit averaged, so that the coupling between \(l\) and \(\lambda\) is retained. For the convention \(\rme^{-\rmi\omega t}\), causality requires starting from \(\operatorname{Im}\omega > 0\) and continuing analytically; at real frequency, this gives the Landau prescription \citep{Landau1946}
+\begin{equation}
+\frac{1}{\omega_r - \Omega + \rmi0} = \PV\frac{1}{\omega_r - \Omega} - \rmi\pi\,\delta(\omega_r - \Omega).
+\label{eq:landau}
+\end{equation}
+Accordingly, we split the operator as \(\Lop = \Lop_R + \rmi\Lop_I\), where \(\Lop_R\) is the principal-value part and \(\Lop_I\) the delta-function part,
+\begin{equation}
+\Lop_I(\omega_r)\,\varphi = \frac{\pi T}{2n_0e^2}\sum_a e_a\int\rmd^3\vv\,\Nop_a(\omega_r)\,\varphibar\,\delta\!\left(\omega_r - k\left[U + \vda\right]\right).
+\label{eq:imaginary}
+\end{equation}
+Note that this is a split of the operator, not of \(\Lop\varphi\) into real and imaginary parts, since \(\varphi\) is complex. The delta function selects the drift-resonant particles, \(\omega_r/k = U(\psi) + \vda(\varepsilon,\lambda)\); this is the same resonance that drives the kinetic instabilities of the dipole \citep{MPH2018}.
+
+Assuming that the principal-value problem has a simple real-frequency solution, \(\Lop_R(\omega_r)\varphi = 0\), and that the resonant part is a small correction, we write \(\omega = \omega_r - \rmi\gamma\), with \(\gamma > 0\) for damping of the amplitude, and project. Since the kinetic operator is local in \(\psi\) (there is no radial drift) and \(\Nop_a\) is real at real frequency, \(\Lop_R\) is symmetric under \(\intr\), and its left null vector is \(\varphi\) itself. Hence
+\begin{equation}
+\gamma = \frac{\langle\varphi, \Lop_I(\omega_r)\varphi\rangle}{\langle\varphi, \partial_\omega\Lop_R(\omega_r)\varphi\rangle}
+= \frac{\pi T}{2n_0e^2}\,\frac{\sum_a e_a\intr\intv\Nop_a(\omega_r)\,|\varphibar|^2\,\delta(\omega_r - \Omega_a)}{\langle\varphi, \partial_\omega\Lop_R(\omega_r)\varphi\rangle},
+\label{eq:gamma}
+\end{equation}
+where \(\langle f, g\rangle \equiv \intr f^*g\), and all explicit frequency dependence, including that in \(\Nop_a\), is differentiated in the denominator. For a scalar dispersion relation \(\Dfn(\omega) = 0\), \cref{eq:gamma} reduces to \(\gamma = \Dfn_I/\Dfn_R'\). The sign of the numerator is not fixed: the resonance can damp or drive, and negligible net injection is not a proof that \(\gamma > 0\). Recall from \cref{sec:equations} that \(\GammaE = 2\gamma\) for a structure of fixed shape.
+
+Equation \cref{eq:gamma} requires three caveats, each of which turns out to matter. Firstly, in a pair plasma whose energy-dependent drifts have opposite signs for the two species, the resonant sets \(kU + k\bar v_{dp}[0,\infty)\) and \(kU + k\bar v_{de}[0,\infty)\) together cover the whole real frequency axis. There is therefore never a discrete real spectrum: the `mode' of \cref{eq:gamma} is always a quasi-mode on the second Riemann sheet, and the expansion is valid only when \(|\gamma| \ll |\omega_r - kU|\), equivalently \(|\Dfn_I| \ll |\wt\,\Dfn_R'|\), and only if the expansion connects to an actual second-sheet root. A real root of \(\Dfn_R\) is not sufficient (\cref{sec:uniform}). Secondly, freezing the zonal state requires the quasi-mode frequency \(|\wt|\) to greatly exceed both the rate of zonal evolution and the breathing frequency \(\omb\); otherwise the relevant object is a Floquet mode of a time-periodic background, not \cref{eq:gamma}. Thirdly, \cref{eq:gamma} describes neither a strongly damped transient nor a finite-amplitude structure; the latter is the subject of \cref{sec:nonlinear}.
+
+The resonance condition \(\omega_r = kU(\psi) + k\vda\) can be satisfied in two quite different ways, and the rest of this section treats them in turn. If the zonal flow is locally uniform across the vortex and the vortex moves relative to it, the resonance selects an energy, and the damping is a genuine Landau damping on the magnetic drift (\cref{sec:uniform}). If, instead, the drift is negligible compared with the variation of \(kU\) across the vortex, the resonance selects a radius, viz., a critical layer where \(U = \omega_r/k\) (\cref{sec:euler}).
+
+\subsection{Limit (a): uniform flow and drift resonance}\label{sec:uniform}
+
+Assuming that (i)~the vortex is flute-like, \(\varphibar = \varphi\); (ii)~\(U\) is locally uniform, so the zonal flow enters only as the Doppler shift of \cref{eq:Ndoppler}; (iii)~the drift is isotropic in pitch angle, \(k\bar v_{dp} = \what u\) and \(k\bar v_{de} = -\what u\), with \(u \equiv \varepsilon/T\) and \(\what\) the signed drift frequency of a positron at \(u = 1\); and (iv)~the background, including the zonal flattening, is a local Maxwellian with species-symmetric effective gradients, \(k\tilde v_{*p}(u) = -k\tilde v_{*e}(u) = -\what\,\Omstar[1 + \eta(u - 3/2)]\), the dispersion relation can be written in closed form. The energy measure at fixed pitch angle is
+\begin{equation}
+p(u) = \frac{2}{\sqrt\pi}\,u^{1/2}\rme^{-u},
+\qquad
+\int_0^\infty p(u)\,\rmd u = 1,
+\label{eq:measure}
+\end{equation}
+and the sign of \(\Omstar\) is chosen so that \(\Omstar > 0\) is the destabilising side.\footnote{\label{fn:sign}The sign convention is fixed by the \(Z\)-pinch check. With the anisotropic drift \(\propto v_\parallel^2 + v_\perp^2/2\) in place of assumption (iii), the fluid limit of the model reproduces the interchange threshold \(\Omstar(1+\eta) = 7/4\) of \citet{MPH2018} and \citet{KennedyPlunkLetter} only if \(\Omstar > 0\) on the destabilising side. In the isotropic model, the corresponding fluid threshold is \(\Omstar(1+\eta) = 5/2\).} With \(z \equiv \wt/\what\) and \(\kappa \equiv \kperp\lambdaD\), \cref{eq:operator} reduces to
+\begin{equation}
+\Dfn(z) = 1 + \kappa^2 - \left\langle\frac{z^2 - u\,\Omstar\left[1 + \eta(u - 3/2)\right]}{z^2 - u^2}\right\rangle_u = 0,
+\label{eq:Duniform}
+\end{equation}
+where \(\langle\cdot\rangle_u \equiv \int_0^\infty p(u)(\cdot)\,\rmd u\) with the causal continuation. The function \(\Dfn\) is even in \(\wt\), so the quasi-modes of a single uniform flow come in pairs \(\pm\wt\) that damp at the same rate. This degeneracy does not by itself explain the equal decay of the two simulated vortices, which ride on different jets (\cref{sec:geometry}); that follows from the species-exchange symmetry of \cref{sec:condensate}. The exact evaluation in terms of the plasma dispersion function \citep{FriedConte1961} is given in \cref{app:kfunctions}. The resonant part, for \(\what > 0\) and \(z > 0\), is
+\begin{equation}
+\Dfn_I = \sqrt\pi\,z^{1/2}\rme^{-z}\left[z - \Omstar\left(1 + \eta\left(z - \tfrac32\right)\right)\right].
+\label{eq:DI}
+\end{equation}
+For \(z \gg 1\), the principal-value part has the asymptotic expansion
+\begin{equation}
+\Dfn_R = \kappa^2 - \sum_{n\geq0}\frac{m_n}{z^{2n+2}},
+\qquad
+m_n = \langle u^{2n+2}\rangle - \Omstar\left[\left(1 - \tfrac32\eta\right)\langle u^{2n+1}\rangle + \eta\langle u^{2n+2}\rangle\right],
+\label{eq:DR}
+\end{equation}
+where \(\langle u^m\rangle = \Gamma(m + 3/2)/\Gamma(3/2)\), so that \(m_0 = 15/4 - (3/2)\Omstar(1+\eta)\). There is thus a weakly damped branch with
+\begin{equation}
+z_r^2 \approx \frac{m_0}{\kappa^2} + \frac{m_1}{m_0},
+\qquad
+\gamma \approx |\what|\,\frac{\sqrt\pi}{2}\,\frac{z_r^{3/2}\rme^{-z_r}}{\kappa^2}\left[z_r - \Omstar\left(1 + \eta\left(z_r - \tfrac32\right)\right)\right],
+\label{eq:gamma_uniform}
+\end{equation}
+where \(\Dfn_R' \approx 2\kappa^2/z\) has been used. Equation \cref{eq:gamma_uniform} implies that the resonance damps if and only if \(z_r > \Omstar[1 + \eta(z_r - 3/2)]\), which, at large \(z_r\), reduces to \(\Omstar\eta < 1\) for the effective (flattened) gradients. For a pure density gradient, or for profiles flattened by the condensate, the resonance always damps; for \(\Omstar\eta > 1\), the high-energy resonant particles drive a growing kinetic mode, with growth rate of order \(\what\).\footnote{Exact second-sheet roots confirm this: \(\Omstar = 1.2\), \(\eta = 1\) gives \(\gamma/\what\approx-1.3\) at \(\kappa = 0.1\), and \(\Omstar = 0.8\), \(\eta = 2\) gives \(\gamma/\what\approx -2.7\). Note that this flute-like isotropic model has no unstable root at \(\Omstar = 1\), \(\eta = 0\), and so does not contain the entropy mode of \citet{KennedyPlunkLetter}; this is a limitation of the model, not a statement about the real system.}
+
+The damping \cref{eq:gamma_uniform} is linear in the drift frequency \(\what\), and its dependence on wavenumber,
+\begin{equation}
+\gamma \propto k_y\,\kperp^{-9/2}\exp\!\left(-\frac{\sqrt{m_0}}{\kperp\lambdaD}\right),
+\label{eq:gamma_scaling}
+\end{equation}
+has an essential singularity at \(\kperp\to0\): long-wavelength vortices are exponentially protected in this limit, and at \(k_y = 0\) the channel vanishes altogether. A subthreshold increase of \(\Omstar\) lowers \(m_0\), hence \(z_r\), and so increases the damping; conversely, flattening of the profiles by the condensate reduces it. If the drift depends on pitch angle, the class with the largest \(|\bar v_d|\) has the smallest \(z_r\) and dominates the exponential.
+
+\Cref{tab:roots} lists exact second-sheet roots of \cref{eq:Duniform}. The projection \cref{eq:gamma}, i.e., \(\Dfn_I/\Dfn_R'\) evaluated at the exact real root of \(\Dfn_R\), agrees with the exact root to better than \(1\%\) for \(\kappa \leq 0.1\), to \(2\)--\(10\%\) at \(0.15\)--\(0.2\), and to about \(25\%\) at \(0.3\), beyond which the quasi-mode is strongly damped and \cref{eq:gamma} is not usable. The closed-form asymptotic estimate \cref{eq:gamma_uniform} is cruder, agreeing to about \(10\%\) at \(\kappa = 0.1\); e.g., for \(\Omstar = 0\) it gives \(4.0\times10^{-4}\) against the exact \(3.7\times10^{-4}\). Real roots of \(\Dfn_R\) also exist elsewhere --- at \(z\approx2.4\), with \(\Dfn_R' < 0\), and, for \(\Omstar = 1\), \(\eta = 0\), at \(z\approx0.25\), with \(\Dfn_R' > 0\) and \(\Dfn_I < 0\), suggesting a spurious `growth' of \(0.26\what\) --- but neither has a complex root near it, which illustrates the first caveat of \cref{sec:resonance}.
+
+\begin{table}
+\centering
+\begin{tabular}{ccccc}
+\toprule
+\(\kperp\lambdaD\) & \(\Omstar = 0\), \(\eta = 0\) & \(\Omstar = 0.5\), \(\eta = 0\) & \(\Omstar = 1\), \(\eta = 0\) & \(\Omstar = 1\), \(\eta = 1\) \\
+\midrule
+\(0.05\) & \(4.1\times10^{-11}\) & \(1.7\times10^{-9}\) & \(1.1\times10^{-7}\) & \(2.9\times10^{-4}\) \\
+\(0.1\) & \(3.7\times10^{-4}\) & \(1.9\times10^{-3}\) & \(1.1\times10^{-2}\) & \(0.10\) \\
+\(0.15\) & \(2.9\times10^{-2}\) & \(6.9\times10^{-2}\) & \(0.16\) & --- \\
+\(0.2\) & \(0.16\) & \(0.27\) & \(0.45\) & --- \\
+\bottomrule
+\end{tabular}
+\caption{Damping rate \(\gamma/\what\) of the weakly damped quasi-mode of the uniform-flow model \cref{eq:Duniform}, from exact second-sheet roots. For \(\Omstar = 0.5\), \(\eta = 1\), the corresponding values are \(6.5\times10^{-8}\) at \(\kperp\lambdaD = 0.05\) and \(7.2\times10^{-3}\) at \(0.1\). The closed-form estimate \cref{eq:gamma_uniform} tracks \(z_r\) to about \(0.2\%\) for \(\Omstar\leq0.5\) and \(\gamma\) to about \(10\%\) at \(\kperp\lambdaD = 0.1\).}
+\label{tab:roots}
+\end{table}
+
+Weak radial variation of \(U\) can be included at leading order, provided that there is no critical layer, i.e., \(|\omega - kU(\psi)| \gg |\what|\) everywhere across the vortex. Expanding about the vortex centre, we find that the resonant energy becomes \(z_r(\psi) \approx z_{r0} - (U'/\bar v_{d1})\,\delta\psi - (U''/2\bar v_{d1})\,\delta\psi^2\), where \(\bar v_{d1}\) is the drift at \(u = 1\) and the wavenumber cancels. For a Gaussian \(|\varphi|^2\) of radial variance \(\sigma^2\), linear shear then multiplies the damping by \(\exp[(U'\sigma/\bar v_{d1})^2/2]\), always increasing it; the control parameter is the velocity jump across the vortex compared with the thermal drift speed. At a jet maximum, \(U' = 0\), the factor becomes \((1 - s\,U''\sigma^2/\bar v_{d1})^{-1/2}\), with \(s = \operatorname{sgn}\wt\) for \(\what > 0\), so the curvature of the jet breaks the degeneracy of the \(\pm\wt\) partners. We have not tested these corrections numerically.
+
+Finally, let us note what this limit requires. The weakly damped branch has \(z_r \approx \sqrt{m_0}/\kperp\lambdaD \gg 1\), viz., the vortex must move through the local zonal flow much faster than the thermal drift speed, and the frozen-background caveat of \cref{sec:resonance} requires \(|\what|z_r \gg \omb\). A vortex that co-moves with the flow somewhere inside itself, \(\wt(\psi) = 0\), is not this quasi-mode at all. We now consider that case.
+
+\subsection{Limit (b): no drift, the Euler equation and the critical layer}\label{sec:euler}
+
+Suppose instead that the vortex is flute-like and that the magnetic drift is negligible compared with the variation of the Doppler-shifted frequency across it, \(|k\vda| \ll |k\,\delta U|\). Then the kinetic problem collapses to a fluid one, as the following argument shows.\footnote{This reduction does not appear in the earlier note.}
+
+Let us take the charge moment \(\sum_a e_a\intv\) of \cref{eq:kinetic} with \(\phibar = \phi\). The bracket commutes with the velocity integral, the gradient drive cancels between the species because \(e_a\,(e_af_0/T)\,v_{*a}^T = -e_a\,\partial_\psi f_0\) sums to zero, and the drift term survives only through the even part \(h_p + h_e\), since \(e_a\vda\) is the same for both species. Using \cref{eq:poisson} to write the charge moment as \((2n_0e^2/T)(1-\lambdaD^2\nabla_\perp^2)\phi\), and \(\pbrainline{\phi}{\phi} = 0\), we find\footnote{Strictly speaking, \cref{eq:euler} holds as written in a flux tube whose metric is constant along the field line; in the dipole, \(\nabla_\perp^2\) depends on \(l\), and a flute-like \(\phi\) satisfies it only on average along the line. This is consistent with the approximate flute-like character of the long-wavelength states \citep{KennedyPlunkManuscript}.}
+\begin{equation}
+\pt\nabla_\perp^2\phi + \pbra{\phi}{\nabla_\perp^2\phi} = \frac{T}{2n_0e\lambdaD^2}\,\partial_\alpha\intv\bar v_{dp}\left(h_p + h_e\right),
+\label{eq:euler}
+\end{equation}
+where \(\bar v_{dp}\) is the positron drift. Without the drift, \cref{eq:euler} is the two-dimensional Euler equation for the streamfunction \(\phi\) and the vorticity \(\nabla_\perp^2\phi\): the Debye length drops out, the gradients drop out, as they do for a symmetric pair plasma in a straight field \citep{Helander2014}, and the vortex--jet system is, at this order, an incompressible inviscid flow. Linearising about \(\Phi(\psi)\) with \(\phi = \Phi + \varphi\rme^{\rmi k\alpha - \rmi\omega t}\), and writing \(c \equiv \omega/k\), gives Rayleigh's equation \citep{Rayleigh1880, DrazinReid2004},
+\begin{equation}
+\left(U - c\right)\left(\partial_\psi^2 - k^2\right)\varphi - U''\varphi = 0,
+\label{eq:rayleigh}
+\end{equation}
+in which the zonal vorticity gradient \(U''\) plays the role of the velocity gradient of the distribution function in Landau damping. The same equation follows from the kinetic response: setting \(\vda = 0\) in \cref{eq:response,eq:Ndoppler} and using the zonal part of \cref{eq:poisson}, \(\sum_a e_a\intv\delta F_a = -(2n_0e^2\lambdaD^2/T)\,U'\), the operator \cref{eq:operator} becomes \(\lambdaD^2\) times the left-hand side of \cref{eq:rayleigh} divided by \(c - U\), which is a useful check on both.
+
+The resonance of \cref{eq:imaginary} is now the critical layer \(U(\psi_c) = c\), and the projection \cref{eq:gamma} becomes the classical critical-layer (Landau-type) damping of a Rayleigh quasi-mode \citep{Briggs1970},
+\begin{equation}
+\gamma = \pi\,\frac{\sum_c U''_c\,|\varphi_c|^2/|U'_c|}{-\partial_{\omega_r}\PV\!\int\rmd\psi\,k\,U''|\varphi|^2/(\omega_r - kU)},
+\label{eq:gamma_rayleigh}
+\end{equation}
+where \(k > 0\) (otherwise a factor \(\operatorname{sgn}k\) appears), the sum runs over the critical layers, the subscript \(c\) denotes evaluation there, and the integral is over \(\psi\). The derivative must be taken outside the principal value: written as \(\int k\,U''|\varphi|^2/(\omega_r - kU)^2\,\rmd\psi\), the denominator has a double pole at each critical layer, which a principal value does not regularise, and must be read as a Hadamard finite part. The same caveats as for \cref{eq:gamma} apply.\footnote{Equation \cref{eq:gamma_rayleigh} follows from dividing \cref{eq:rayleigh} by \(U - c\), i.e., writing it as \((\partial_\psi^2 - k^2)\varphi + kU''\varphi/(\omega - kU) = 0\), regularising \(1/(\omega - kU + \rmi0)\) by \cref{eq:landau}, multiplying by \(\varphi^*\) and integrating, which gives \(\Dfn_I = -\pi\sum_c U''_c|\varphi_c|^2/|U'_c|\). We have not evaluated it for the simulated jet profile.} In this limit, the magnetic drift and the kinetic structure of \(h_a\) are corrections, of relative size \(|\vda|/|U - c|\), that shift the critical layer by an energy-dependent distance \(\delta\psi \sim \vda/|U'|\). Crucially, the critical layer is a property of the jet profile, not of the plasma's velocity distribution; its nonlinear theory is that of the Kelvin cat's eye \citep{Stewartson1978, WarnWarn1978}, with viscosity \citep{Haberman1972} in place of collisions.
+
+Which of the two limits applies is a matter of measurement: the vortex speed relative to the local zonal flow must be compared with the thermal drift speed. We shall see in \cref{sec:geometry} that the simulated vortices are deep in limit (b): the variation of the zonal flow across each vortex exceeds the drift speed by more than two orders of magnitude, and \(U = c\) occurs inside each vortex.
+
+\subsection{Passive phase mixing}\label{sec:passive}
+
+For comparison, let us consider a passive perturbation obeying \(\pt g + \rmi(kU + \what u)g = 0\), initially proportional to the Maxwellian. Its normalised moment is
+\begin{equation}
+\begin{aligned}
+C(t) &= \rme^{-\rmi kUt}\int_0^\infty p(u)\,\rme^{-\rmi\what ut}\,\rmd u = \rme^{-\rmi kUt}\left(1 + \rmi\what t\right)^{-3/2},\\
+|C(t)|^2 &= \left(1 + \what^2t^2\right)^{-3/2},
+\end{aligned}
+\label{eq:passive}
+\end{equation}
+whose logarithmic decay rate, \(3\what^2t/(1 + \what^2t^2)\) for \(|C|^2\) (half of it for \(|C|\)), first rises and then falls as \(3/t\). Phase mixing alone therefore produces an algebraic tail that decelerates, not a decay that accelerates (see also \citealt{Schekochihin2016} on the competition between linear phase mixing and nonlinear advection). The same is true of the self-consistent response: \(\Kfn_0\) of \cref{app:kfunctions} has a branch point at \(\wt = 0\), the zero-energy particles, so even the full response has an algebraic tail alongside the Landau pole. Note, however, that \cref{eq:passive} is the law of limit (a), i.e., phase mixing by the energy-dependent drift. In limit (b), passive mixing is instead by the shear of the jet across the critical layer (Orr-type mixing), whose algebraic laws differ and which we have not worked out for the simulated profile. Equation \cref{eq:passive} is the basis for the test of the late remnant in \cref{sec:remnant}, which therefore probes drift phase mixing only.
+
+% ===========================================================================
+\section{Nonlinear theory: trapping and sinks}\label{sec:nonlinear}
+% ===========================================================================
+
+The linear response of \cref{sec:linear} ignores the modification of trajectories by the vortex itself. In this section, we estimate that modification, first for the geometry in which the critical layer lies on the flank of a jet, then for the jet maximum assumed in the earlier note, and finally ask how trapping interacts with the hyperdiffusive sinks.
+
+\subsection{The moving-frame Hamiltonian}\label{sec:hamiltonian}
+
+We use local coordinates \((x, y)\), radial and binormal, and the \exb{} streamfunction \(\Psi\).\footnote{In \gene{} units, \(\Psi = \phi/\Cxy\) with \(\Cxy = 0.9264\) the metric factor of the flux tube, \(x\) is in \(\rho_\text{ref}\) and \(t\) in \(L_\text{ref}/c_\text{ref}\). \gene{} writes the real field as \(\phi = \phi_0 + 2\operatorname{Re}(\phi_{k_y}\rme^{\rmi k_yy})\), so the cosine amplitude of a single \(k_y\) is \(A = 2|\phi_{k_y}|/\Cxy\); using \(|\phi_{k_y}|\) instead would underestimate the trapping frequency and width below by \(\sqrt2\) each.} In the frame \(\xi = y - ct\) moving with a nearly steady vortex, and approximating \(\vda\) as radially constant, the trajectories of an orbit class satisfy
+\begin{equation}
+\dot x = -\partial_\xi\Ham,
+\qquad
+\dot\xi = \partial_x\Ham,
+\qquad
+\Ham = \Psi_\zon(x) + \Psi_v(x,\xi) + \left(\vda - c\right)x,
+\label{eq:hamiltonian}
+\end{equation}
+so closed orbits must be sought in the moving, orbit-dependent Hamiltonian, not in the instantaneous laboratory-frame streamlines. When \(|\vda| \ll |U - c|\) across the vortex, as in limit (b) of \cref{sec:euler}, the drift term is a small correction and the trapped region is the fluid cat's eye at \(U = c\), shared by all energy classes.
+
+\subsection{Shear at the critical layer: the pendulum}\label{sec:pendulum}
+
+Let \(x_r\) satisfy \(U(x_r) + \vda = c\), with \(U = \Psi_\zon'\) and \(S \equiv U'(x_r) \neq 0\). If the radial variation of the vortex is negligible over the trapped region, expansion of \cref{eq:hamiltonian} gives the pendulum Hamiltonian
+\begin{equation}
+\Ham = \text{const} + \frac{S}{2}X^2 - A\cos(k\xi) + \dots,
+\qquad
+X = x - x_r,
+\label{eq:pendulum}
+\end{equation}
+where \(A\) is the vortex amplitude in streamfunction units. The small-orbit frequency and the separatrix half-width are
+\begin{equation}
+\omtr = |k|\sqrt{|S|A},
+\qquad
+w = 2\sqrt{\frac{A}{|S|}},
+\label{eq:trapping}
+\end{equation}
+the latter from equating \(SX^2/2\) to the barrier \(2A\); both scale as \(A^{1/2}\). For \(S > 0\), the centre is at \(X = \xi = 0\); for \(S < 0\), it is shifted by half a wavelength. More generally, at an elliptic fixed point of the full \(\Ham\),
+\begin{equation}
+\omtr^2 = \det\grad\grad\Ham = \Ham_{xx}\Ham_{\xi\xi} - \Ham_{x\xi}^2 > 0,
+\label{eq:hessian}
+\end{equation}
+which includes the radial curvature of the vortex.
+
+\subsection{The jet maximum}\label{sec:jetmax}
+
+The earlier note located the vortices at the maxima of the zonal flow, where \(U' = 0\) and \cref{eq:pendulum} is singular. For completeness, let us work this case out, although we shall find in \cref{sec:geometry} that it is not the geometry of the simulation. Expanding about the maximum \(x_m\), with mismatch \(\delta \equiv U(x_m) + \vda - c\) and vortex \(A\,g(X)\cos k\xi\), where \(g(0) = 1\), \(g'(0) = 0\) and \(\kappa_\phi^2 \equiv -g''(0)\), we obtain
+\begin{equation}
+\Ham = \delta X + \frac{U''}{6}X^3 + A\,g(X)\cos k\xi.
+\label{eq:jetmax}
+\end{equation}
+At exact resonance, \(\delta = 0\), there are two cases. If the vortex is radially curved enough, \(\kappa_\phi^3A \gg |U''|\), the vortex makes its own cell, with \(\omtr = |k|\kappa_\phi A\), linear in \(A\), closing for \(|X| < 2A\kappa_\phi^2/|U''|\). If the vortex is radially flat, \(\kappa_\phi^3A \ll |U''|\), there are no closed orbits at all, since \(\dot\xi = U''X^2/2\) never changes sign, and the nonlinear scales are those of a non-twist map, viz., a width \((A/|U''|)^{1/3}\) and a frequency \(\omega_\text{NL} = |k|\,|U''|^{1/3}A^{2/3}\). For \(\delta \neq 0\), twin island chains appear at \(X_* = \pm(2|\delta|/|U''|)^{1/2}\), with local shear \(|U''|X_*\), and reconnect when their widths become comparable with \(X_*\). In other words, at a jet maximum, \(\omtr \propto A\) or \(A^{2/3}\), not \(A^{1/2}\).
+
+\subsection{Trapping, the O'Neil threshold and the sinks}\label{sec:oneil}
+
+Following \citet{ONeil1965}, trapping modifies a resonant response before linear damping removes the perturbation if \(\omtr \gtrsim \gamma\). On the flank, \cref{eq:trapping} turns this into a critical amplitude
+\begin{equation}
+A_\text{crit} \sim \frac{\gamma^2}{k^2|S|},
+\label{eq:threshold}
+\end{equation}
+where \(\gamma\) is the amplitude damping rate; at a jet maximum, the corresponding estimates are \(A_\text{crit}\sim\gamma/|k|\kappa_\phi\) and \(A_\text{crit}\sim\gamma^{3/2}/(|k|^{3/2}|U''|^{1/2})\). In O'Neil's picture, \(A \ll A_\text{crit}\) gives linear damping and \(A \gg A_\text{crit}\) gives damping that is suppressed after a few trapping periods. This picture predicts that the decay should slow down as the amplitude grows, and speed up as it falls --- qualitatively what is observed --- but it says nothing about how fast the suppressed state decays.
+
+That rate is set by the sinks. In the trapped regime, the comparison that matters is not \(\omtr\) against \(\gamma\) but \(\omtr\) against the effective rate at which the sinks erode the structure inside the cat's eye. For an order-\(n\) hyperdiffusion of coefficient \(\nu_n\) acting across a trapped region of half-width \(w\), the relevant parameter, analogous to that of viscous critical layers \citep{Haberman1972}, is
+\begin{equation}
+\Lambda \equiv \frac{\nu_\text{eff}}{\omtr} = \frac{2\nu_n}{k|S|\,w^{n+1}} \propto A^{-(n+1)/2}.
+\label{eq:haberman}
+\end{equation}
+For \(\Lambda \gg 1\), the sinks destroy the cat's eye faster than it forms, and the damping is linear, \(\gamma = \gamma_L\); for \(\Lambda \ll 1\), trapping suppresses it, and \(\gamma \approx C\gamma_L\Lambda^q\) with some \(C\) and \(q\) that depend on the sink. A Krook-type sink gives \(q = 1\), whence \(\gamma \propto A^{-5/2}\) for \(n = 4\). A separatrix boundary layer of thickness \(\delta_b = (\nu_n/\omtr)^{1/n}\), across which the trapped and passing populations are reconnected, suggests instead \(\gamma/\gamma_L \sim \delta_b/w \propto \Lambda^{1/n}\), i.e., \(\gamma \propto A^{-5/8}\) for \(n = 4\); this is a heuristic, not a derivation. In either case, the decay accelerates as \(A\) falls, without any crossover at \(\omtr\sim\gamma\).
+
+\subsection{Phase mixing feeding a sink}\label{sec:t5}
+
+A second elementary calculation separates the transfer of free energy to fine scales from its removal. Near a resonance, let the orbit frequency vary linearly with a local velocity offset \(v\), \(\Omega(v) \approx \Omega_r + \beta v\), and, removing the constant phase, consider
+\begin{equation}
+\pt f + \rmi\beta vf = -\nu_4\,\partial_v^4f,
+\qquad \nu_4 > 0.
+\label{eq:sinkmodel}
+\end{equation}
+With \(\hat f(\kappa_v, t) \equiv \int\rme^{-\rmi\kappa_v v}f\,\rmd v\), this becomes \(\pt\hat f - \beta\,\partial_{\kappa_v}\hat f = -\nu_4\kappa_v^4\hat f\), whose characteristics are \(\kappa_v(t) = \kappa_{v0} - \beta t\). Along the one launched at \(\kappa_{v0} = 0\),
+\begin{equation}
+\hat f(-\beta t, t) = \hat f(0, 0)\exp\!\left(-\frac{\nu_4\beta^4t^5}{5}\right),
+\qquad
+t_\text{sink} \sim \left(\nu_4\beta^4\right)^{-1/5},
+\label{eq:t5}
+\end{equation}
+since \(\int_0^t(\kappa_{v0} - \beta s)^4\rmd s = [\kappa_{v0}^5 - (\kappa_{v0} - \beta t)^5]/5\beta\). Mixing makes the velocity-space wavenumber grow as \(|\beta|t\), and the fourth-order sink then acts as \(\kappa_v^4\). Note that \cref{eq:t5} describes a moving Fourier component of the distribution, not \(\Enz(t)\), and that it shows that accelerating removal of fine structure can occur without any trapping transition: acceleration alone does not identify the mechanism.
+
+The same law, with \(\beta \to k_yS\) and \(v \to x\), describes the shearing of open-streamline structure in physical space by a perpendicular hyperdiffusion. Interpreted as a radial width, \(t_\text{sink}^{-1}\) then corresponds to the hyperviscous critical-layer width \(\delta_\nu = (\nu_4/k|S|)^{1/5}\). Whether either version applies in the simulation depends on whether the relevant wavenumber is resolved before \(t_\text{sink}\), to which we return in \cref{sec:dissipation}.
+
+% ===========================================================================
+\section{Confrontation with the simulations}\label{sec:data}
+% ===========================================================================
+
+We now test the calculations of \cref{sec:linear,sec:nonlinear} against the reduced-box simulation and its amplitude tests (\cref{sec:runs}). All measurements are made at the outboard mid-plane, and, as in \cref{sec:condensate}, \(k_y = 1\) denotes the vortex and \(k_y = 0\) the jet. The two counter-propagating vortices are separated by a two-frequency least-squares fit, \(a_+\rme^{-\rmi\omega_+t} + a_-\rme^{-\rmi\omega_-t}\), in \(60\)-time-unit windows, whose residual is below \(3\%\) until \(t\approx10\,800\).
+
+\subsection{Where the vortices sit and which limit applies}\label{sec:geometry}
+
+The geometry is not the one assumed in the earlier note (see \cref{fig:geometry}a). At \(t = 5910\), the two jets peak at \(U = +1142\) and \(-1150\), at \(x = 32\) and \(1834\), with \(U'' = -7.2\times10^{-3}\) and \(+6.7\times10^{-3}\) (between \(5.7\times10^{-3}\) and \(9\times10^{-3}\) in magnitude over the run). The vortices propagate at \(\omega_\pm \approx \pm0.857\), i.e., \(c_\pm \approx \pm430\), or about \(0.37\)--\(0.39\) of the jet speed from \(t\approx3000\) to \(11\,000\); the real frequency \(|\omega|\) falls slowly from about \(1.2\) to \(0.85\) over the run. Each vortex is radially broad --- a plateau over its own jet with maxima on both flanks --- and its maxima lie just inside the critical layers \(U = c\), within about half a grid cell of them, where the shear is near its largest, \(|S| \approx 1.7\)--\(1.9\). At the jet maximum, \(\partial_x\Ham = U_\text{jet} - c \approx 713\), not zero, so the jet maximum is not an \exb{} fixed point in the moving frame and \cref{eq:jetmax} does not describe the simulation: the pendulum case of \cref{sec:pendulum} applies.
+
+The comparison that decides between the limits of \cref{sec:linear} is as follows. The drift frequency is \(|k_y\vda| \lesssim 10^{-2}\),\footnote{We take this as an order-of-magnitude estimate, since the \gene{} normalisation of the drift was not checked independently.} and the diamagnetic frequency of the unflattened background is \(k_yv_* \approx 5.6\times10^{-3}\) (the flattened \(\tilde v_*\) of \cref{eq:Ndoppler}, which we have not measured, is at most of this size), while \(k_y(U_\text{jet} - c)\approx 1.4\). The energy-dependent shift of the resonant layer, \(\delta x \sim \vda/|S|\), is therefore of the order of one \(\rho_\text{ref}\), against a trapped half-width of about \(190\,\rho_\text{ref}\) at \(t\approx5900\) and still tens of \(\rho_\text{ref}\) at the collapse. The vortices are thus in limit (b), the drift resonance is in effect an \exb{} critical layer, and the uniform-flow results of \cref{sec:uniform}, including the exponential protection \cref{eq:gamma_scaling}, do not apply to them.
+
+Placing the vortices in limit (b) does not, however, remove the frozen-background caveat of \cref{sec:resonance}. The condition \(|\what|z_r \gg \omb\) of limit (a) would fail here, since \(\omb\approx 2\times0.86\) exceeds every drift frequency in the problem; but in limit (b), too, the Doppler frequency of the vortex relative to its jet, \(k_y(U_\text{jet} - c)\approx 1.4\), is below \(\omb\approx1.7\), and it vanishes at the critical layer. The quasi-mode is therefore not fast compared with the breathing in either limit, and freezing the zonal state, on which \cref{eq:rayleigh,eq:gamma_rayleigh} rest, is justified only if the breathing modulates \(U\) by a small relative amount. If \(\delta U/U\) is of the order of \(\Enz/\Ezon\), as an exchange \cref{eq:exchange} at fixed zonal shape would suggest, it is below about \(2\times10^{-2}\) from \(t\approx5900\) on, but we have not measured it, and we list it as open together with the modulation of the cat's eye noted in \cref{sec:trapping_data}.
+
+The two vortices decay at nearly the same rate: per-vortex energy decay rates over \(5908\leq t\leq6707\) are \(4.25\) and \(4.60\times10^{-4}\) in the original, \(9.98\) and \(8.93\times10^{-4}\) at \(\epsilon = 0.3\), and \(52\) and \(57\times10^{-4}\) at \(\epsilon = 0.03\). This is expected in either geometry and does not discriminate between them. The vortices ride on different jets and are related by the species-exchange symmetry of \cref{sec:condensate}; even at a jet maximum, the curvature factor \((1 - s\,U''\sigma^2/\bar v_{d1})^{-1/2}\) of \cref{sec:uniform} would be the same for both, since \(U''\) and the sign \(s\) of \(\wt\) both reverse between the jets (\(sU''\approx+7.2\times10^{-3}\) and \(+6.7\times10^{-3}\) at \(t = 5910\)). The asymmetry of \cref{sec:uniform} is between the \(\pm\wt\) partners on the same jet.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/test3_trapping_vs_damping.pdf}
+\caption{Geometry of the vortices and the trapping test. (a) The zonal flow \(U = \partial_x\Phi/\Cxy\) at \(t = 5910\) (black solid) and \(t = 10\,410\) (black dashed), with the radial profiles \(|\psi_+|\) (red) and \(-|\psi_-|\) (blue) of the two vortices at the same times, each rescaled to a peak of \(10^3\); the horizontal dotted lines mark the phase speeds \(c_\pm = \omega_\pm/k_y\), so the critical layers are where these cross \(U\). (b) Frequencies and rates against time: the pendulum trapping frequency \(\omtr = k_y(|S_r|A_r)^{1/2}\) of \cref{eq:trapping} at the critical layer, for vortex \(+\) (black solid) and \(-\) (black dotted); \(\sqrt{\det\grad\grad\Ham}\) of \cref{eq:hessian} at the O-point of the moving-frame Hamiltonian with \(\vda = 0\) (green dots); the same quantity evaluated at the jet maximum, i.e., the case assumed by the earlier note (orange; labelled in the figure by its equation number in that note), which is not a fixed point here; and the amplitude damping rates \(\gammaamp = \GammaE/2\) of vortex \(+\) (red) and \(-\) (blue) from \(200\)-time-unit fits, with the \(\epsilon = 0.3\) (blue squares) and \(\epsilon = 0.03\) (red triangles) restarts. (c) The per-vortex amplitude damping rate against the separatrix half-width \(w = 2(A_r/|S_r|)^{1/2}\) in units of the grid spacing \(\dx\), for the original run (black dots) and the restarts (blue squares, red triangles); the dashed vertical line marks \(w = \dx\), and the dotted line labelled \(w = \lambdaD\) is drawn at \(0.82\,\dx\), i.e., at \(\dx/\lambdaD\); the half-width \(w = \lambdaD\) itself lies at \(1.23\,\dx\). The trapping frequency exceeds the damping rate by one to three orders of magnitude throughout (\cref{sec:trapping_data}), while the damping rate rises steeply as \(w\) approaches \(\dx\) (\cref{sec:collapse}).}
+\label{fig:geometry}
+\end{figure}
+
+\subsection{Trapping against damping}\label{sec:trapping_data}
+
+At the critical layer, the pendulum estimate \cref{eq:trapping} gives \(\omtr\approx0.71\) at \(t = 1000\), \(0.37\) at \(5910\), \(0.24\) at \(9000\), \(0.17\) at \(10\,000\), and \(0.13\)/\(0.10\) (vortex \(+\)/\(-\)) at \(10\,490\), falling to \(0.07\)/\(0.05\) at \(10\,850\) (see \cref{fig:geometry}b); at \(t = 5910\), \(A_r\approx1.8\times10^4\) and \(|S_r|\approx1.9\). The Hessian at the numerically located O-point lies about \(10\%\) above these values (\(0.43\) against \(0.39\) at \(t = 5410\), and \(0.38\) against \(0.35\) at \(6410\)). The corresponding half-width falls from about \(194\,\rho_\text{ref}\), i.e., \(3.4\,\dx\), at \(t = 5910\) to about one grid cell at \(t\approx10\,600\). The ratio \(\omtr/\gammaamp\) is about \(800\) at \(t = 1000\), \(1800\) at \(5910\), \(550\) at \(9000\), \(170\)/\(110\) at \(10\,000\) and \(34\)/\(9\) at \(10\,690\), and is still about \(20\) at \(10\,850\); in the restarts, it is \(330\)--\(680\) (\(\epsilon = 0.3\)) and \(11\)--\(160\) (\(\epsilon = 0.03\)).
+
+The O'Neil criterion is therefore satisfied by a wide margin throughout, and the crossover \(\omtr\sim\gamma\) is never reached: with \(\gammaamp \approx (2.5\)--\(5)\times10^{-3}\), \cref{eq:threshold} gives \(A_\text{crit}\approx1\)--\(4\) on the flank (and about \(18\) for the non-twist estimate at a jet maximum), whereas the amplitude at the critical layer is about \(1.8\times10^4\) at \(t = 5910\) and about \(600\) at the collapse. Therefore, the acceleration of the decay is not the transition from trapping-suppressed to linear damping that motivated the earlier note. The trapped regime does hold throughout, which makes the sink-limited regime of \cref{eq:haberman} the natural replacement hypothesis.
+
+Two further facts complicate the picture. Firstly, the breathing frequency, \(\omb\approx1.7\), exceeds \(\omtr\) by a factor of about five even at \(t\approx5900\), so the cat's eye is periodically modulated at a frequency faster than its own orbits, and the trapped orbits near the separatrix may well be chaotic; we have not analysed this. Secondly, the restarts show that a small-amplitude \(k_y = 1\) perturbation on the present zonal background first grows (\cref{sec:amplitude}), so a positive linear damping rate \(\gamma_L\), which both \cref{eq:threshold} and \cref{eq:haberman} presuppose, has not in fact been demonstrated for this state.
+
+\subsection{Amplitude dependence}\label{sec:amplitude}
+
+The amplitude tests exclude the linear null hypothesis decisively (see \cref{fig:amplitude}a). When the breathing is removed, either by a least-squares fit of \(\ln\Enz\) to a line plus two harmonics of \(\omb\) or by a linear fit to a running mean over ten breathing periods, the decay rates over the common window \(5908\leq t\leq6707\) are \(\GammaE = (4.49\pm0.22)\times10^{-4}\) for the original, \((9.39\pm0.25)\times10^{-4}\) for \(\epsilon = 0.3\), and \((45.5\pm5.7)\times10^{-4}\) for \(\epsilon = 0.03\), the two methods agreeing to within about \(8\%\); smaller amplitude means faster decay. The restarts also violate linear scaling more directly: immediately after the restart, \(\Enz/\epsilon^2\Enz^\text{orig}\) grows, to \(1.56\) by \(t = 5927\) at \(\epsilon = 0.3\) and to \(12.0\) by \(t = 5971\) at \(\epsilon = 0.03\). There are two possible readings of this transient. The rescaling touches only \(k_y\geq1\), so it leaves behind the zonal footprint of the old trapped region --- a locally flattened vorticity profile at the critical layer --- which is inconsistent with the smaller vortex and on which the latter regrows; in this reading, the regrowth is itself a nonlinear signature. Alternatively, the small-amplitude response on this background may be genuinely unstable for a time. The data does not distinguish these readings.
+
+At matched amplitude, the decay rate is approximately, but not exactly, a function of the amplitude alone (see \cref{fig:amplitude}b,c). Comparing the \(\epsilon = 0.3\) restart (\(t > 5980\)) with the original over \(9322\leq t\leq9842\), where the latter passes through the same range of \((\Enz/\Ezon)^{1/2}\), gives \((9.73\pm0.30)\) against \((13.41\pm0.24)\times10^{-4}\), a ratio of \(0.73\); the \(\epsilon = 0.03\) restart gives \((55.2\pm2.8)\) against \((55.5\pm2.2)\times10^{-4}\) over \(10\,522\leq t\leq10\,999\), a ratio of \(0.99\), although its early and late halves give ratios of \(0.37\) and \(1.62\). This second comparison is only partial. The restart runs from \((\Enz/\Ezon)^{1/2} = 4.2\times10^{-3}\) down to \(6.4\times10^{-4}\), which the original reaches only at \(t\approx11\,270\); with the window capped at \(t = 11\,000\), where \((\Enz/\Ezon)^{1/2}\approx1.0\times10^{-3}\), the low-amplitude end of the restart is not matched. Since that is where the rate of the original reaches about \(10^{-2}\) (\(10\,900\leq t\leq11\,100\)), the ratios \(0.99\) and \(1.62\) are probably biased upwards. Over three decades of \(\Enz\), all three runs follow one curve to within a factor of about \(1.5\)--\(2\). History matters, however: at matched amplitude, \(\Znz/\Enz\) is about \(0.6\) in the restarts and \(1.0\) in the original (see \cref{fig:history}b). Fitting the natural decay over \(5900\leq t\leq10\,400\) gives \(\GammaE\propto A_c^{-p}\), with \(p\approx1.0\) overall (\(0.73\) early, \(1.2\) late), where \(A_c\) is the amplitude at the critical layer.
+
+\Cref{tab:predictions} compares the measured ratios with the predictions of \cref{sec:oneil}. Since both restarts regrow before decaying, we give the predictions both for the nominal amplitudes and for the effective ones reached after the regrowth, \(A_c/A_c^\text{orig}\approx0.35\) and \(0.082\). The linear prediction and the Krook-type law \(q = 1\) are excluded. The data is consistent with \(\GammaE\propto A^{-p}\), \(p\approx0.6\)--\(1.2\), in a sink-limited trapped regime; the boundary-layer heuristic, \(p = 5/8\), reproduces the \(\epsilon = 0.3\) ratio well but underestimates the \(\epsilon = 0.03\) one, while the empirical \(p = 1\) overestimates the former. We regard this level of agreement as encouraging but not discriminating.
+
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Model & \(\epsilon = 0.3\) & \(\epsilon = 0.03\) \\
+\midrule
+Linear (\(\Lambda\gg1\)) & \(1\) & \(1\) \\
+Krook-type, \(q = 1\) (\(\GammaE\propto A^{-5/2}\)) & \(20\) & capped by collapse \\
+Boundary layer, \(q = 1/4\) (\(\GammaE\propto A^{-5/8}\)), nominal amplitude & \(2.1\) & \(8.9\) \\
+Boundary layer, effective amplitude (\(0.35\), \(0.082\)) & \(1.9\) & \(4.8\) \\
+Empirical, \(p = 1\), effective amplitude & \(2.9\) & \(12\) \\
+Measured & \(2.09\) & \(10\) overall, about \(18\) late \\
+\bottomrule
+\end{tabular}
+\caption{Ratio of the decay rate \(\GammaE\) of each amplitude test to that of the original run over the common window \(5908\leq t\leq6707\): predictions of the regimes of \cref{sec:oneil} for an order-\(n = 4\) sink at the flank critical layer, and the measured values. `Effective amplitude' refers to the amplitude reached by each restart after its initial regrowth (\cref{sec:amplitude}); `capped by collapse' means that the predicted rate exceeds the largest rate measured during the collapse, about \(10^{-2}\) (\cref{sec:collapse}). The measured ratios are those of the fitted \(\GammaE\) of \cref{sec:amplitude}. The boundary-layer exponent \(q = 1/n\) is heuristic, and the empirical exponent \(p\approx1\) is the fit to the natural decay of the original run.}
+\label{tab:predictions}
+\end{table}
+
+
+
+\subsection{The collapse and the grid}\label{sec:collapse}
+
+The one measured quantity that tracks the decay rate across all three runs is the separatrix half-width \(w\) of \cref{eq:trapping}: \(3.4\,\dx\) at \(t = 5910\), \(2.2\,\dx\) at \(9000\), \(1.6\,\dx\) at \(10\,000\), \(1.0\)--\(1.2\,\dx\) at \(10\,500\), and \(0.6\,\dx\) at \(10\,850\). The decay rate rises steeply as \(w\) approaches \(\dx\) and keeps rising through the collapse, from about \(4\times10^{-3}\) over \(10\,300\leq t\leq10\,600\) through \(6\times10^{-3}\) over \(10\,600\)--\(10\,900\) to \(1.0\times10^{-2}\) over \(10\,900\)--\(11\,100\), with no plateau; the two restarts lie on the same rate-against-width curve as the original (see \cref{fig:geometry}c). The \(\epsilon = 0.03\) restart, which starts at \(w\approx1.0\,\dx\) (\(1.05\) and \(0.96\,\dx\) for the two vortices at \(t = 5997\)), first regrows for about \(60\) time units and only then, from \(t\approx6100\)--\(6300\), decays at close to the collapse rate. The continuum hyperviscous layer width of \cref{sec:t5}, \(\delta_\nu = (\nu_4/k|S|)^{1/5}\approx14\,\rho_\text{ref}\) with \(\nu_4 = \nu_x(\dx/2)^4\approx1.7\times10^3\), is smaller than one grid cell, so the effective dissipative width at the critical layer is the grid itself. This suggests that the collapse occurs when the cat's eye can no longer be resolved.
+
+There is, however, a confounding coincidence: \(\lambdaD = 1.23\,\dx\), so under-resolution of the cat's eye cannot be separated from physics at the Debye scale in this simulation.\footnote{Recall from \cref{sec:euler} that \(\lambdaD\) drops out of the drift-free vortex dynamics, which favours the former; but the flute-like approximation behind \cref{eq:euler} itself degrades at \(\kperp\lambdaD\sim1\).} A restart from the checkpoint at \(t\approx9000\) with \(n_{x0} = 128\) would decide between the two: if the collapse is set by the grid, it should move to an amplitude about four times lower, i.e., an \(\Enz\) about sixteen times lower, while a Debye-scale effect would not move. Finally, let us note that the collapse rate is not the linear rate of the original vortex: after the collapse, the state is different (\cref{sec:remnant}), so the collapse rate cannot be read as \(\gamma_L\).
+
+\subsection{Entropy and free energy of the vortices}\label{sec:entropy}
+
+If the decay were passive phase mixing, the electrostatic energy lost by the vortices would reappear, at least for a while, as entropy, and \(\Wnz\) would be approximately conserved while \(\Enz\) fell. The ratio \(\Znz/\Enz\) does rise, from \(0.46\) (\(t\approx1000\)--\(3000\)) through \(0.69\) (\(7000\)), \(0.96\) (\(9000\)--\(9500\)), \(1.16\) (\(10\,300\)) and \(1.43\) (\(10\,600\)) to \(3.1\) (\(10\,900\)) and \(8.5\) (\(11\,100\)), and about \(12\)--\(15\) in the remnant (see \cref{fig:history}a). However, \(\Znz\) decays almost as fast as \(\Enz\) through most of the decay: the logarithmic decay rates of \(\Enz\), \(\Znz\) and \(\Wnz\), in units of \(10^{-3}\), are \(0.43\), \(0.29\), \(0.38\) over \(5000\)--\(7000\); \(1.20\), \(1.17\), \(1.19\) over \(9000\)--\(9500\); \(2.49\), \(2.23\), \(2.35\) over \(10\,000\)--\(10\,300\); and \(3.90\), \(2.96\), \(3.36\) over \(10\,300\)--\(10\,600\). Only in the final collapse does \(\Znz\) lag clearly: \(5.95\), \(3.23\), \(4.09\) over \(10\,600\)--\(10\,900\), and \(10.1\), \(2.1\), \(3.4\) over \(10\,900\)--\(11\,100\). The restarts behave alike (\(0.95\), \(0.75\), \(0.88\) at \(\epsilon = 0.3\), with \(\Znz/\Enz\) from \(0.55\) to \(0.61\); \(8.3\), \(5.8\), \(7.1\) at \(\epsilon = 0.03\), with \(\Znz/\Enz\) from \(0.58\) to \(1.36\)).
+
+In other words, the rising ratio is consistent with phase mixing qualitatively, and transfer of the vortex energy into fine-scale structure is plausible in the last \(300\)--\(500\) time units of the collapse, but through most of the decay the free energy leaves the non-zonal sector as a whole, either to the sinks or to the jet through \cref{eq:exchange}. The \(\Wnz\)-conserving passive picture does not describe the bulk of the decay.
+
+\subsection{Where the dissipation is}\label{sec:dissipation}
+
+All four sinks of the simulation are of fourth order (\cref{tab:runs}), collisions are absent and \(P \lesssim 10^{-3}D\). At \(t\approx6000\), \(D\approx1.08\times10^4\) per unit time, about half of it in the perpendicular hyperdiffusion and half in the velocity-space one; the vortex loses electrostatic energy at roughly a tenth of this rate (the two being measured in normalisations that differ by a factor of order unity). As the vortex disappears, \(D\) falls to \(5.6\times10^3\) (\(t\approx10\,500\)): the velocity-space sink falls from \(4.8\times10^3\) to \(0.36\times10^3\), while the perpendicular sink stays at about \((5.3\)--\(5.8)\times10^3\). The dissipation that disappears with the vortex is therefore about \(90\%\) velocity-space hyperdiffusion, while the perpendicular sink, which carries \(86\)--\(93\%\) of \(D\) once the vortex has gone, belongs mostly to the vortex-free zonal background.
+
+This sits awkwardly with the drift-free limit of \cref{sec:euler}, and the tension is worth stating plainly. The velocity-space hyperdiffusion conserves particle number, and so has no charge moment and cannot act on the vorticity of \cref{eq:euler} directly; it can only act through the drift term on its right-hand side, or on the kinetic fine structure that the vortex carries. Conversely, the perpendicular sink can act on the vorticity at the critical layer, but on this grid the perpendicular version of \cref{eq:t5} is cut off: with \(\nu_4\approx1.7\times10^3\) and \(\beta = k_yS\), \(t_\text{sink}\approx29\), whereas \(k_x\) reaches the Nyquist value \(0.0545\) after about \(16\) time units (about \(10\) at the dealiasing limit), with only about \(5\%\) removed by then, so removal happens at the grid scale. The velocity-space version applies: with \(\nu_4 = \nu_v(\Delta v/2)^4\approx1.7\times10^{-6}\), parallel-streaming mixing (\(\beta\sim1\)) gives \(t_\text{sink}\approx14\), and drift mixing (\(\beta\sim k_y\)) about \(10^3\), the latter as an order of magnitude only. Whether the electrostatic energy of the vortex is dissipated, through its kinetic structure, or absorbed by the jet through \cref{eq:exchange}, as in critical-layer absorption in fluids \citep{Stewartson1978, WarnWarn1978}, cannot be decided from these totals: \(\Enz/\Ezon\sim10^{-4}\), so absorption by the jet would be invisible in \(\Ezon\). The mode-resolved nonlinear transfer of the \gene{} free-energy diagnostics \citep{BanonNavarro2011}, split into the \(k_y = 1\to0\) exchange and the sinks acting on \(k_y = 1\), would decide it.
+
+\subsection{The late remnant}\label{sec:remnant}
+
+The passive law \cref{eq:passive} predicts an algebraic tail, \(|C|^2\propto t^{-3}\), once phase mixing has run its course. After the collapse, \(\Enz\) does not decay cleanly [\cref{fig:remnant}]: in \(250\)-time-unit block means over \(11\,100\leq t\leq19\,056\), it goes from \(750\) to \(1500\) (a regrowth at \(t\approx12\,000\)--\(13\,000\)) and then to \(255\) at \(t\approx18\,900\), a total drop in \(\ln\Enz\) of only \(1.1\), with a root-mean-square logarithmic residual of about \(0.27\) for every model fitted. An exponential fit gives \(\GammaE\approx2.0\times10^{-4}\), pulled up by the regrowth; the two halves give \(1.3\times10^{-4}\) and \(1.2\times10^{-4}\). A law \((t - 10\,900)^{-3}\), i.e., measured from the collapse, would predict a drop of \(9.5\) in \(\ln\Enz\) and is excluded; with \(t_0 = 10\,900\) and the exponent free, the best fit has exponent \(0.47\) and a worse residual. Power laws measured from \(t_0 = 0\) (exponent \(2.99\)) or from the burst, \(t_0 = 660\) (exponent \(2.85\)), fit as well as the exponential, but over this window they cannot be told apart from a slow exponential.
+
+The remnant is \(94\)--\(99\%\) \(k_y = 1\), with \(\Znz/\Enz\approx12\)--\(15\), but the coherent two-vortex fit explains only \(30\)--\(70\%\) of it, so it is partly incoherent, and the passive law may not apply to it in any case. Its phase speed is also lower than that of the original vortices, falling from \(429\) to \(336\) at \(t\approx15\,000\) and \(285\) at \(18\,500\), and its trapped half-width is only \(0.3\)--\(0.4\,\dx\). The remnant therefore needs its own analysis of \((c, S, A)\), and we draw no conclusion from it beyond excluding a \(t^{-3}\) tail from the collapse.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figures/test2_late_remnant.pdf}
+\caption{The late remnant after the collapse. (a) The non-zonal electrostatic energy \(\Enz\) (grey, every output sample) and its \(250\)-time-unit block means (black dots) over \(9000\leq t\leq19\,000\), with an exponential fit (blue solid, \(\GammaE\approx2.1\times10^{-4}\)), the best power law \(t^{-2.99}\) measured from \(t_0 = 0\) (red dashed), and the passive law \((t - 10\,900)^{-3}\) of \cref{eq:passive} measured from the collapse (green dotted). (b) The block means on logarithmic axes against \(t - t_0\), with \(t_0 = 10\,900\) (black dots) and \(t_0 = 660\), the burst (orange squares), together with a slope of \(-3\) (green dotted). The \(t^{-3}\) tail from the collapse is excluded, while an exponential and a \(t^{-3}\) law from the burst cannot be distinguished.}
+\label{fig:remnant}
+\end{figure}
+
+% ===========================================================================
+\section{Summary and discussion}\label{sec:summary}
+% ===========================================================================
+
+Starting from the drift-resonance picture of the earlier note, we have derived the linear response of a vortex on a frozen zonal condensate, corrected it, completed it in two limits, and confronted it, together with simple trapping and sink models, with a reduced-box simulation and two amplitude-reduced restarts. Let us state what we consider established.
+
+Firstly, the corrected linear response \cref{eq:Ndoppler} is Doppler invariant only once the Boltzmann part of the zonal distribution is retained, and its drive is the gradient of the distribution as modified by the condensate. In a pair plasma the drift resonances of the two species cover the whole real frequency axis, so the weak-damping formula \cref{eq:gamma} always describes a second-sheet quasi-mode, valid only for \(|\gamma|\ll|\omega_r - kU|\). In the uniform-flow limit, the resonance damps if and only if \(z_r > \Omstar[1+\eta(z_r - 3/2)]\), the rate is linear in the drift frequency, and long-wavelength vortices are exponentially protected, \cref{eq:gamma_scaling}. Secondly, in the drift-free limit, the charge moment of the transit-averaged equations is exactly the two-dimensional Euler equation \cref{eq:euler}, the vortex obeys Rayleigh's equation \cref{eq:rayleigh}, and the resonance is a hydrodynamic critical layer. Thirdly, the simulated vortices are in the latter limit: they propagate at about \(0.38\) of the jet speed, their critical layers lie on the flanks of the jets at near-maximal shear, and the magnetic drift shifts the resonance by about one \(\rho_\text{ref}\) against a trapped half-width of more than a hundred. The vortices do not sit at the jet maxima, and the two counter-propagating vortices decay at nearly the same rate. Fourthly, the decay is clearly amplitude dependent, which excludes any linear explanation on a frozen background, and it is approximately, though not exactly, a function of the current amplitude. Fifthly, the trapping frequency exceeds the damping rate by one to three orders of magnitude throughout, so the acceleration is not an O'Neil-type crossover. Finally, the free energy of the non-zonal sector falls almost as fast as its electrostatic energy, so the bulk of the decay is not passive, \(\Wnz\)-conserving phase mixing, and the remnant does not follow a \(t^{-3}\) tail from the collapse.
+
+The following remain open. The data are consistent with a sink-limited nonlinear critical layer, \(\GammaE\propto A^{-p}\) with \(p\approx0.6\)--\(1.2\), but no derivation of \(p\) exists beyond the heuristic \(p = 5/8\), and a positive linear damping rate of the Rayleigh quasi-mode \cref{eq:gamma_rayleigh} for the simulated jet profile has not been computed --- indeed, the regrowth of the restarts leaves open whether the small-amplitude response is damped at all. It remains an open question exactly what sets the collapse: it coincides with the trapped half-width reaching one grid cell, but the grid cell is also of the order of the Debye length. Whether the vortex energy is dissipated, through the velocity-space sink acting on its kinetic structure, or absorbed by the jet, as in fluid critical-layer absorption, is not decided by the totals. The breathing modulates the cat's eye at a frequency several times its own trapping frequency, an effect that we have not analysed. In view of all this, we do not claim a lifetime for the vortices in physical units, nor that they would decay in a better-resolved or collisional plasma.
+
+Several of these questions are decidable with modest effort. The restart at \(n_{x0} = 128\) from \(t\approx9000\) would separate the grid from the Debye scale: a grid-set collapse should move to an \(\Enz\) about sixteen times lower. A Rayleigh calculation on the measured jet profile, using \cref{eq:rayleigh,eq:gamma_rayleigh}, would give the phase speed and the sign and size of the linear critical-layer damping, to be compared with the measured \(c\approx0.38\,U_\text{jet}\). The mode-resolved transfer between \(k_y = 1\) and \(k_y = 0\) would show where the vortex energy goes. A scan of the perpendicular hyperdiffusion at fixed resolution would measure \(q\) in \cref{eq:haberman} directly. Whether the sink-limited critical layer, rather than kinetic drift resonance, is the mechanism that ultimately limits the lifetime of coherent structures in strongly driven pair-plasma condensates --- and how the answer changes with physical collisions and with the radial scale of the condensate in a device --- appears to be a promising subject for future work.
+
+\section*{Acknowledgements}
+The simulations analysed here were carried out on the Cambridge Service for Data Driven Discovery (CSD3).
+
+\section*{Funding}
+The authors received no specific funding for this work.
+
+\section*{Declaration of interests}
+The authors report no conflict of interest.
+
+\appendix
+
+% ===========================================================================
+\section{Energy integrals of the uniform-flow limit}\label{app:kfunctions}
+% ===========================================================================
+
+Here we collect the energy integrals behind \cref{eq:Duniform,eq:DI}, which were derived in the earlier note and checked independently, as promised in \cref{sec:uniform}. For \(\what > 0\), define \(z = \wt/\what\) and
+\begin{equation}
+\Kfn_n(z) = \int_0^\infty\frac{p(u)\,u^n}{z - u}\,\rmd u,
+\label{eq:Kn}
+\end{equation}
+with the causal continuation from \(\operatorname{Im}z > 0\). Then \(\Kfn_{n+1} = z\Kfn_n - \langle u^n\rangle\), in particular \(\Kfn_1 = z\Kfn_0 - 1\), and, with \(u = s^2\),
+\begin{equation}
+\Kfn_0(z) = \frac{4}{\sqrt\pi}\int_0^\infty\frac{s^2\rme^{-s^2}}{z - s^2}\,\rmd s = -2\left[1 + \sqrt z\,\Zfn(\sqrt z)\right],
+\qquad
+\Zfn(\zeta) = \frac{1}{\sqrt\pi}\int_{-\infty}^{\infty}\frac{\rme^{-s^2}}{s - \zeta}\,\rmd s,
+\label{eq:K0}
+\end{equation}
+where \(\Zfn\) is the plasma dispersion function \citep{FriedConte1961}, \(\Zfn(\zeta) = \rmi\sqrt\pi\,\rme^{-\zeta^2}\operatorname{erfc}(-\rmi\zeta)\) for \(\operatorname{Im}\zeta > 0\), and \(\sqrt z\) is the principal root; since \(\Zfn\) is entire, this continues correctly across \(\operatorname{Re}z > 0\). On \(\operatorname{Re}z < 0\), the non-resonant side, \(\Kfn_0\) is real and analytic across the axis.\footnote{In a numerical implementation, at real \(z < 0\) with a signed \(-0\) imaginary part, the principal root selects the wrong sheet; the imaginary part should be set to \(+0\).} For \(\what < 0\), the causal prescription becomes \(z - \rmi0\), i.e., \(\Kfn_0\) is replaced by its complex conjugate; this caveat applies to \cref{eq:K0}, not to the absorptive part below. In the uniform-flow model, the positron and electron contributions to \cref{eq:Duniform} are
+\begin{equation}
+\mathcal{P} = (z - \Omstar\vartheta)\,\Kfn_0(z) - \Omstar\eta\,\Kfn_1(z),
+\qquad
+\mathcal{E} = -\left[(z + \Omstar\vartheta)\,\Kfn_0(-z) + \Omstar\eta\,\Kfn_1(-z)\right],
+\label{eq:PE}
+\end{equation}
+where \(\vartheta \equiv 1 - 3\eta/2\), and \(\Dfn = 1 + \kappa^2 - (\mathcal{P} + \mathcal{E})/2\). For an energy weight \(b_0 + b_1u\) real at real frequency, the absorptive part of the resonant integral is, for either sign of \(\what\),
+\begin{equation}
+\begin{aligned}
+\operatorname{Im}\int_0^\infty\frac{p(u)(b_0 + b_1u)}{\omega_r - kU - \what u + \rmi0}\,\rmd u &= -\frac{2\sqrt\pi}{|\what|}\,u_r^{1/2}\rme^{-u_r}\left(b_0 + b_1u_r\right)\Theta(u_r),\\
+u_r &= \frac{\omega_r - kU}{\what},
+\end{aligned}
+\label{eq:Jimag}
+\end{equation}
+where \(\Theta\) is the Heaviside function; by \cref{eq:Ndoppler}, \(b_0\) must be built from \(\omega_r - kU\), not from \(\omega_r\). The identity \cref{eq:K0} agrees with direct quadrature to about \(10^{-12}\) at complex and real \(z\), including \(z = x + \rmi0\) and \(\operatorname{Re}z < 0\); \cref{eq:Jimag} agrees with the \(\Kfn\)-function evaluation and with finite-\(\epsilon\) quadrature for \(\what = \pm1.5\); and \cref{eq:passive} agrees with quadrature to about \(10^{-9}\).
+
+\bibliographystyle{jpp}
+\bibliography{notes}
+
+\end{document}
