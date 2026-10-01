@@ -4,3 +4,7 @@
 *.blg
 *.toc
 __pycache__/
+scripts/rayleigh/cache/
+scripts/rayleigh/scratch/
+scripts/rayleigh/logs/
+*.pyc

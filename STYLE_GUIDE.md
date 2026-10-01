@@ -195,13 +195,43 @@ qualifiers sit inside the sentence instead of in a separate caveat sentence:
   - "Radial localisation of turbulent perturbations at very large values of flow shear."
 - **Line keys are given in words**: "The black dashed and dash-dotted lines show the theoretical predictions (3.13) and (3.18), respectively", "The vertical black dotted line marks...", "shown as a black dashed line", "hollow triangles".
 - **Captions give interpretation and cross-references** to equations and sections: "In the former, k_y° is (approximately) pinned to k_y°(0) but k_x° increases linearly with γ_E."
-- **Fitted values are stated in the caption**: "plotted using γ̂_c ≈ 39, found by fitting to the data presented here."
+- **Fitted values**: Ivanov et al. state them in the caption; in THESE notes they are stated only when the argument
+  needs them (see section 7a).
 - **In the text, cite figures with `\cref`**, which renders "figure 4(a)" in lower case mid-sentence and `\Cref` gives "Figure 4(a)" at the start of a sentence. Write "figures 2–3" for ranges. Figure sentences start "Figure 4(a) shows ...". A pointer can also go in parentheses: "(see figure 1)", or in brackets inside a parenthetical maths context: "[see figure 3(b)]".
 - Schematic figures (tikz) come before data figures. The theory gets a qualitative diagram first,
   and the simulation figure is later compared against that diagram ("The agreement with figure 3 is evident.").
 - Tables carry a caption that defines all symbols: "A summary of the simulation parameters used in §4.1."
 
 ---
+
+## 7a. House rules of these notes that override the model paper (Dan, 1 Oct 2026)
+
+**Figures are in the style of the long dipole paper** (`ep_turbulence_paper/scripts/lib/paper_style.py`), through
+`figures/lib/notes_style.py`:
+
+- Every figure is made at its final size, the full text width (384 pt), and included with a bare
+  `\includegraphics{figures/<name>.pdf}`: no `width=`, no scaling.
+- **At most two panels per row.** A third panel becomes a second row or a second figure.
+- **Axis labels, tick labels, legends and panel tags are all the body size (10 pt)**, Computer Modern. Nothing in a
+  figure is smaller than the text around it.
+- Panel tags "(a)", "(b)" sit inside the axes, top left. No titles. Units go in the axis label in parentheses.
+- In-panel legends are frameless and clear of the data; a legend that does not fit goes below the figure, boxed.
+- One colour per run or quantity, the same in every figure (`PAL`), with line styles that also separate the curves
+  in greyscale.
+- One directory per figure, `figures/<name>/figure.py`: `--rebuild` reads the run data and writes a small
+  `cache.npz`; the default draws `figures/<name>.pdf` from the cache alone.
+
+**Numbers from the simulations are not reported unless the argument cannot be made without them.**
+
+- The text says what a figure shows in words ("by more than an order of magnitude", "about twice as fast",
+  "a small fraction of a grid cell"); the figure carries the values.
+- No lists of rates per time window, no fitted values with error bars, no times of events, no table of measured
+  values. Captions define what is plotted (quantities, windows, line keys) and do not quote results.
+- What may stay: input parameters (in the parameter table), dimensionless ratios on which the argument turns
+  (the vortex speed as a fraction of the jet speed; the Debye length in grid cells), and exponents that are
+  compared with a prediction.
+- Numbers that belong to the theory (thresholds, exponents, roots of a dispersion relation) are not simulation
+  numbers and are given as usual.
 
 ## 8. Citing the literature in-line
 

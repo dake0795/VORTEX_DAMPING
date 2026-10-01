@@ -1,21 +1,13 @@
-# Status (1 Oct 2026, 05:35)
+# Status (1 Oct 2026, 10:15)
 
-## In this repository
-- `STYLE_GUIDE.md`: the voice of Ivanov et al. (2025), arXiv:2405.00854, taken from its LaTeX source (`reference_style/ivanov2025_source/`).
-- `jpp.cls`, `jpp.bst`: the JPP class, as in the long paper.
-- `source_note/`: Dan's analytical note (30 Sep), which these working notes start from.
-
-## Coming next
-`notes.tex`, the working notes, is being drafted. Before drafting, the note is audited and tested against the simulations.
-
-## Audit so far: Sections 1–3 of the note (linear response, Landau resonance, energy integral)
-They are correct. Every equation was re-derived and checked numerically: K_0, Im J, and |C|² = (1+a²t²)^(−3/2).
-
-There are two substantive gaps:
-1. **Zonal Poisson fixes part of the background.** It forces H_a = e_a f_0 Φ/T + δF_z,a, so the drive is
-   N_a = (e_a f_0/T)(ω − kU + k v*_a) − k δF′_z,a.
-   This is the Doppler-invariant form, and b_0 must be built from ω − kU.
-2. **The weak-damping formula describes a quasi-mode only.** In the pair plasma the drift resonances of the two species cover the whole real frequency axis. So the weak-damping formula describes a second-sheet quasi-mode, valid only when |γ| ≪ |ω − kU|.
-
-## Data tests
-The amplitude tests support amplitude-dependent damping. A vortex scaled to 0.3 decays 2× faster than the original, and one scaled to 0.03 about 10× faster.
+- Notes rewritten in the house style (figures two per row at body size; simulation numbers removed) and around three
+  tested results: the vortices are the saturated Rayleigh instability of their jets (frequency, structure,
+  omega_tr = alpha gamma_R); their damping is linear Landau damping of their non-flute part (drift resonance
+  suppressed by trapping, far below the prediction of eq. gamma_layer); they decay as the jets lose their
+  instability.
+- Running (submitted 1 Oct 09:00-09:15, each needs ~28 h to reach the collapse): `rb_c0p3_hxy_sinktest/` hv_x4, hv_d4,
+  hxy_x4, hxy_d4 (2 nodes each, -flat) and nx128 (4 nodes, hbm). Predictions they test are stated at the end of
+  Sec. 6.8 and in the summary of the notes; `figures/sinktests/figure.py` will draw them.
+- Not yet done: first-principles calculation of the kinetic loss (non-flute fraction f and its Landau damping);
+  theory of alpha; model for the erosion of the vorticity strips (lifetime); the same analysis for the production run.
+- Next: pedagogical pass on the mathematics (every derivation from a stated starting point, undergraduate level), Dan 1 Oct.

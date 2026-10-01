@@ -1,71 +1,68 @@
 # VORTEX_DAMPING
 
 Working notes by D. Kennedy (UKAEA) and G. G. Plunk (IPP Greifswald) on why the two breathing vortices of the
-strongly driven (eta = 1) dipole pair-plasma condensate decay, and how fast. The notes take the earlier analytical
-note (30 Sep 2026), correct and complete it in line with two independent audits, and compare it with a reduced-box
-GENE simulation and two amplitude-reduced restarts.
+strongly driven (eta = 1) dipole pair-plasma condensate decay. `notes.pdf` is the compiled document.
+
+## Where the notes stand (1 Oct 2026)
+
+- **The vortices are the saturated shear-flow instability of their own jets.** Rayleigh's equation on the measured
+  jets predicts their frequency throughout the run and their radial structure, and their amplitude obeys the trapping
+  law omega_tr = alpha gamma_R, with a single alpha, while their energy falls by orders of magnitude.
+- **Their damping is linear and kinetic.** Electrostatic energy is converted into entropy at a rate independent of
+  amplitude, nearly all of it by Landau damping along the field line of the part of the vortices that is not
+  flute-like; the velocity-space sink then removes it. The drift resonance is suppressed by trapping (far below the
+  linear prediction derived in the notes).
+- **They decay because the jets slowly lose their instability**, and collapse when the jets become stable.
+- **Open:** a first-principles calculation of the kinetic loss; what erodes the jets' vorticity strips; grid scale
+  against Debye scale at the collapse. Five restarts that bear on these are running
+  (`DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy_sinktest`).
 
 ## Build
 
 ```
-cd /rds/project/rds-aSo1XX0UOlw/ir-kenn3/VORTEX_DAMPING
-env -u LD_LIBRARY_PATH pdflatex notes
-env -u LD_LIBRARY_PATH bibtex notes
-env -u LD_LIBRARY_PATH pdflatex notes
-env -u LD_LIBRARY_PATH pdflatex notes
+env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH bibtex notes
+env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 ```
 
-`env -u LD_LIBRARY_PATH` is needed on the CSD3 login nodes so that TeX finds its fonts. The build has no errors,
-no undefined references and no overfull boxes. The output is 22 pages.
+(`env -u LD_LIBRARY_PATH` is needed on the CSD3 login nodes so that TeX finds its fonts.)
 
 ## Contents
 
 | Path | What it is |
 |---|---|
-| `notes.tex` | The working notes. JPP class; the preamble and macros are copied from `ep_turbulence_paper/main.tex` (lines 1-160 and 190-196). The voice follows `STYLE_GUIDE.md`. |
-| `notes.bib` | Bibliography. Entries from the Letter's `references.bib` and `letter-references.bib` are copied verbatim. The others (O'Neil 1965, Landau 1946, Fried & Conte 1961, Briggs et al. 1970, Rayleigh 1880, Drazin & Reid 2004, Haberman 1972, Stewartson 1978, Warn & Warn 1978, Ivanov et al. 2025 = arXiv:2405.00854, and the Letter as an unpublished working draft) are added. |
-| `notes.pdf`, `notes.aux`, `notes.bbl`, `notes.blg`, `notes.log`, `notes.out` | Build products. |
-| `jpp.cls`, `jpp.bst` | The JPP class and bibliography style, as in the long paper. |
-| `STYLE_GUIDE.md` | The voice of Ivanov et al. (2025), taken from its LaTeX source. |
-| `STATUS.md` | Status snapshot from 1 Oct 2026, 05:35, written before the notes were drafted. Now out of date. |
-| `reference_style/ivanov2025_source/` | LaTeX source of Ivanov et al. (2025), on which the style guide is based. |
-| `reference_style/vortex_damping_analytical_note.{tex,pdf}` | The earlier analytical note. |
-| `source_note/vortex_damping_analytical_note.{tex,pdf}` | The same note, copied from `DIPOLE_TEST/VORTEX_CALCULATION/`. The notes start from it. |
-| `figures/test1_amplitude_dependence.{pdf,png}` | Figure 2 of the notes: amplitude-reduced restarts and decay rate against amplitude. |
-| `figures/test2_late_remnant.{pdf,png}` | Figure 4: the remnant after the collapse, with exponential and power-law fits. |
-| `figures/test3_trapping_vs_damping.{pdf,png}` | Figure 3: jet and vortex profiles, trapping frequency against damping rate, and decay rate against cat's-eye width. |
-| `figures/test4_entropy_energy.{pdf,png}` | Figure 1: E_nz, Z_nz, W_nz and Z_nz/E_nz. |
-| `scripts/audit_linear/` | Audit of Secs 1-3 of the earlier note: `audit.py` and `k0.py` (K_0 identity, Im J, C(t)), `model.py` and `roots.py` (closed uniform-flow model, exact second-sheet roots), `extra.py`. |
-| `scripts/audit_vortex/` | Audit of Secs 4-5 against the simulation data: `field.py` (field.dat reader), `energy.py` (windowed rates), `vstruct.py` (radial profiles), `phase.py` (phase speeds), `island.py` (resonant layer and trapped-region table), `series.py`, `fit.py` (rate against A_c), `hess.py` (Hessian trapping frequency). |
+| `notes.tex`, `notes.bib`, `notes.pdf` | The working notes (JPP class). Voice and house rules: `STYLE_GUIDE.md`. |
+| `STYLE_GUIDE.md` | The voice of Ivanov et al. (2025, arXiv:2405.00854), from its source in `reference_style/`; section 7a holds the rules of these notes: figures in the long dipole paper's style (two panels per row, all text at body size), and no simulation numbers unless the argument needs them. |
+| `figures/lib/notes_style.py` | Figure style (wraps `ep_turbulence_paper/scripts/lib/paper_style.py`). `traces.py`, `vortex_field.py`: shared readers. |
+| `figures/<name>/figure.py` | One directory per figure: `--rebuild` reads the run data and writes `cache.npz`; the default draws `figures/<name>.pdf` from the cache alone. |
+| `figures/cartoon.tex` | The TikZ cartoon (figure 1). |
+| `figures/measurements/` | Measurements quoted in the text without a figure: modulation of the jets by the breathing, mode-resolved budgets, the drift-resonance prediction at the critical layers, the loss rate in the production run. |
+| `figures/budget/` | Free-energy (W) budget of the vortices; cross-check of `figures/exchange` (not shown in the notes); also draws `dissipation`. `spec2d.py` reads GENE's `Spectral_2D_*.dat`. |
+| `scripts/rayleigh/` | Rayleigh problem and two-dimensional Euler model on the measured jets (own README). |
+| `scripts/audit_linear/`, `scripts/audit_vortex/` | Checks of the earlier analytical note (linear response, energy integrals; first field analysis). |
+| `source_note/` | The earlier analytical note (30 Sep 2026) that these notes start from. |
+| `jpp.cls`, `jpp.bst` | JPP class and bibliography style, as in the long paper. |
 
-The scripts were copied from the session scratchpad that produced them. Some read intermediate caches (`orig.npy`,
-`crit_*.npy`, `cache/*.npz`) that were not copied, because they are large and can be regenerated from the run
-data. The scripts that drew the four figures are not in this repository.
+## Figures of the notes
+
+| Figure | File | What to learn from it |
+|---|---|---|
+| 1 | `figures/cartoon.tex` | How the vortices lose their energy: fed by the jets, drained by phase mixing along the field line. |
+| 2 | `history` | The vortices decay ever faster and collapse; the zonal flow barely changes. |
+| 3 | `amplitude` | The smaller the vortex, the faster it decays: the decay is not linear. |
+| 4 | `geometry` | Critical layers on the jet flanks, with a cat's eye at each. |
+| 5 | `rayleigh` | The vortices are the unstable shear mode of their corrugated jets. |
+| 6 | `saturation` | The vortex amplitude follows the jets' growth rate: omega_tr = alpha gamma_R. |
+| 7 | `trapping` | Trapping is always far faster than the decay; no O'Neil crossover of the damping. |
+| 8 | `flute` | The vortices are flute-like at the box scale, not at the Debye scale. |
+| 9 | `entropy` | Entropy falls with energy: the decay is not passive phase mixing. |
+| 10 | `exchange` | The loss to entropy is steady and linear; the supply from the jets fades and reverses. |
+| 11 | `dissipation` | The perpendicular sink belongs to the zonal flow, the velocity-space sink to the vortices. |
+| 12 | `channels` | The loss is carried by parallel streaming at a rate independent of amplitude; the predicted drift resonance is suppressed. |
+| 13 | `euler` | A fluid model reproduces the vortices and part of their decay; the rest is kinetic. |
+| 14 | `remnant` | What is left after the collapse does not follow a t^-3 tail. |
 
 ## Data
 
-The notes use only CSD3 data (read only):
-- the reduced-box eta = 1 run `DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy`, legs 1 and 3-6 (t up to about 19 000);
-- its two amplitude-reduced restarts in `DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy_ampltest`, from the t = 5907 checkpoint, with every k_y >= 1 component scaled by
-  epsilon = 0.3 and 0.03.
-
-The run parameters are in Table 1 of the notes and in `DIPOLE_TEST/nl_reducedbox_20260925/README.md`.
-
-## Main conclusions
-
-The full statement is in Sec. 7 of the notes.
-- The simulated vortices are in the drift-free (critical-layer) limit, not the uniform-flow drift-resonance limit.
-  - Their critical layers lie on the jet flanks.
-  - The magnetic drift shifts the resonance by about 1 rho_ref, against a trapped half-width of more than 100 rho_ref.
-- The decay depends on amplitude, so it is not linear. It is also not an O'Neil crossover: the trapping frequency
-  exceeds the damping rate by 10-1800 throughout.
-- The data are consistent with a sink-limited nonlinear critical layer.
-- The collapse coincides with the trapped half-width reaching one grid cell, about one Debye length.
-
-## Proposed next tests (none run)
-
-- Restart from t of about 9000 with nx0 = 128. If the collapse is set by the grid, it should move to an E_nz about
-  16 times lower.
-- Compute the Rayleigh quasi-mode on the measured jet profile.
-- Measure the mode-resolved k_y = 1 -> 0 transfer to see whether the vortex energy is dissipated or absorbed by the jet.
-- Scan the perpendicular hyperdiffusion at fixed resolution.
+CSD3 only (read only): the reduced-box eta = 1 run `DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy` (legs 1, 3-6), its
+amplitude-reduced restarts `rb_c0p3_hxy_ampltest/{amp0p3,amp0p03}`, the restarts `rb_c0p3_hxy_sinktest/*` (running),
+and, for one comparison, the production run `DIPOLE_TEST/eta1_production_NEW_sep26`.
