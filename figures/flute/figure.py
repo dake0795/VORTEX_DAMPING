@@ -58,17 +58,6 @@ def draw():
         a.loglog(x, T / T.max(), ls, c="k", label=lab)
         b.loglog(x, F / T, ls, c="k")
     from matplotlib.ticker import FixedLocator, NullFormatter
-    # prediction of the field equation for an l-independent right-hand side: phi(l) = R / [1 + kappa(l)],
-    # kappa(l) = lambda_D^2 [gxx(l) kx^2 + gyy(l) ky^2]  (metric from the run's geometry file; uniform weights in z,
-    # as for the measured fraction)
-    lines = open(f"{ns.RB}/rb_c0p3_hxy/leg_0004/out/dipole_fix.dat").read().split("\n/\n", 1)[1]
-    geo = np.array([[float(v) for v in l.split()] for l in lines.strip().splitlines()])
-    gxx, gyy = geo[:, 0], geo[:, 3]
-    xt = np.geomspace(0.105, 4.2, 200)
-    kap = (xt[:, None] ** 2) * gxx[None, :] + (0.002 * LAMD) ** 2 * gyy[None, :]
-    ph = 1.0 / (1.0 + kap)
-    fth = ((ph - ph.mean(axis=1, keepdims=True)) ** 2).sum(axis=1) / (ph ** 2).sum(axis=1)
-    b.loglog(xt, fth, c=ns.PAL["theory"], ls="-", lw=1.4, zorder=1, label="minimal estimate")
     for ax in (a, b):
         ax.axvline(1.0, c="0.5", lw=0.8, ls=":")
         ax.axvspan(1.0, 4.2, color="0.93", lw=0, zorder=0)       # scales below the Debye length
@@ -81,7 +70,6 @@ def draw():
     b.set_ylabel(r"non-flute fraction")
     b.set_ylim(top=1.5)
     a.legend(loc="lower left")
-    b.legend(loc="lower right", handlelength=1.4)
     ns.tag(a, "(a)", x=0.86); ns.tag(b, "(b)")
     ns.save(fig, "flute")
 

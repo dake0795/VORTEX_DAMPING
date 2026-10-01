@@ -5,16 +5,18 @@ strongly driven (eta = 1) dipole pair-plasma condensate decay. `notes.pdf` is th
 
 ## Where the notes stand (1 Oct 2026)
 
-- **The vortices are the saturated shear-flow instability of their own jets.** Rayleigh's equation on the measured
-  jets predicts their frequency throughout the run and their radial structure, and their amplitude obeys the trapping
-  law omega_tr = alpha gamma_R, with a single alpha, while their energy falls by orders of magnitude.
-- **Their damping is linear and kinetic.** Electrostatic energy is converted into entropy at a rate independent of
-  amplitude, nearly all of it by Landau damping along the field line of the part of the vortices that is not
-  flute-like; the velocity-space sink then removes it. The drift resonance is suppressed by trapping (far below the
-  linear prediction derived in the notes).
+The notes give the theory of the vortices and test it; they present only the calculation that describes the
+simulations (house rule, `STYLE_GUIDE.md` section 7a).
+
+- **The vortices are the saturated shear-flow instability of their own jets.** In the fluid limit the jets and
+  vortices obey the two-dimensional Euler equation; jets corrugated at the Debye scale are Rayleigh-unstable; the
+  instability saturates by trapping. Rayleigh's equation on the measured jets gives the vortex frequency and
+  structure, and omega_tr = alpha gamma_R holds through the decay.
+- **Their damping is linear and kinetic**: Landau damping, along the field line, of the part of the vortex potential
+  that is not flute-like, at a rate independent of amplitude.
 - **They decay because the jets slowly lose their instability**, and collapse when the jets become stable.
-- **Open:** a first-principles calculation of the kinetic loss; what erodes the jets' vorticity strips; grid scale
-  against Debye scale at the collapse. Five restarts that bear on these are running
+- **Open:** the kinetic loss from first principles (in progress); what erodes the jets' corrugation; grid scale
+  against Debye scale. Five restarts that bear on these are running
   (`DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy_sinktest`).
 
 ## Build
@@ -35,10 +37,10 @@ env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 | `figures/lib/notes_style.py` | Figure style (wraps `ep_turbulence_paper/scripts/lib/paper_style.py`). `traces.py`, `vortex_field.py`: shared readers. |
 | `figures/<name>/figure.py` | One directory per figure: `--rebuild` reads the run data and writes `cache.npz`; the default draws `figures/<name>.pdf` from the cache alone. |
 | `figures/cartoon.tex` | The TikZ cartoon (figure 1). |
-| `figures/measurements/` | Measurements quoted in the text without a figure: modulation of the jets by the breathing, mode-resolved budgets, the drift-resonance prediction at the critical layers, the loss rate in the production run. |
+| `figures/measurements/` | Measurements used in the text without a figure of their own: modulation of the jets by the breathing, mode-resolved budgets, the loss rate in the production run. |
 | `figures/budget/` | Free-energy (W) budget of the vortices; cross-check of `figures/exchange` (not shown in the notes); also draws `dissipation`. `spec2d.py` reads GENE's `Spectral_2D_*.dat`. |
 | `scripts/rayleigh/` | Rayleigh problem and two-dimensional Euler model on the measured jets (own README). |
-| `scripts/audit_linear/`, `scripts/audit_vortex/` | Checks of the earlier analytical note (linear response, energy integrals; first field analysis). |
+| `scripts/audit_vortex/` | First field analysis (superseded by `figures/lib/vortex_field.py`). |
 | `source_note/` | The earlier analytical note (30 Sep 2026) that these notes start from. |
 | `jpp.cls`, `jpp.bst` | JPP class and bibliography style, as in the long paper. |
 
@@ -46,20 +48,21 @@ env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 
 | Figure | File | What to learn from it |
 |---|---|---|
-| 1 | `figures/cartoon.tex` | How the vortices lose their energy: fed by the jets, drained by phase mixing along the field line. |
+| 1 | `figures/cartoon.tex` | The mechanism: jets feed the vortices; phase mixing along the field line drains them. |
 | 2 | `history` | The vortices decay ever faster and collapse; the zonal flow barely changes. |
-| 3 | `amplitude` | The smaller the vortex, the faster it decays: the decay is not linear. |
+| 3 | `amplitude` | A vortex made smaller on unchanged jets regrows, then decays faster. |
 | 4 | `geometry` | Critical layers on the jet flanks, with a cat's eye at each. |
 | 5 | `rayleigh` | The vortices are the unstable shear mode of their corrugated jets. |
 | 6 | `saturation` | The vortex amplitude follows the jets' growth rate: omega_tr = alpha gamma_R. |
-| 7 | `trapping` | Trapping is always far faster than the decay; no O'Neil crossover of the damping. |
-| 8 | `flute` | The vortices are flute-like at the box scale, not at the Debye scale. |
-| 9 | `entropy` | Entropy falls with energy: the decay is not passive phase mixing. |
-| 10 | `exchange` | The loss to entropy is steady and linear; the supply from the jets fades and reverses. |
-| 11 | `dissipation` | The perpendicular sink belongs to the zonal flow, the velocity-space sink to the vortices. |
-| 12 | `channels` | The loss is carried by parallel streaming at a rate independent of amplitude; the predicted drift resonance is suppressed. |
-| 13 | `euler` | A fluid model reproduces the vortices and part of their decay; the rest is kinetic. |
-| 14 | `remnant` | What is left after the collapse does not follow a t^-3 tail. |
+| 7 | `exchange` | The loss to entropy is steady and linear; the supply from the jets fades and reverses. |
+| 8 | `channels` | The loss is carried by the streaming of particles along the field line. |
+| 9 | `flute` | The vortices are flute-like at the box scale, not at the Debye scale. |
+| 10 | `dissipation` | The perpendicular sink belongs to the zonal flow, the velocity-space sink to the vortices. |
+| 11 | `euler` | A fluid with the same jets has the same vortices but not their kinetic loss. |
+| 12 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
+
+Appendices (`appendices/*.tex`): step-by-step derivations at undergraduate level (Euler limit and Rayleigh's equation;
+trapping and saturation; Landau damping of the non-flute part - in preparation).
 
 ## Data
 

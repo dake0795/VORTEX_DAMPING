@@ -126,7 +126,7 @@ def main():
         rebuild()
     C = np.load(CACHE)
     ns.apply_style()
-    draw_budget(C); draw_dissipation(C)
+    draw_dissipation(C)                       # draw_budget(C) is kept as a cross-check of figures/exchange; not in the notes
     for run in ("orig", "a03", "a003"):
         S, T, G = rates(C, run)
         st = 5 if run == "orig" else 1

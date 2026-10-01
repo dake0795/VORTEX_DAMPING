@@ -221,6 +221,16 @@ qualifiers sit inside the sentence instead of in a separate caveat sentence:
 - One directory per figure, `figures/<name>/figure.py`: `--rebuild` reads the run data and writes a small
   `cache.npz`; the default draws `figures/<name>.pdf` from the cache alone.
 
+**Only the answer.** The notes present only the calculation that describes the simulations, written as though the
+final answer had always been known: mechanism, derivation, prediction, and a figure that tests it. No dead-end
+calculations, no account of hypotheses tried and discarded, no reference to earlier drafts or notes. Scaling laws are
+shown through figures.
+
+**Derivations at undergraduate level.** Every derivation starts from a stated equation of the notes and shows each
+step that is not one line of algebra. The body keeps the voice of this guide and states results; the step-by-step
+derivations go into appendices, to which the body points. Terms of art (critical layer, cat's eye, Landau damping)
+are explained where they first appear.
+
 **Numbers from the simulations are not reported unless the argument cannot be made without them.**
 
 - The text says what a figure shows in words ("by more than an order of magnitude", "about twice as fast",

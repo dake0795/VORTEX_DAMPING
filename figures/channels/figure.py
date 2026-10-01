@@ -8,10 +8,9 @@ prediction (1 Oct 2026).
 
 For the non-zonal part (k_y >= 1, species summed) the script stores, in sliding windows, the mean native electrostatic
 energy E and the mean rates of change of E through GENE's parallel-streaming and curvature (magnetic-drift) terms.
-PRED is the prediction of the notes' eq:gamma_layer for the drift channel (the <omega_d^2> term, gradients at the
-critical layers flattened), from ../measurements/drift_layer_rate.py; PROD holds the same two rates for the k_y = 1
+PROD holds the same two rates for the k_y = 1
 vortices of the production run, from ../measurements/production_loss_rate.py.
-(a) the two rates of the original run against time, with the prediction; (b) against the amplitude a, with the
+(a) the two rates of the original run against time; (b) against the amplitude a, with the
 restarts and the production run.
 """
 import argparse, os, sys
@@ -23,7 +22,6 @@ import traces
 import spec2d
 
 CACHE = os.path.join(HERE, "cache.npz")
-PRED = 5.9e-3                                             # drift_layer_rate.py: mean of the two vortices, "fully flattened"
 PROD = dict(a=0.25, par=1.70e-4, curv=2.04e-4)            # production_loss_rate.py (t = 741-936 of leg 2)
 SPEC = {"orig": [f"{ns.RB}/rb_c0p3_hxy/leg_000{l}/out" for l in (1, 3, 4, 5)],
         "a03": [f"{ns.RB}/rb_c0p3_hxy_ampltest/amp0p3/out"], "a003": [f"{ns.RB}/rb_c0p3_hxy_ampltest/amp0p03/out"]}
@@ -67,14 +65,11 @@ def draw():
     pos = lambda y: np.where(y > 0, y, np.nan)
     a.semilogy(tc, pos(C["par_orig"]), c="k", ls="-")
     a.semilogy(tc, pos(C["curv_orig"]), c="k", ls="--")
-    a.axhline(PRED, c=ns.PAL["theory"], ls=":", lw=1.4)
-    a.set_xlim(1, 11.1); a.set_ylim(2e-5, 3e-2)
+    a.set_xlim(1, 11.1); a.set_ylim(2e-5, 1e-2)
     a.set_xlabel(r"$t\;(10^3L_{\rm ref}/c_{\rm ref})$"); a.set_ylabel(r"loss rate $(c_{\rm ref}/L_{\rm ref})$")
-    traces.label(a, 3.6, 1.05e-2, "drift resonance, predicted", c=ns.PAL["theory"])
     traces.label(a, 4.2, 3.1e-3, "parallel streaming", c="k"); traces.label(a, 4.6, 2.6e-4, "magnetic drift", c="k")
     am = C["a_orig"]
     b.loglog(am, pos(C["par_orig"]), c="k", ls="-"); b.loglog(am, pos(C["curv_orig"]), c="k", ls="--")
-    b.axhline(PRED, c=ns.PAL["theory"], ls=":", lw=1.4)
     for run, mk in (("a03", "s"), ("a003", "^")):
         b.loglog(C[f"a_{run}"], pos(C[f"par_{run}"]), mk, c=ns.PAL[run], mfc=ns.PAL[run], ms=4.2)
         b.loglog(C[f"a_{run}"], pos(C[f"curv_{run}"]), mk, c=ns.PAL[run], mfc="w", ms=4.2, mew=0.9)

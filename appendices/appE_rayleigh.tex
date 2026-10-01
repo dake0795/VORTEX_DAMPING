@@ -1,0 +1,105 @@
+% ===========================================================================
+\section{From the kinetic equation to Rayleigh's equation}\label{app:rayleigh}
+% ===========================================================================
+
+Here we derive, step by step, the fluid equations that govern the vortices, viz., the Euler equation \cref{eq:euler} and Rayleigh's equation \cref{eq:rayleigh}, and then the formula \cref{eq:gamma_rayleigh} for the growth rate of the shear-flow instability of the jets. The starting point is the transit-averaged system \cref{eq:kinetic,eq:poisson}. The only assumption is that the potential is flute-like, i.e., independent of the position \(l\) along the field line, so that \(\phibar = \phi\) in \cref{eq:orbit}; this is the case when \(\kperp\lambdaD\ll1\).
+
+\subsection{The charge moment}\label{app:rayleigh_moment}
+
+The field equation \cref{eq:poisson} involves the distribution functions only through their charge moment, \(\sum_a e_a\intv h_a = e\intv(h_p - h_e)\), so let us find the equation that this moment obeys: we multiply \cref{eq:kinetic} by \(e_a\), integrate over velocities and sum over the two species. Consider the terms of \cref{eq:kinetic} in turn. Firstly, by \cref{eq:poisson}, the charge moment itself is
+\begin{equation}
+\sum_a e_a\intv h_a = \frac{2n_0e^2}{T}\left(1 - \lambdaD^2\nabla_\perp^2\right)\phi,
+\label{eq:Echarge}
+\end{equation}
+which gives the moment of \(\pt h_a\). Secondly, a flute-like potential does not depend on the velocity, so the bracket commutes with the velocity integral, and the moment of \(\pbrainline{\phi}{h_a}\) is the bracket of \(\phi\) with \cref{eq:Echarge}; since \(\pbrainline{\phi}{\phi} = 0\), only \(-(2n_0e^2\lambdaD^2/T)\pbrainline{\phi}{\nabla_\perp^2\phi}\) survives. Thirdly, the magnetic drifts of the two species are equal and opposite, \(\bar v_{de} = -\bar v_{dp}\), and so are their charges, whence \(e_a\vda = e\bar v_{dp}\) for both, and the moment of the drift term is \(e\,\partial_\alpha\intv\bar v_{dp}(h_p + h_e)\): the drift couples the charge moment to the \textit{sum} of the two distributions. Fourthly, on the right-hand side, \(\sum_a e_a^2\intv f_0/T = 2n_0e^2/T\), so the first term gives \((2n_0e^2/T)\,\pt\phi\). Finally, \((e_af_0/T)\,v_{*a}^T = -\partial_\psi f_0\) is the same for both species, so the gradient drive, multiplied by \(e_a\) and summed, vanishes. Collecting the terms, we get
+\begin{equation}
+\frac{2n_0e^2}{T}\left[\pt\phi - \lambdaD^2\,\pt\nabla_\perp^2\phi - \lambdaD^2\pbra{\phi}{\nabla_\perp^2\phi}\right] + e\,\partial_\alpha\intv\bar v_{dp}\left(h_p + h_e\right) = \frac{2n_0e^2}{T}\,\pt\phi.
+\label{eq:Ecollect}
+\end{equation}
+The terms \(\pt\phi\) on the two sides cancel: they describe the Boltzmann part of the response, which follows the potential adiabatically and exerts no net effect. What remains, divided by \(-2n_0e^2\lambdaD^2/T\), is \cref{eq:euler}. Three things have dropped out of it, viz., the gradients of the equilibrium, the time derivative of \(\phi\) itself and, apart from the prefactor of the drift term, the Debye length.
+
+The drift term on the right-hand side of \cref{eq:euler} is smaller than the advection terms on its left-hand side by the ratio of the drift speed of a thermal particle to the speed of the vortex relative to the zonal flow, \(|\vda|/|U - c|\), which is very small for the vortices of these notes (\cref{sec:geometry}). Without it, \cref{eq:euler} is the two-dimensional Euler equation of an incompressible, inviscid fluid, written for its streamfunction \(\phi\): the velocity is \((-\partial_\alpha\phi, \partial_\psi\phi)\) in the \((\psi,\alpha)\) plane, \(\nabla_\perp^2\phi\) is the vorticity, and the equation states that the vorticity of each fluid element is conserved as it is carried by the flow.
+
+\subsection{The average along the field line}\label{app:rayleigh_metric}
+
+In a flux tube, the perpendicular Laplacian is \(\nabla_\perp^2 = g^{xx}\partial_\psi^2 + 2g^{xy}\partial_\psi\partial_\alpha + g^{yy}\partial_\alpha^2\), where \(g^{xx} = |\grad\psi|^2\), \(g^{xy} = \grad\psi\bcdot\grad\alpha\) and \(g^{yy} = |\grad\alpha|^2\), in the normalised coordinates of the flux tube, are the metric coefficients; these vary along the field line, whereas a flute-like \(\phi\) and the distributions \(h_a\) do not. Equation \cref{eq:poisson} can therefore hold only on average, and \cref{eq:Echarge} is to be read as its average over the volume of the flux tube, \(\langle\cdot\rangle\equiv\int(\rmd l/B)(\cdot)\big/\!\int\rmd l/B\). (The departure of \(\phi\) from a flute-like function that restores \cref{eq:poisson} at every \(l\) is of relative order \(\kperp^2\lambdaD^2\); it does not affect the motion of the vortices, but it is what damps them, see \cref{sec:loss}.) The derivation of \cref{app:rayleigh_moment} goes through unchanged with \(\nabla_\perp^2\) replaced by its average. In the flux tube of the simulations, \(g^{xy} = 0\), so the vorticity is
+\begin{equation}
+\zeta = \langle g^{xx}\rangle\,\partial_\psi^2\phi + \langle g^{yy}\rangle\,\partial_\alpha^2\phi,
+\qquad
+\pt\zeta + \pbra{\phi}{\zeta} = 0.
+\label{eq:Evorticity}
+\end{equation}
+In other words, the fluid is two-dimensional and incompressible, but its vorticity is an anisotropic Laplacian of its streamfunction.
+
+\subsection{Rayleigh's equation and the critical layer}\label{app:rayleigh_equation}
+
+Let the potential be that of a zonal flow, \(\Phi(\psi)\), plus a small wave, \(\phi = \Phi + \operatorname{Re}[\varphi(\psi)\,\rme^{\rmi k\alpha - \rmi\omega t}]\), with \(k > 0\), and let \(U\equiv\partial_\psi\Phi\) be the velocity of the zonal flow, which is in the \(\alpha\) direction. Any \(\Phi(\psi)\) is a steady solution of \cref{eq:Evorticity}, because its vorticity \(\langle g^{xx}\rangle U'\) is also a function of \(\psi\) alone. To first order in the wave, the three terms of \cref{eq:Evorticity} are: the rate of change of the vorticity of the wave, \(-\rmi\omega\,(\langle g^{xx}\rangle\varphi'' - \langle g^{yy}\rangle k^2\varphi)\); its advection by the zonal flow, \(\rmi kU\,(\langle g^{xx}\rangle\varphi'' - \langle g^{yy}\rangle k^2\varphi)\); and the advection of the zonal vorticity by the radial velocity \(-\rmi k\varphi\) of the wave, \(-\rmi k\varphi\,\langle g^{xx}\rangle U''\). Their sum, divided by \(\rmi k\langle g^{xx}\rangle\), is Rayleigh's equation,
+\begin{equation}
+\left(U - c\right)\left(\varphi'' - k_\text{eff}^2\varphi\right) - U''\varphi = 0,
+\qquad
+c\equiv\frac{\omega}{k},
+\qquad
+k_\text{eff}^2\equiv k^2\,\frac{\langle g^{yy}\rangle}{\langle g^{xx}\rangle},
+\label{eq:Erayleigh}
+\end{equation}
+which is \cref{eq:rayleigh} with the metric restored; primes denote derivatives with respect to \(\psi\). It is an eigenvalue problem: for a given jet \(U(\psi)\), periodic solutions \(\varphi\) exist only for special values of the phase speed \(c\), in general complex, and the wave grows at the rate \(\gamma_\text{R}\equiv\operatorname{Im}\omega = k\operatorname{Im}c\).
+
+A \textit{critical layer} is a radius \(\psi_c\) at which the real part of the phase speed equals the speed of the flow, \(U(\psi_c) = \operatorname{Re}c\). The fluid there moves with the wave and so feels a steady, not an oscillating, radial velocity; this is the resonance of the problem. For a neutral wave, \(\operatorname{Im}c = 0\), the coefficient of the highest derivative in \cref{eq:Erayleigh} vanishes at \(\psi_c\), and the equation is singular: by \cref{eq:Erayleigh}, the vorticity of the wave is \(\varphi'' - k_\text{eff}^2\varphi = U''\varphi/(U - c)\), which diverges as \(1/(\psi - \psi_c)\) unless \(U''_c\varphi_c = 0\), the subscript \(c\) denoting evaluation at the critical layer. For a growing wave, there is no singularity, but the vorticity is concentrated in a layer of width \(\gamma_\text{R}/k|U'_c|\) around \(\psi_c\). Once the wave has a finite amplitude, the fluid in this layer is trapped by it and circulates in the cat's eyes of \cref{sec:pendulum}.
+
+\subsection{When is a jet unstable?}\label{app:rayleigh_theorem}
+
+Let us divide \cref{eq:Erayleigh} by \(U - c\), multiply by the complex conjugate \(\varphi^*\) and integrate over one period in \(\psi\), integrating the first term by parts:
+\begin{equation}
+\int\rmd\psi\left(|\varphi'|^2 + k_\text{eff}^2|\varphi|^2\right) + \int\rmd\psi\,\frac{U''\,(U - c^*)}{|U - c|^2}\,|\varphi|^2 = 0.
+\label{eq:Equadratic}
+\end{equation}
+The imaginary part of \cref{eq:Equadratic} is \(\operatorname{Im}c\int\rmd\psi\,U''|\varphi|^2/|U - c|^2 = 0\). Therefore, a growing wave is possible only if \(U''\) changes sign somewhere, i.e., only if the zonal vorticity \(U'\) has an extremum: this is Rayleigh's inflection-point theorem \citep{Rayleigh1880, DrazinReid2004}. It is a necessary condition, not a sufficient one, as the following example, which is the relevant one here, shows.
+
+Consider a jet that is a single harmonic, \(U = U_0\sin q\psi\). It has inflection points, but \(U'' = -q^2U\), and \cref{eq:Equadratic} becomes \(\int\rmd\psi\,(|\varphi'|^2 + k_\text{eff}^2|\varphi|^2) = q^2\int\rmd\psi\,U(U - c^*)|\varphi|^2/|U - c|^2\). For a growing wave, its imaginary part gives \(\int\rmd\psi\,U|\varphi|^2/|U - c|^2 = 0\), and then its real part, with \(U^2 = |U - c|^2 + 2U\operatorname{Re}c - |c|^2\), gives
+\begin{equation}
+\int\rmd\psi\left[|\varphi'|^2 + \left(k_\text{eff}^2 - q^2\right)|\varphi|^2\right] = -q^2|c|^2\int\rmd\psi\,\frac{|\varphi|^2}{|U - c|^2}\leq0.
+\label{eq:Eharmonic}
+\end{equation}
+The left-hand side is positive if \(k_\text{eff} > q\). Hence a single-harmonic jet is stable to all waves whose effective wavenumber exceeds that of the jet, which is the case for the box-scale wave in the box of the simulations. This is why the metric factor in \cref{eq:Erayleigh} matters, and why a smooth jet could not, by itself, produce the vortices. The argument fails as soon as \(U''\) is no longer proportional to \(U\). In the simulations, each shear layer between the jets is split into two strips of vorticity [see \cref{fig:rayleigh}(a)], so \(U''\) changes sign within each shear layer, close to the critical layers, and the jets are unstable. How fast the wave then grows is the subject of the next subsection.
+
+\subsection{The growth rate}\label{app:rayleigh_growth}
+
+For a growing wave, \cref{eq:Equadratic} can be written as \(\Dfn(\omega) = 0\), where
+\begin{equation}
+\Dfn(\omega)\equiv\int\rmd\psi\left(|\varphi'|^2 + k_\text{eff}^2|\varphi|^2\right) - \int\rmd\psi\,\frac{kU''|\varphi|^2}{\omega - kU}.
+\label{eq:Edispersion}
+\end{equation}
+We seek its solution \(\omega = \omega_r + \rmi\gamma_\text{R}\) when the growth is slow, \(\gamma_\text{R}\ll\omega_r\). The second integral is then nearly singular at the critical layers, where \(\omega_r = kU\), and we need the limit of \(1/(x + \rmi\epsilon)\) as \(\epsilon\to0^+\), with \(x = \omega_r - kU\). Since
+\begin{equation}
+\frac{1}{x + \rmi\epsilon} = \frac{x}{x^2 + \epsilon^2} - \rmi\,\frac{\epsilon}{x^2 + \epsilon^2},
+\label{eq:Esplit}
+\end{equation}
+let us consider the integral of each part against a smooth function \(g(x)\). The first part is odd in \(x\) and equals \(1/x\) for \(|x|\gg\epsilon\), while the contribution of \(|x|\lesssim\epsilon\) vanishes with \(\epsilon\) by symmetry; its integral thus tends to the principal value, \(\PV\!\int\rmd x\,g(x)/x\), i.e., the integral with a symmetric interval around \(x = 0\) excised and then shrunk to zero. The second part is a peak of width \(\epsilon\) and area \(\int\rmd x\,\epsilon/(x^2 + \epsilon^2) = \pi\), so its integral tends to \(\pi g(0)\). Therefore,
+\begin{equation}
+\frac{1}{x + \rmi0} = \PV\frac{1}{x} - \rmi\pi\,\delta(x),
+\label{eq:Eplemelj}
+\end{equation}
+which is the Landau prescription \citep{Landau1946}. The sign of the infinitesimal imaginary part is not a matter of choice. For a growing wave, \(\operatorname{Im}\omega > 0\) literally. More generally, the response to a disturbance applied at some instant is a superposition of terms \(\rme^{-\rmi\omega t}\) with \(\omega\) on a line that lies above all the singularities in the complex plane, since otherwise the response would precede its cause; real frequencies must, therefore, always be approached from above \citep{Landau1946}.
+
+Using \cref{eq:Eplemelj} in \cref{eq:Edispersion}, and \(\delta(\omega_r - kU) = \sum_c\delta(\psi - \psi_c)/k|U'_c|\), we find that, just above the real axis, \(\Dfn = \Dfn_R + \rmi\Dfn_I\) with
+\begin{equation}
+\Dfn_R(\omega_r) = \int\rmd\psi\left(|\varphi'|^2 + k_\text{eff}^2|\varphi|^2\right) - \PV\!\int\rmd\psi\,\frac{kU''|\varphi|^2}{\omega_r - kU},
+\qquad
+\Dfn_I = \pi\sum_c\frac{U''_c\,|\varphi_c|^2}{|U'_c|},
+\label{eq:Eparts}
+\end{equation}
+where the sum is over the critical layers. For small \(\gamma_\text{R}\), we expand \(\Dfn(\omega_r + \rmi\gamma_\text{R})\approx\Dfn_R + \rmi\,(\Dfn_I + \gamma_\text{R}\,\partial_{\omega_r}\Dfn_R)\). Here \(\varphi\) may be held fixed: \cref{eq:Edispersion} is the quadratic form of the operator of \cref{eq:Erayleigh}, which is symmetric, so it is stationary with respect to variations of \(\varphi\) about a solution, and the change of \(\varphi\) with \(\gamma_\text{R}\) enters only at second order. The real part of \(\Dfn = 0\) then determines the frequency, \(\Dfn_R(\omega_r) = 0\), and the imaginary part gives the growth rate, \(\gamma_\text{R} = -\Dfn_I/\partial_{\omega_r}\Dfn_R\), i.e.,
+\begin{equation}
+\gamma_\text{R} = \pi\,\frac{\sum_c U''_c\,|\varphi_c|^2/|U'_c|}{\partial_{\omega_r}\PV\!\int\rmd\psi\,kU''|\varphi|^2/(\omega_r - kU)},
+\label{eq:Egrowth}
+\end{equation}
+which is \cref{eq:gamma_rayleigh}. The derivative in the denominator must be taken after the principal value. Indeed, differentiating under the integral sign would give \(-\int\rmd\psi\,kU''|\varphi|^2/(\omega_r - kU)^2\), which has a double pole at each critical layer and diverges, whereas, with \(s = kU(\psi)\) as the variable of integration on each side of a layer and \(G(s)\equiv U''|\varphi|^2/|U'|\), the shift \(s\to s + \omega_r\) shows that
+\begin{equation}
+\partial_{\omega_r}\PV\!\int\rmd s\,\frac{G(s)}{\omega_r - s} = \PV\!\int\rmd s\,\frac{G'(s)}{\omega_r - s},
+\label{eq:Ederivative}
+\end{equation}
+which is finite for any \(G\) that is smooth at \(s = \omega_r\).
+
+Equation \cref{eq:Egrowth} has the structure of Landau's formula for the growth of a plasma wave, with the zonal vorticity gradient \(U''\) at the critical layer in the place of the slope of the distribution function at the phase velocity of the wave. Away from the critical layers, the denominator of \cref{eq:Egrowth} is \(-\int\rmd\psi\,kU''|\varphi|^2/(\omega_r - kU)^2\), i.e., minus a weighted average of the vorticity gradient over the body of the wave. Hence the sign of \(\gamma_\text{R}\): the wave grows if the vorticity gradient at its critical layers is opposite in sign to its average over the body of the wave, and decays otherwise. For a single-harmonic jet, the two have the same sign, in agreement with \cref{eq:Eharmonic}; on jets whose shear layers are split into strips, with the critical layers on the strips, they have opposite signs, and the wave grows. Since the fluid elements at the critical layers are trapped once \(\omtr\) is comparable with \(\gamma_\text{R}\), the growth stops there, which is the origin of the saturation law \cref{eq:saturation}.
+
+We have checked \cref{eq:Egrowth} against the growth rates obtained by solving \cref{eq:Erayleigh} numerically, both for jets of the form \(U\propto\sin q\psi + a\sin3q\psi\), in which the third harmonic splits the shear layers when \(a < -1/27\) and makes the jet unstable to waves with \(k_\text{eff} > q\) once the splitting is pronounced enough, and for the jets of the simulations (\cref{sec:unstable}). In both cases, it gives the correct sign and a growth rate close to the exact one, the difference vanishing with \(\gamma_\text{R}/\omega_r\), as expected of a first-order formula.

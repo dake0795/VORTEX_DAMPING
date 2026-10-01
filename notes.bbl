@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{21}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \def\au#1{#1} \def\ed#1{#1} \def\yr#1{#1}\def\at#1{#1}\def\jt#1{\textit{#1}}
   \def\bt#1{#1}\def\bvol#1{\textbf{#1}} \def\vol#1{#1} \def\pg#1{#1}
@@ -35,14 +35,6 @@
 {\sc \au{Drazin, P.~G.} \& \au{Reid, W.~H.}} \yr{2004} {\em Hydrodynamic
   Stability\/}, 2nd edn.  \publ{Cambridge: Cambridge University Press}.
 
-\bibitem[Fried \& Conte(1961)]{FriedConte1961}
-{\sc \au{Fried, B.~D.} \& \au{Conte, S.~D.}} \yr{1961} {\em The Plasma
-  Dispersion Function\/}.  \publ{New York: Academic Press}.
-
-\bibitem[Haberman(1972)]{Haberman1972}
-{\sc \au{Haberman, R.}} \yr{1972}  \at{Critical layers in parallel flows}.
-  \jt{Stud. Appl. Math.}  \bvol{51},  \pg{139}.
-
 \bibitem[Helander(2014)]{Helander2014}
 {\sc \au{Helander, P.}} \yr{2014}  \at{Microstability of magnetically confined
   electron-positron plasmas}.  \jt{Phys. Rev. Lett.}  \bvol{113},  \pg{135003}.
@@ -66,13 +58,6 @@
 {\sc \au{Jenko, F.}, \au{Dorland, W.}, \au{Kotschenreuther, M.} \& \au{Rogers,
   B.~N.}} \yr{2000}  \at{Electron temperature gradient driven turbulence}.
   \jt{Phys. Plasmas}  \bvol{7},  \pg{1904}.
-
-\bibitem[Kennedy {\em et~al.\/}(2020)Kennedy, Mishchenko, Xanthopoulos,
-  Helander, Ba{\~n}{\'o}n~Navarro \& G\"orler]{Kennedy2020}
-{\sc \au{Kennedy, D.}, \au{Mishchenko, A.}, \au{Xanthopoulos, P.},
-  \au{Helander, P.}, \au{Ba{\~n}{\'o}n~Navarro, A.} \& \au{G\"orler, T.}}
-  \yr{2020}  \at{Linear gyrokinetics of electron--positron plasmas in closed
-  field-line systems}.  \jt{J. Plasma Phys.}  \bvol{86},  \pg{905860208}.
 
 \bibitem[Kennedy \& Plunk(2026{\natexlab{{\em a\/}}})]{KennedyPlunkManuscript}
 {\sc \au{Kennedy, D.} \& \au{Plunk, G.~G.}} \yr{2026{\natexlab{{\em a\/}}}}
@@ -118,13 +103,6 @@
 {\sc \au{Plunk, G.~G.} \& \au{Tatsuno, T.}} \yr{2011}  \at{Energy transfer and
   dual cascade in kinetic magnetized plasma turbulence}.  \jt{Phys. Rev. Lett.}
    \bvol{106},  \pg{165003}.
-
-\bibitem[Schekochihin {\em et~al.\/}(2016)Schekochihin, Parker, Highcock,
-  Dellar, Dorland \& Hammett]{Schekochihin2016}
-{\sc \au{Schekochihin, A.~A.}, \au{Parker, J.~T.}, \au{Highcock, E.~G.},
-  \au{Dellar, P.~J.}, \au{Dorland, W.} \& \au{Hammett, G.~W.}} \yr{2016}
-  \at{Phase mixing versus nonlinear advection in drift-kinetic plasma
-  turbulence}.  \jt{J. Plasma Phys.}  \bvol{82}~(2),  \pg{905820212}.
 
 \bibitem[Stewartson(1978)]{Stewartson1978}
 {\sc \au{Stewartson, K.}} \yr{1978}  \at{The evolution of the critical layer of

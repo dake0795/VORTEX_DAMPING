@@ -29,8 +29,6 @@ W_FIT, S_FIT = 200.0, 100.0
 W_ORIG, S_ORIG = 400.0, 200.0
 T_FIT0, T_COLLAPSE = 3600.0, 11100.0
 T_TRANS = 5980.0
-T_ANCHOR = 5900.0                         # the guide slopes of (b) pass through the original run here
-A_END, G_END = 5.0e-4, 6.0e-2             # where the a^{-5/8}, a^{-1} guides end (in a) and the a^{-5/2} guide (in Gamma_E)
 RUNS = ("orig", "a03", "a003")
 
 
@@ -98,17 +96,7 @@ def main():
     for r in ("a03", "a003"):
         m = C[f"g_{r}"] > 0
         b.loglog(C[f"a_{r}"][m], C[f"g_{r}"][m], ls="none", c=ns.PAL[r], marker=mk[r], ms=4.2, mfc="w", mew=0.9, zorder=4)
-    # guide slopes THROUGH the data: a fan anchored on the original run at T_ANCHOR (the restart time), so that the
-    # eye compares the slopes directly; thin, beneath the data, labelled at their far ends
-    k = np.argmin(np.abs(C["tc_orig"] - T_ANCHOR))
-    a0, g0 = C["a_orig"][k], C["g_orig"][k]
-    for p, st, txt, a1 in ((5 / 8, ":", r"$a^{-5/8}$", A_END), (1.0, "--", r"$a^{-1}$", A_END),
-                           (2.5, "-.", r"$a^{-5/2}$", a0 * (G_END / g0) ** (-1 / 2.5))):
-        ag = np.array([a0, a1])
-        yy = g0 * (ag / a0) ** (-p)
-        b.loglog(ag, yy, c="0.5", lw=0.8, ls=st, zorder=1)
-        b.text(a1 * 0.88, yy[-1], txt, color="0.3", ha="left", va="center")
-    b.set_xlim(0.2, 8.0e-5); b.set_ylim(5e-6, 2e-1)
+    b.set_xlim(0.2, 5e-4); b.set_ylim(1.5e-4, 3e-2)
     b.set_xlabel(r"$a=(E_{\rm nz}/E_{\rm zon})^{1/2}$")
     b.set_ylabel(r"$\Gamma_E\;(c_{\rm ref}/L_{\rm ref})$")
     for ax in (a, b):
