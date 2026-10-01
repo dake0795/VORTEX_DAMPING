@@ -54,13 +54,14 @@ env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 | 3 | `amplitude` | A vortex made smaller on unchanged jets regrows, then decays faster. |
 | 4 | `geometry` | Critical layers on the jet flanks, with a cat's eye at each. |
 | 5 | `rayleigh` | The vortices are the unstable shear mode of their corrugated jets. |
-| 6 | `saturation` | Trapping frequency and Rayleigh growth rate decay together: omega_tr = C gamma_R. |
-| 7 | `exchange` | The loss to entropy is steady and linear; the supply from the jets fades and reverses. |
-| 8 | `channels` | The loss is carried by the streaming of particles along the field line. |
-| 9 | `landau` | The loss is Landau damping of the non-flute part, at the calculated rate, with no adjustable parameter, in every run. |
-| 10 | `dissipation` | The perpendicular sink acts on the zonal flow, the velocity-space sink on the vortices. |
-| 11 | `euler` | A fluid with the same jets has the same vortices but not their kinetic loss. |
-| 12 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
+| 6 | `corrugation` | The vortices maintain the corrugation; the jets are only just unstable. |
+| 7 | `saturation` | Trapping frequency and Rayleigh growth rate decay together: omega_tr = C gamma_R. |
+| 8 | `exchange` | The loss to entropy is steady and linear; the supply from the jets fades and reverses. |
+| 9 | `channels` | The loss is carried by the streaming of particles along the field line. |
+| 10 | `landau` | The loss is Landau damping of the non-flute part, at the calculated rate, with no adjustable parameter, in every run. |
+| 11 | `dissipation` | The perpendicular sink acts on the zonal flow, the velocity-space sink on the vortices. |
+| 12 | `euler` | A fluid with the same jets has the same vortices but not their kinetic loss. |
+| 13 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
 
 Appendices (`appendices/*.tex`): step-by-step derivations at undergraduate level - A: Euler limit and Rayleigh's
 equation; B: trapping and saturation; C: Landau damping of the non-flute part (the loss formula).
