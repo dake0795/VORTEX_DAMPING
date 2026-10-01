@@ -1,0 +1,44 @@
+\begin{tikzpicture}[scale=1, thick, every node/.style={scale=1}]
+    \begin{loglogaxis}[width=3.5in, height=2in, clip mode=individual,
+    axis lines=left,
+    axis line style={thick},
+    xmin=0.01,xmax=100,
+    xlabel=$\log \gammaE$,ylabel=$\log \Pi$,
+    ymin=0.03,ymax=0.3,
+    ticklabel style={font=\tiny,fill=white},
+    xtick={\empty},ytick={\empty},
+    xlabel style={at={(ticklabel* cs:1)},anchor=north east},
+    ylabel style={at={(ticklabel* cs:1)},anchor=east,rotate=-90}
+    ]
+    \def\xc{0.1}
+    \def\xo{0.5}
+    \def\xendstrong{10}
+    \def\xendflat{80}
+    \def\Ampl{5}
+    \addplot[samples=20,domain=0.01:\xo,black,thick] {\Ampl*x/(1 + x/\xc)^2};
+    \addplot[samples=20,domain=\xo:\xendstrong,black,thick] {\Ampl*\xo/(1 + \xo/\xc)^2};
+    \addplot[samples=20,domain=\xendstrong:\xendflat,black,thick] {\Ampl*\xo*exp( -(ln(\xendstrong/x))^2)/(1 + \xo/\xc)^2};
+    
+    \node[circle,inner sep=2pt,fill=black] at (\xo,{\Ampl*\xo/(1+\xo/\xc)^2}) {};
+    
+    \draw[-, dotted, thick] (\xc,\Ampl*\xc/4) --node[pos=1,anchor=north]{\(\gammaani\)} (\xc,0.03);
+    \draw[-, dotted, thick] (\xo,{\Ampl*\xo/(1+\xo/\xc)^2}) --node[pos=1,anchor=north]{\(\gammaoO\)} (\xo,0.03);
+    \draw[-, dotted, thick] (\xendstrong,{\Ampl*\xo/(1+\xo/\xc)^2}) --node[pos=1,anchor=north]{\(\gamma_\text{max}\)} (\xendstrong,0.03);
+    \draw[-, dotted, thick] (\xc,\Ampl*\xc/4) -- (\xo,\Ampl*\xc/4);
+    
+    \node[anchor=south] at (0.6*\xc, 1.1*\Ampl*\xc/4) {
+    	$\begin{aligned}
+    		\Pi \propto \frac{\gammaE}{(1+\gammaE/\gammaani)^2}
+    	\end{aligned}$
+    	};
+    
+    \node[anchor=south] at ({sqrt(\xo*\xendstrong)}, {0.7*\Ampl*\xo/(1 + \xo/\xc)^2}) {\(\Pi \sim \text{const}\)};
+    
+    \draw[<->, >=stealth, dotted, thick] (\xo,{1.1*\Ampl*\xo/(1+\xo/\xc)^2}) -- node[midway, right, scale=1] {
+    	$\begin{aligned}
+    		\propto \AoO
+    	\end{aligned}$
+    } (\xo,\Ampl*\xc/4);
+\end{loglogaxis}
+
+\end{tikzpicture}

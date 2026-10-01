@@ -1,0 +1,711 @@
+\begin{thebibliography}{105}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\def\au#1{#1} \def\ed#1{#1} \def\yr#1{#1}\def\at#1{#1}\def\jt#1{\textit{#1}}
+  \def\bt#1{#1}\def\bvol#1{\textbf{#1}} \def\vol#1{#1} \def\pg#1{#1}
+  \def\publ#1{#1}\def\arxiv#1{#1}\def\org#1{#1}\def\st#1{\textit{#1}}
+
+\bibitem[{Abel} {\em et~al.\/}(2013){Abel}, {Plunk}, {Wang}, {Barnes},
+  {Cowley}, {Dorland} \& {Schekochihin}]{abel13}
+{\sc \au{{Abel}, I.~G.}, \au{{Plunk}, G.~G.}, \au{{Wang}, E.}, \au{{Barnes},
+  M.}, \au{{Cowley}, S.~C.}, \au{{Dorland}, W.} \& \au{{Schekochihin}, A.~A.}}
+  \yr{2013}  \at{{Multiscale gyrokinetics for rotating tokamak plasmas:
+  fluctuations, transport and energy flows}}.  \jt{Rep.\ Prog.\ Phys.}
+  \bvol{76},  \pg{116201}.
+
+\bibitem[Adkins {\em et~al.\/}(2023)Adkins, Ivanov \& Schekochihin]{adkins23}
+{\sc \au{Adkins, T.}, \au{Ivanov, P.~G.} \& \au{Schekochihin, A.~A.}} \yr{2023}
+   \at{Scale invariance and critical balance in electrostatic drift-kinetic
+  turbulence}.  \jt{J.\ Plasma Phys.}  \bvol{89},  \pg{905890406}.
+
+\bibitem[{Adkins} {\em et~al.\/}(2022){Adkins}, {Schekochihin}, {Ivanov} \&
+  {Roach}]{adkins22}
+{\sc \au{{Adkins}, T.}, \au{{Schekochihin}, A.~A.}, \au{{Ivanov}, P.~G.} \&
+  \au{{Roach}, C.~M.}} \yr{2022}  \at{Electromagnetic instabilities and plasma
+  turbulence driven by electron-temperature gradient}.  \jt{J.\ Plasma Phys.}
+  \bvol{88},  \pg{905880410}.
+
+\bibitem[Artun \& Tang(1992)]{artun92}
+{\sc \au{Artun, M.} \& \au{Tang, W.~M.}} \yr{1992}  \at{{Gyrokinetic analysis
+  of ion temperature gradient modes in the presence of sheared flows}}.
+  \jt{Phys.\ Fluids B}  \bvol{4},  \pg{1102--1114}.
+
+\bibitem[{Barnes} {\em et~al.\/}(2009){Barnes}, {Abel}, {Dorland}, {Ernst},
+  {Hammett}, {Ricci}, {Rogers}, {Schekochihin} \& {Tatsuno}]{barnes09}
+{\sc \au{{Barnes}, M.}, \au{{Abel}, I.~G.}, \au{{Dorland}, W.}, \au{{Ernst},
+  D.~R.}, \au{{Hammett}, G.~W.}, \au{{Ricci}, P.}, \au{{Rogers}, B.~N.},
+  \au{{Schekochihin}, A.~A.} \& \au{{Tatsuno}, T.}} \yr{2009}  \at{{Linearized
+  model Fokker-Planck collision operators for gyrokinetic simulations. II.
+  Numerical implementation and tests}}.  \jt{Phys.\ Plasmas}  \bvol{16},
+  \pg{072107}.
+
+\bibitem[Barnes {\em et~al.\/}(2019)Barnes, Parra \&
+  Landreman]{barnes_stella19}
+{\sc \au{Barnes, M.}, \au{Parra, F.I.} \& \au{Landreman, M.}} \yr{2019}
+  \at{\texttt{stella}: An operator-split, implicit–explicit $\delta
+  f$-gyrokinetic code for general magnetic field configurations}.  \jt{J.
+  Comput. Phys.}  \bvol{391},  \pg{365}.
+
+\bibitem[Barnes {\em et~al.\/}(2011)Barnes, Parra, Highcock, Schekochihin,
+  Cowley \& Roach]{barnes_shear11}
+{\sc \au{Barnes, M.}, \au{Parra, F.~I.}, \au{Highcock, E.~G.},
+  \au{Schekochihin, A.~A.}, \au{Cowley, S.~C.} \& \au{Roach, C.~M.}} \yr{2011}
+  \at{Turbulent transport in tokamak plasmas with rotational shear}.  \jt{Phys.
+  Rev. Lett.}  \bvol{106},  \pg{175004}.
+
+\bibitem[{Barnes} {\em et~al.\/}(2011){Barnes}, {Parra} \&
+  {Schekochihin}]{barnes11}
+{\sc \au{{Barnes}, M.}, \au{{Parra}, F.~I.} \& \au{{Schekochihin}, A.~A.}}
+  \yr{2011}  \at{{Critically balanced ion temperature gradient turbulence in
+  fusion plasmas}}.  \jt{Phys.\ Rev.\ Lett.}  \bvol{107},  \pg{115003}.
+
+\bibitem[Biglari {\em et~al.\/}(1990)Biglari, Diamond \& Terry]{biglari90}
+{\sc \au{Biglari, H.}, \au{Diamond, P.~H.} \& \au{Terry, P.~W.}} \yr{1990}
+  \at{{Influence of sheared poloidal rotation on edge turbulence}}.  \jt{Phys.\
+  Fluids B}  \bvol{2},  \pg{1--4}.
+
+\bibitem[{Boldyrev}(2006)]{boldyrev06}
+{\sc \au{{Boldyrev}, S.}} \yr{2006}  \at{{Spectrum of magnetohydrodynamic
+  turbulence}}.  \jt{Phys.\ Rev.\ Lett.}  \bvol{96},  \pg{115002}.
+
+\bibitem[{Boldyrev} {\em et~al.\/}(2009){Boldyrev}, {Mason} \&
+  {Cattaneo}]{boldyrev09exact}
+{\sc \au{{Boldyrev}, S.}, \au{{Mason}, J.} \& \au{{Cattaneo}, F.}} \yr{2009}
+  \at{{Dynamic alignment and exact scaling laws in magnetohydrodynamic
+  turbulence}}.  \jt{Astrophys.~J.}  \bvol{699},  \pg{L39}.
+
+\bibitem[{Braginskii}(1965)]{braginskii65}
+{\sc \au{{Braginskii}, S.~I.}} \yr{1965}  \at{{Transport processes in a
+  plasma}}.  \jt{Rev.\ Plasma Phys.}  \bvol{1},  \pg{205}.
+
+\bibitem[C.~J. {\em et~al.\/}(2021)C.~J., Brunner \& Ball]{ajay21}
+{\sc \au{C.~J., {Ajay}}, \au{Brunner, S.} \& \au{Ball, J.}} \yr{2021}
+  \at{{Effect of collisions on non-adiabatic electron dynamics in ITG-driven
+  microturbulence}}.  \jt{Phys.\ Plasmas}  \bvol{28},  \pg{092303}.
+
+\bibitem[{Candy} {\em et~al.\/}(2007){Candy}, {Waltz}, {Fahey} \&
+  {Holland}]{candy07}
+{\sc \au{{Candy}, J.}, \au{{Waltz}, R.~E.}, \au{{Fahey}, M.~R.} \&
+  \au{{Holland}, C.}} \yr{2007}  \at{{The effect of ion-scale dynamics on
+  electron-temperature-gradient turbulence}}.  \jt{Plasma Phys.\ Control.\
+  Fusion}  \bvol{49},  \pg{1209}.
+
+\bibitem[Casson {\em et~al.\/}(2009)Casson, Peeters, Camenen, Hornsby, Snodin,
+  Strintzi \& Szepesi]{casson09}
+{\sc \au{Casson, F.~J.}, \au{Peeters, A.~G.}, \au{Camenen, Y.}, \au{Hornsby,
+  W.~A.}, \au{Snodin, A.~P.}, \au{Strintzi, D.} \& \au{Szepesi, G.}} \yr{2009}
+  \at{{Anomalous parallel momentum transport due to E×B flow shear in a
+  tokamak plasma}}.  \jt{Phys.\ Plasmas}  \bvol{16},  \pg{092303}.
+
+\bibitem[Catto(2019)]{catto2019}
+{\sc \au{Catto, P.~J.}} \yr{2019}  \at{Practical gyrokinetics}.  \jt{{J.~Plasma
+  Phys.}}  \bvol{85},  \pg{925850301}.
+
+\bibitem[{Catto} {\em et~al.\/}(1973){Catto}, {Rosenbluth} \& {Liu}]{catto73}
+{\sc \au{{Catto}, P.~J.}, \au{{Rosenbluth}, M.~N.} \& \au{{Liu}, C.~S.}}
+  \yr{1973}  \at{{Parallel velocity shear instabilities in an inhomogeneous
+  plasma with a sheared magnetic field}}.  \jt{Phys.\ Fluids}  \bvol{16},
+  \pg{1719--1729}.
+
+\bibitem[Christen {\em et~al.\/}(2022)Christen, Barnes, Hardman \&
+  Schekochihin]{christen22}
+{\sc \au{Christen, N.}, \au{Barnes, M.}, \au{Hardman, M.R.} \&
+  \au{Schekochihin, A.A.}} \yr{2022}  \at{Bistable turbulence in strongly
+  magnetised plasmas with a sheared mean flow}.  \jt{J.\ Plasma Phys.}
+  \bvol{88},  \pg{905880504}.
+
+\bibitem[Christen {\em et~al.\/}(2021)Christen, Barnes \& Parra]{christen21}
+{\sc \au{Christen, N.}, \au{Barnes, M.} \& \au{Parra, F.~I.}} \yr{2021}
+  \at{Continuous-in-time approach to flow shear in a linearly implicit local
+  $\delta f$ gyrokinetic code}.  \jt{J.\ Plasma Phys.}  \bvol{87},
+  \pg{905870230}.
+
+\bibitem[{Colyer} {\em et~al.\/}(2017){Colyer}, {Schekochihin}, {Parra},
+  {Roach}, {Barnes}, {Ghim} \& {Dorland}]{colyer17}
+{\sc \au{{Colyer}, G.~J.}, \au{{Schekochihin}, A.~A.}, \au{{Parra}, F.~I.},
+  \au{{Roach}, C.~M.}, \au{{Barnes}, M.~A.}, \au{{Ghim}, Y.-c.} \&
+  \au{{Dorland}, W.}} \yr{2017}  \at{{Collisionality scaling of the electron
+  heat flux in ETG turbulence}}.  \jt{Plasma Phys.\ Control.\ Fusion}
+  \bvol{59},  \pg{055002}.
+
+\bibitem[Cooper(1988)]{cooper88}
+{\sc \au{Cooper, W.~A.}} \yr{1988}  \at{Ballooning instabilities in tokamaks
+  with sheared toroidal flows}.  \jt{Plasma Phys.\ Control.\ Fusion}
+  \bvol{30},  \pg{1805}.
+
+\bibitem[{Diamond} {\em et~al.\/}(2005){Diamond}, {Itoh}, {Itoh} \&
+  {Hahm}]{diamond05}
+{\sc \au{{Diamond}, P.~H.}, \au{{Itoh}, S.-I.}, \au{{Itoh}, K.} \& \au{{Hahm},
+  T.~S.}} \yr{2005}  \at{{Zonal flows in plasma---a review}}.  \jt{Plasma
+  Phys.\ Control.\ Fusion}  \bvol{47},  \pg{35}.
+
+\bibitem[{Dif-Pradalier} {\em et~al.\/}(2010){Dif-Pradalier}, {Diamond},
+  {Grandgirard}, {Sarazin}, {Abiteboul}, {Garbet}, {Ghendrih}, {Strugarek},
+  {Ku} \& {Chang}]{dif10}
+{\sc \au{{Dif-Pradalier}, G.}, \au{{Diamond}, P.~H.}, \au{{Grandgirard}, V.},
+  \au{{Sarazin}, Y.}, \au{{Abiteboul}, J.}, \au{{Garbet}, X.}, \au{{Ghendrih},
+  P.}, \au{{Strugarek}, A.}, \au{{Ku}, S.} \& \au{{Chang}, C.~S.}} \yr{2010}
+  \at{{On the validity of the local diffusive paradigm in turbulent plasma
+  transport}}.  \jt{Phys.\ Rev.\ E}  \bvol{82},  \pg{025401}.
+
+\bibitem[{Dif-Pradalier} {\em et~al.\/}(2015){Dif-Pradalier}, {Hornung},
+  {Ghendrih}, {Sarazin}, {Clairet}, {Vermare}, {Diamond}, {Abiteboul},
+  {Cartier-Michaud}, {Ehrlacher}, {Est{\`e}ve}, {Garbet}, {Grandgirard},
+  {G{\"u}rcan}, {Hennequin}, {Kosuga}, {Latu}, {Maget}, {Morel}, {Norscini},
+  {Sabot} \& {Storelli}]{dif15}
+{\sc \au{{Dif-Pradalier}, G.}, \au{{Hornung}, G.}, \au{{Ghendrih}, P.},
+  \au{{Sarazin}, Y.}, \au{{Clairet}, F.}, \au{{Vermare}, L.}, \au{{Diamond},
+  P.~H.}, \au{{Abiteboul}, J.}, \au{{Cartier-Michaud}, T.}, \au{{Ehrlacher},
+  C.}, \au{{Est{\`e}ve}, D.}, \au{{Garbet}, X.}, \au{{Grandgirard}, V.},
+  \au{{G{\"u}rcan}, {\"O}.~D.}, \au{{Hennequin}, P.}, \au{{Kosuga}, Y.},
+  \au{{Latu}, G.}, \au{{Maget}, P.}, \au{{Morel}, P.}, \au{{Norscini}, C.},
+  \au{{Sabot}, R.} \& \au{{Storelli}, A.}} \yr{2015}  \at{{Finding the elusive
+  E $\times$ B staircase in magnetized plasmas}}.  \jt{Phys.\ Rev.\ Lett.}
+  \bvol{114},  \pg{085004}.
+
+\bibitem[{Dimits} {\em et~al.\/}(2000){Dimits}, {Bateman}, {Beer}, {Cohen},
+  {Dorland}, {Hammett}, {Kim}, {Kinsey}, {Kotschenreuther}, {Kritz}, {Lao},
+  {Mandrekas}, {Nevins}, {Parker}, {Redd}, {Shumaker}, {Sydora} \&
+  {Weiland}]{dimits00}
+{\sc \au{{Dimits}, A.~M.}, \au{{Bateman}, G.}, \au{{Beer}, M.~A.}, \au{{Cohen},
+  B.~I.}, \au{{Dorland}, W.}, \au{{Hammett}, G.~W.}, \au{{Kim}, C.},
+  \au{{Kinsey}, J.~E.}, \au{{Kotschenreuther}, M.}, \au{{Kritz}, A.~H.},
+  \au{{Lao}, L.~L.}, \au{{Mandrekas}, J.}, \au{{Nevins}, W.~M.}, \au{{Parker},
+  S.~E.}, \au{{Redd}, A.~J.}, \au{{Shumaker}, D.~E.}, \au{{Sydora}, R.} \&
+  \au{{Weiland}, J.}} \yr{2000}  \at{{Comparisons and physics basis of tokamak
+  transport models and turbulence simulations}}.  \jt{Phys.\ Plasmas}
+  \bvol{7},  \pg{969}.
+
+\bibitem[{Dorland} {\em et~al.\/}(2000){Dorland}, {Jenko}, {Kotschenreuther} \&
+  {Rogers}]{dorland00}
+{\sc \au{{Dorland}, W.}, \au{{Jenko}, F.}, \au{{Kotschenreuther}, M.} \&
+  \au{{Rogers}, B.~N.}} \yr{2000}  \at{{Electron temperature gradient
+  turbulence}}.  \jt{Phys.\ Rev.\ Lett.}  \bvol{85},  \pg{5579}.
+
+\bibitem[{Drake} {\em et~al.\/}(1988){Drake}, {Guzdar} \& {Hassam}]{drake88}
+{\sc \au{{Drake}, J.~F.}, \au{{Guzdar}, P.~N.} \& \au{{Hassam}, A.~B.}}
+  \yr{1988}  \at{{Streamer formation in plasma with a temperature gradient}}.
+  \jt{Phys.\ Rev.\ Lett.}  \bvol{61},  \pg{2205}.
+
+\bibitem[{Dupree}(1972)]{dupree72}
+{\sc \au{{Dupree}, T.~H.}} \yr{1972}  \at{{Theory of phase space density
+  granulation in plasma}}.  \jt{Phys.\ Fluids}  \bvol{15},  \pg{334}.
+
+\bibitem[Fedorczak {\em et~al.\/}(2013)Fedorczak, Ghendrih, Hennequin, Tynan,
+  Diamond \& Manz]{fedorczak13}
+{\sc \au{Fedorczak, N.}, \au{Ghendrih, Ph.}, \au{Hennequin, P.}, \au{Tynan,
+  G.~R.}, \au{Diamond, P.~H.} \& \au{Manz, P.}} \yr{2013}  \at{Dynamics of
+  tilted eddies in a transversal flow at the edge of tokamak plasmas and the
+  consequences for {L–H} transition}.  \jt{Plasma Phys.\ Control.\ Fusion}
+  \bvol{55},  \pg{124024}.
+
+\bibitem[Field {\em et~al.\/}(2011)Field, Michael, Akers, Candy, Colyer,
+  Guttenfelder, Ghim, Roach, Saarelma \& the MAST~Team]{field11}
+{\sc \au{Field, A.~R.}, \au{Michael, C.}, \au{Akers, R.~J.}, \au{Candy, J.},
+  \au{Colyer, G.}, \au{Guttenfelder, W.}, \au{Ghim, {Y.-c.}}, \au{Roach,
+  C.~M.}, \au{Saarelma, S.} \& \au{the MAST~Team}} \yr{2011}  \at{Plasma
+  rotation and transport in {MAST} spherical tokamak}.  \jt{Nucl.\ Fusion}
+  \bvol{51},  \pg{063006}.
+
+\bibitem[Fox {\em et~al.\/}(2017)Fox, van Wyk, Field, Ghim, Parra, Schekochihin
+  \& the MAST~Team]{fox17}
+{\sc \au{Fox, M. F.~J.}, \au{van Wyk, F.}, \au{Field, A.~R.}, \au{Ghim,
+  {Y.-c.}}, \au{Parra, F.~I.}, \au{Schekochihin, A.~A.} \& \au{the MAST~Team}}
+  \yr{2017}  \at{Symmetry breaking in {MAST} plasma turbulence due to toroidal
+  flow shear}.  \jt{Plasma Phys.\ Control.\ Fusion}  \bvol{59},  \pg{034002}.
+
+\bibitem[Ghim {\em et~al.\/}(2014)Ghim, Field, Schekochihin, Highcock, Michael
+  \& the MAST~Team]{ghim14}
+{\sc \au{Ghim, {Y.-c.}}, \au{Field, A.~R.}, \au{Schekochihin, A.~A.},
+  \au{Highcock, E.~G.}, \au{Michael, C.} \& \au{the MAST~Team}} \yr{2014}
+  \at{Local dependence of ion temperature gradient on magnetic configuration,
+  rotational shear and turbulent heat flux in {MAST}}.  \jt{Nucl.\ Fusion}
+  \bvol{54},  \pg{042003}.
+
+\bibitem[{Ghim} {\em et~al.\/}(2013){Ghim}, {Schekochihin}, {Field}, {Abel},
+  {Barnes}, {Colyer}, {Cowley}, {Parra}, {Dunai} \& {Zoletnik}]{ghim13}
+{\sc \au{{Ghim}, Y.-c.}, \au{{Schekochihin}, A.~A.}, \au{{Field}, A.~R.},
+  \au{{Abel}, I.~G.}, \au{{Barnes}, M.}, \au{{Colyer}, G.}, \au{{Cowley},
+  S.~C.}, \au{{Parra}, F.~I.}, \au{{Dunai}, D.} \& \au{{Zoletnik}, S.}}
+  \yr{2013}  \at{{Experimental signatures of critically balanced turbulence in
+  MAST}}.  \jt{Phys.\ Rev.\ Lett.}  \bvol{110},  \pg{145002}.
+
+\bibitem[{Goldreich} \& {Sridhar}(1995)]{GS95}
+{\sc \au{{Goldreich}, P.} \& \au{{Sridhar}, S.}} \yr{1995}  \at{{Toward a
+  theory of interstellar turbulence. 2: Strong Alfv\'enic turbulence}}.
+  \jt{Astrophys.~J.}  \bvol{438},  \pg{763}.
+
+\bibitem[{Hammett} {\em et~al.\/}(1993){Hammett}, {Beer}, {Dorland}, {Cowley}
+  \& {Smith}]{hammett93}
+{\sc \au{{Hammett}, G.~W.}, \au{{Beer}, M.~A.}, \au{{Dorland}, W.},
+  \au{{Cowley}, S.~C.} \& \au{{Smith}, S.~A.}} \yr{1993}  \at{{Developments in
+  the gyrofluid approach to tokamak turbulence simulations}}.  \jt{Plasma
+  Phys.\ Control.\ Fusion}  \bvol{35},  \pg{973}.
+
+\bibitem[{Hammett} {\em et~al.\/}(2006){Hammett}, {Dorland}, {Loureiro} \&
+  {Tatsuno}]{hammett_flowshear_06}
+{\sc \au{{Hammett}, G.~W.}, \au{{Dorland}, W.}, \au{{Loureiro}, N.~F.} \&
+  \au{{Tatsuno}, T.}} \yr{2006}  \at{{Implementation of large scale ExB shear
+  flow in the GS2 gyrokinetic turbulence code}}  \bvol{48},  \pg{VP1.136}.
+
+\bibitem[Hardman {\em et~al.\/}(2020)Hardman, Barnes \& Roach]{hardman20}
+{\sc \au{Hardman, M.~R.}, \au{Barnes, M.} \& \au{Roach, C.~M.}} \yr{2020}
+  \at{Stabilisation of short-wavelength instabilities by parallel-to-the-field
+  shear in long-wavelength {$E \times B$} flows}.  \jt{J.\ Plasma Phys.}
+  \bvol{86},  \pg{905860601}.
+
+\bibitem[{Hardman} {\em et~al.\/}(2019){Hardman}, {Barnes}, {Roach} \&
+  {Parra}]{hardman19}
+{\sc \au{{Hardman}, M.~R.}, \au{{Barnes}, M.}, \au{{Roach}, C.~M.} \&
+  \au{{Parra}, F.~I.}} \yr{2019}  \at{{A scale-separated approach for studying
+  coupled ion and electron scale turbulence}}.  \jt{Plasma Phys.\ Control.\
+  Fusion}  \bvol{61},  \pg{065025}.
+
+\bibitem[Hatch {\em et~al.\/}(2018)Hatch, Hazeltine, Kotschenreuther \&
+  Mahajan]{hatch18}
+{\sc \au{Hatch, D.~R.}, \au{Hazeltine, R.~D.}, \au{Kotschenreuther, M.~K.} \&
+  \au{Mahajan, S.~M.}} \yr{2018}  \at{{Flow shear suppression of pedestal ion
+  temperature gradient turbulence-A first principles theoretical framework}}.
+  \jt{Plasma Phys.\ Control.\ Fusion}  \bvol{60},  \pg{084003}.
+
+\bibitem[Helander \& Plunk(2022)]{helander22}
+{\sc \au{Helander, P.} \& \au{Plunk, G.~G.}} \yr{2022}  \at{{Energetic bounds
+  on gyrokinetic instabilities. Part 1. Fundamentals}}.  \jt{J.\ Plasma Phys.}
+  \bvol{88},  \pg{905880207}.
+
+\bibitem[Highcock {\em et~al.\/}(2011)Highcock, Barnes, Parra, Schekochihin,
+  Roach \& Cowley]{highcock11}
+{\sc \au{Highcock, E.~G.}, \au{Barnes, M.}, \au{Parra, F.~I.},
+  \au{Schekochihin, A.~A.}, \au{Roach, C.~M.} \& \au{Cowley, S.~C.}} \yr{2011}
+  \at{{Transport bifurcation induced by sheared toroidal flow in tokamak
+  plasma}}.  \jt{Phys.\ Plasmas}  \bvol{18},  \pg{102304}.
+
+\bibitem[Highcock {\em et~al.\/}(2010)Highcock, Barnes, Schekochihin, Parra,
+  Roach \& Cowley]{highcock10}
+{\sc \au{Highcock, E.~G.}, \au{Barnes, M.}, \au{Schekochihin, A.~A.},
+  \au{Parra, F.~I.}, \au{Roach, C.~M.} \& \au{Cowley, S.~C.}} \yr{2010}
+  \at{Transport bifurcation in a rotating tokamak plasma}.  \jt{Phys. Rev.
+  Lett.}  \bvol{105},  \pg{215003}.
+
+\bibitem[Highcock {\em et~al.\/}(2012)Highcock, Schekochihin, Cowley, Barnes,
+  Parra, Roach \& Dorland]{highcock12}
+{\sc \au{Highcock, E.~G.}, \au{Schekochihin, A.~A.}, \au{Cowley, S.~C.},
+  \au{Barnes, M.}, \au{Parra, F.~I.}, \au{Roach, C.~M.} \& \au{Dorland, W.}}
+  \yr{2012}  \at{Zero-turbulence manifold in a toroidal plasma}.  \jt{Phys.
+  Rev. Lett.}  \bvol{109},  \pg{265001}.
+
+\bibitem[Hobbs {\em et~al.\/}(2001)Hobbs, House, Leboeuf, Dawson, Decyk,
+  Kissick \& Sydora]{hobbs01}
+{\sc \au{Hobbs, C.~G.}, \au{House, M.~G.}, \au{Leboeuf, J.~N.}, \au{Dawson,
+  J.~M.}, \au{Decyk, V.~K.}, \au{Kissick, M.~W.} \& \au{Sydora, R.~D.}}
+  \yr{2001}  \at{{Effect of sheared toroidal rotation on ion temperature
+  gradient turbulence and resistive kink stability in a large aspect ratio
+  tokamak}}.  \jt{Phys.\ Plasmas}  \bvol{8},  \pg{4849--4855}.
+
+\bibitem[Hoffmann {\em et~al.\/}(2023)Hoffmann, Frei \& Ricci]{hoffmann23}
+{\sc \au{Hoffmann, A. C.~D.}, \au{Frei, B.~J.} \& \au{Ricci, P.}} \yr{2023}
+  \at{Gyrokinetic moment-based simulations of the dimits shift}.  \jt{J.\
+  Plasma Phys.}  \bvol{89},  \pg{905890611}.
+
+\bibitem[Holland \& Diamond(2004)]{holland04}
+{\sc \au{Holland, C.} \& \au{Diamond, P.~H.}} \yr{2004}  \at{{A simple model of
+  interactions between electron temperature gradient and drift-wave
+  turbulence}}.  \jt{Phys.\ Plasmas}  \bvol{11},  \pg{1043--1051}.
+
+\bibitem[{Howard} {\em et~al.\/}(2016{\natexlab{{\em a\/}}}){Howard},
+  {Holland}, {White}, {Greenwald} \& {Candy}]{howard16a}
+{\sc \au{{Howard}, N.~T.}, \au{{Holland}, C.}, \au{{White}, A.~E.},
+  \au{{Greenwald}, M.} \& \au{{Candy}, J.}} \yr{2016{\natexlab{{\em a\/}}}}
+  \at{{Multi-scale gyrokinetic simulation of tokamak plasmas: enhanced heat
+  loss due to cross-scale coupling of plasma turbulence}}.  \jt{Nucl.\ Fusion}
+  \bvol{56},  \pg{014004}.
+
+\bibitem[{Howard} {\em et~al.\/}(2016{\natexlab{{\em b\/}}}){Howard},
+  {Holland}, {White}, {Greenwald}, {Candy} \& {Creely}]{howard16b}
+{\sc \au{{Howard}, N.~T.}, \au{{Holland}, C.}, \au{{White}, A.~E.},
+  \au{{Greenwald}, M.}, \au{{Candy}, J.} \& \au{{Creely}, A.~J.}}
+  \yr{2016{\natexlab{{\em b\/}}}}  \at{{Multi-scale gyrokinetic simulations:
+  Comparison with experiment and implications for predicting turbulence and
+  transport}}.  \jt{Phys.\ Plasmas}  \bvol{23},  \pg{056109}.
+
+\bibitem[Ivanov {\em et~al.\/}(2022)Ivanov, Schekochihin \& Dorland]{ivanov22}
+{\sc \au{Ivanov, P.~G.}, \au{Schekochihin, A.~A.} \& \au{Dorland, W.}}
+  \yr{2022}  \at{Dimits transition in three-dimensional
+  ion-temperature-gradient turbulence}.  \jt{J.\ Plasma Phys.}  \bvol{88},
+  \pg{905880506}.
+
+\bibitem[{Ivanov} {\em et~al.\/}(2020){Ivanov}, {Schekochihin}, {Dorland},
+  {Field} \& {Parra}]{ivanov20}
+{\sc \au{{Ivanov}, P.~G.}, \au{{Schekochihin}, A.~A.}, \au{{Dorland}, W.},
+  \au{{Field}, A.~R.} \& \au{{Parra}, F.~I.}} \yr{2020}  \at{{Zonally dominated
+  dynamics and Dimits threshold in curvature-driven ITG turbulence}}.  \jt{J.\
+  Plasma Phys.}  \bvol{86},  \pg{855860502}.
+
+\bibitem[{Jenko}(2000)]{jenko00GENE}
+{\sc \au{{Jenko}, F.}} \yr{2000}  \at{{Massively parallel Vlasov simulation of
+  electromagnetic drift-wave turbulence}}.  \jt{Comp. Phys. Comms.}
+  \bvol{125},  \pg{196}.
+
+\bibitem[Jenko(2006)]{jenko06}
+{\sc \au{Jenko, F.}} \yr{2006}  \at{Streamer saturation: a dynamical systems
+  approach}.  \jt{Phys.\ Lett.\ A}  \bvol{351},  \pg{417--423}.
+
+\bibitem[{Jenko} {\em et~al.\/}(2000){Jenko}, {Dorland}, {Kotschenreuther} \&
+  {Rogers}]{jenko00}
+{\sc \au{{Jenko}, F.}, \au{{Dorland}, W.}, \au{{Kotschenreuther}, M.} \&
+  \au{{Rogers}, B.~N.}} \yr{2000}  \at{{Electron temperature gradient driven
+  turbulence}}.  \jt{Phys.\ Plasmas}  \bvol{7},  \pg{1904}.
+
+\bibitem[Kobayashi \& Rogers(2012)]{kobayashi2012}
+{\sc \au{Kobayashi, S.} \& \au{Rogers, B.~N.}} \yr{2012}  \at{The quench rule,
+  {Dimits} shift, and eigenmode localization by small-scale zonal flows}.
+  \jt{Phys. Plasmas}  \bvol{19},  \pg{012315}.
+
+\bibitem[{Kolmogorov}(1941)]{K41}
+{\sc \au{{Kolmogorov}, A.~N.}} \yr{1941}  \at{{Local structure of turbulence in
+  incompressible viscous fluid at very large Reynolds numbers}}.  \jt{Dokl.\
+  Acad.\ Nauk SSSR}  \bvol{30},  \pg{299}.
+
+\bibitem[Li {\em et~al.\/}(2021)Li, Terry, Whelan \& Pueschel]{li21}
+{\sc \au{Li, P.-Y.}, \au{Terry, P.~W.}, \au{Whelan, G.~G.} \& \au{Pueschel,
+  M.~J.}} \yr{2021}  \at{{Saturation physics of threshold heat-flux
+  reduction}}.  \jt{Phys.\ Plasmas}  \bvol{28},  \pg{102507}.
+
+\bibitem[Lin {\em et~al.\/}(1999)Lin, Hahm, Lee, Tang \& Diamond]{lin99}
+{\sc \au{Lin, Z.}, \au{Hahm, T.~S.}, \au{Lee, W.~W.}, \au{Tang, W.~M.} \&
+  \au{Diamond, P.~H.}} \yr{1999}  \at{Effects of collisional zonal flow damping
+  on turbulent transport}.  \jt{Phys. Rev. Lett.}  \bvol{83},  \pg{3645--3648}.
+
+\bibitem[Lippert {\em et~al.\/}(2023)Lippert, Rath \& Peeters]{lippert23}
+{\sc \au{Lippert, M.}, \au{Rath, F.} \& \au{Peeters, A.~G.}} \yr{2023}
+  \at{{Size convergence of the $\text{E} \times \text{B}$ staircase pattern in
+  flux tube simulations of ion temperature gradient-driven turbulence}}.
+  \jt{Phys.\ Plasmas}  \bvol{30},  \pg{074501}.
+
+\bibitem[Lithwick(2007)]{lithwick07_shear}
+{\sc \au{Lithwick, Y.}} \yr{2007}  \at{Nonlinear evolution of hydrodynamical
+  shear flows in two dimensions}.  \jt{Astrophys.~J.}  \bvol{670},  \pg{789}.
+
+\bibitem[{Maeyama} {\em et~al.\/}(2015){Maeyama}, {Idomura}, {Watanabe},
+  {Nakata}, {Yagi}, {Miyato}, {Ishizawa} \& {Nunami}]{maeyama15}
+{\sc \au{{Maeyama}, S.}, \au{{Idomura}, Y.}, \au{{Watanabe}, T.~H.},
+  \au{{Nakata}, M.}, \au{{Yagi}, M.}, \au{{Miyato}, N.}, \au{{Ishizawa}, A.} \&
+  \au{{Nunami}, M.}} \yr{2015}  \at{{Cross-scale interactions between electron
+  and ion scale turbulence in a tokamak plasma}}.  \jt{Phys.\ Rev.\ Lett.}
+  \bvol{114},  \pg{255002}.
+
+\bibitem[{Mallet} \& {Schekochihin}(2017)]{mallet17a}
+{\sc \au{{Mallet}, A.} \& \au{{Schekochihin}, A.~A.}} \yr{2017}  \at{{A
+  statistical model of three-dimensional anisotropy and intermittency in strong
+  Alfv{\'e}nic turbulence}}.  \jt{Mon.\ Not.\ R.\ Astron.\ Soc.}  \bvol{466},
+  \pg{3918}.
+
+\bibitem[{Mallet} {\em et~al.\/}(2016){Mallet}, {Schekochihin}, {Chandran},
+  {Chen}, {Horbury}, {Wicks} \& {Greenan}]{mallet16}
+{\sc \au{{Mallet}, A.}, \au{{Schekochihin}, A.~A.}, \au{{Chandran}, B.~D.~G.},
+  \au{{Chen}, C.~H.~K.}, \au{{Horbury}, T.~S.}, \au{{Wicks}, R.~T.} \&
+  \au{{Greenan}, C.~C.}} \yr{2016}  \at{{Measures of three-dimensional
+  anisotropy and intermittency in strong Alfv{\'e}nic turbulence}}.  \jt{Mon.\
+  Not.\ R.\ Astron.\ Soc.}  \bvol{459},  \pg{2130}.
+
+\bibitem[Mantica {\em et~al.\/}(2009)Mantica, Strintzi, Tala, Giroud, Johnson,
+  Leggate, Lerche, Loarer, Peeters, Salmi, Sharapov, Van~Eester, de~Vries,
+  Zabeo \& Zastrow]{mantica09}
+{\sc \au{Mantica, P.}, \au{Strintzi, D.}, \au{Tala, T.}, \au{Giroud, C.},
+  \au{Johnson, T.}, \au{Leggate, H.}, \au{Lerche, E.}, \au{Loarer, T.},
+  \au{Peeters, A.~G.}, \au{Salmi, A.}, \au{Sharapov, S.}, \au{Van~Eester, D.},
+  \au{de~Vries, P.~C.}, \au{Zabeo, L.} \& \au{Zastrow, K.-D.}} \yr{2009}
+  \at{Experimental study of the ion critical-gradient length and stiffness
+  level and the impact of rotation in the jet tokamak}.  \jt{Phys. Rev. Lett.}
+  \bvol{102},  \pg{175002}.
+
+\bibitem[McKee {\em et~al.\/}(2009)McKee, Gohil, Schlossberg, Boedo, Burrell,
+  deGrassie, Groebner, Moyer, Petty, Rhodes, Schmitz, Shafer, Solomon, Umansky,
+  Wang, White \& Xu]{mckee09}
+{\sc \au{McKee, G.~R.}, \au{Gohil, P.}, \au{Schlossberg, D.~J.}, \au{Boedo,
+  J.~A.}, \au{Burrell, K.~H.}, \au{deGrassie, J.~S.}, \au{Groebner, R.~J.},
+  \au{Moyer, R.~A.}, \au{Petty, C.~C.}, \au{Rhodes, T.~L.}, \au{Schmitz, L.},
+  \au{Shafer, M.~W.}, \au{Solomon, W.~M.}, \au{Umansky, M.}, \au{Wang, G.},
+  \au{White, A.~E.} \& \au{Xu, X.}} \yr{2009}  \at{Dependence of the {L-} to
+  {H-mode} power threshold on toroidal rotation and the link to edge turbulence
+  dynamics}.  \jt{Nucl.\ Fusion}  \bvol{49},  \pg{115016}.
+
+\bibitem[McMillan {\em et~al.\/}(2019)McMillan, Ball \& Brunner]{mcmillan19}
+{\sc \au{McMillan, B.~F.}, \au{Ball, J.} \& \au{Brunner, S.}} \yr{2019}
+  \at{Simulating background shear flow in local gyrokinetic simulations}.
+  \jt{Plasma Phys.\ Control.\ Fusion}  \bvol{61},  \pg{055006}.
+
+\bibitem[{McMillan} {\em et~al.\/}(2009){McMillan}, {Jolliet}, {Tran},
+  {Villard}, {Bottino} \& {Angelino}]{mcmillan09}
+{\sc \au{{McMillan}, B.~F.}, \au{{Jolliet}, S.}, \au{{Tran}, T.~M.},
+  \au{{Villard}, L.}, \au{{Bottino}, A.} \& \au{{Angelino}, P.}} \yr{2009}
+  \at{{Avalanchelike bursts in global gyrokinetic simulations}}.  \jt{Phys.\
+  Plasmas}  \bvol{16},  \pg{022310}.
+
+\bibitem[McMillan {\em et~al.\/}(2018)McMillan, Pringle \& Teaca]{mcmillan18}
+{\sc \au{McMillan, B.~F.}, \au{Pringle, Chris C.~T.} \& \au{Teaca, Bogdan}}
+  \yr{2018}  \at{Simple advecting structures and the edge of chaos in
+  subcritical tokamak plasmas}.  \jt{J. Plasma Phys.}  \bvol{84}.
+
+\bibitem[{Nazarenko} \& {Schekochihin}(2011)]{nazarenko11}
+{\sc \au{{Nazarenko}, S.~V.} \& \au{{Schekochihin}, A.~A.}} \yr{2011}
+  \at{{Critical balance in magnetohydrodynamic, rotating and stratified
+  turbulence: towards a universal scaling conjecture}}.  \jt{J.\ Fluid Mech.}
+  \bvol{677},  \pg{134}.
+
+\bibitem[{Newton} {\em et~al.\/}(2010){Newton}, {Cowley} \&
+  {Loureiro}]{newton10}
+{\sc \au{{Newton}, S.~L.}, \au{{Cowley}, S.~C.} \& \au{{Loureiro}, N.~F.}}
+  \yr{2010}  \at{{Understanding the effect of sheared flow on
+  microinstabilities}}.  \jt{Plasma Phys.\ Control.\ Fusion}  \bvol{52},
+  \pg{125001}.
+
+\bibitem[Nies {\em et~al.\/}(2024)Nies, Parra, Barnes, Mandell \&
+  Dorland]{nies24}
+{\sc \au{Nies, R.}, \au{Parra, F.~I.}, \au{Barnes, M.}, \au{Mandell, N.} \&
+  \au{Dorland, W.}} \yr{2024} Saturation of magnetised plasma turbulence by
+  propagating zonal flows,  \arxiv{arXiv: 2409.02283}.
+
+\bibitem[Orszag(1971)]{orszag71}
+{\sc \au{Orszag, S.~A.}} \yr{1971}  \at{On the elimination of aliasing in
+  finite-difference schemes by filtering high-wavenumber components}.  \jt{J.
+  Atmos. Sci.}  \bvol{28},  \pg{1074--1074}.
+
+\bibitem[Parisi {\em et~al.\/}(2020)Parisi, Parra, Roach, Giroud, Dorland,
+  Hatch, Barnes, Hillesheim, Aiba, Ball, Ivanov \& contributors]{parisi20}
+{\sc \au{Parisi, J.~F.}, \au{Parra, F.~I.}, \au{Roach, C.~M.}, \au{Giroud, C.},
+  \au{Dorland, W.}, \au{Hatch, D.~R.}, \au{Barnes, M.}, \au{Hillesheim, J.~C.},
+  \au{Aiba, N.}, \au{Ball, J.}, \au{Ivanov, P.~G.} \& \au{contributors, JET}}
+  \yr{2020}  \at{Toroidal and slab {ETG} instability dominance in the linear
+  spectrum of {JET}-{ILW} pedestals}.  \jt{Nucl.\ Fusion}  \bvol{60},
+  \pg{126045}.
+
+\bibitem[{Parisi} {\em et~al.\/}(2022){Parisi}, {Parra}, {Roach}, {Hardman},
+  {Schekochihin}, {Abel}, {Aiba}, {Ball}, {Barnes}, {Chapman-Oplopoiou},
+  {Dickinson}, {Dorland}, {Giroud}, {Hatch}, {Hillesheim}, {Ruiz Ruiz},
+  {Saarelma}, {St-Onge} \& Contributors]{parisi22}
+{\sc \au{{Parisi}, J.~F.}, \au{{Parra}, F.~I.}, \au{{Roach}, C.~M.},
+  \au{{Hardman}, M.~R.}, \au{{Schekochihin}, A.~A.}, \au{{Abel}, I.~G.},
+  \au{{Aiba}, N.}, \au{{Ball}, J.}, \au{{Barnes}, M.}, \au{{Chapman-Oplopoiou},
+  B.}, \au{{Dickinson}, D.}, \au{{Dorland}, W.}, \au{{Giroud}, C.},
+  \au{{Hatch}, D.~R.}, \au{{Hillesheim}, J.~C.}, \au{{Ruiz Ruiz}, J.},
+  \au{{Saarelma}, S.}, \au{{St-Onge}, D.} \& \au{Contributors, JET}} \yr{2022}
+  \at{Three-dimensional inhomogeneity of electron-temperature-gradient
+  turbulence in the edge of tokamak plasmas}.  \jt{Nucl.\ Fusion}  \bvol{62},
+  \pg{086045}.
+
+\bibitem[Parra {\em et~al.\/}(2011)Parra, Barnes, Highcock, Schekochihin \&
+  Cowley]{parra11_shear}
+{\sc \au{Parra, F.~I.}, \au{Barnes, M.}, \au{Highcock, E.~G.},
+  \au{Schekochihin, A.~A.} \& \au{Cowley, S.~C.}} \yr{2011}  \at{Momentum
+  injection in tokamak plasmas and transitions to reduced transport}.
+  \jt{Phys.\ Rev.\ Lett.}  \bvol{106},  \pg{115004}.
+
+\bibitem[{Parra} {\em et~al.\/}(2011){Parra}, {Barnes} \& {Peeters}]{parra11}
+{\sc \au{{Parra}, F.~I.}, \au{{Barnes}, M.} \& \au{{Peeters}, A.~G.}} \yr{2011}
+   \at{{Up-down symmetry of the turbulent transport of toroidal angular
+  momentum in tokamaks}}.  \jt{Phys.\ Plasmas}  \bvol{18},  \pg{062501}.
+
+\bibitem[Peeters {\em et~al.\/}(2009)Peeters, Camenen, Casson, Hornsby, Snodin,
+  Strintzi \& Szepesi]{peeters_gkw09}
+{\sc \au{Peeters, A.~G.}, \au{Camenen, Y.}, \au{Casson, F.~J.}, \au{Hornsby,
+  W.~A.}, \au{Snodin, A.~P.}, \au{Strintzi, D.} \& \au{Szepesi, G.}} \yr{2009}
+  \at{The nonlinear gyro-kinetic flux tube code {GKW}}.  \jt{Comput. Phys.
+  Commun.}  \bvol{180},  \pg{2650--2672}.
+
+\bibitem[Peeters {\em et~al.\/}(2016)Peeters, Rath, Buchholz, Camenen, Candy,
+  Casson, Grosshauser, Hornsby, Strintzi \& Weikl]{peeters16}
+{\sc \au{Peeters, A.~G.}, \au{Rath, F.}, \au{Buchholz, R.}, \au{Camenen, Y.},
+  \au{Candy, J.}, \au{Casson, F.~J.}, \au{Grosshauser, S.~R.}, \au{Hornsby,
+  W.~A.}, \au{Strintzi, D.} \& \au{Weikl, A.}} \yr{2016}  \at{{Gradient-driven
+  flux-tube simulations of ion temperature gradient turbulence close to the
+  non-linear threshold}}.  \jt{Phys.\ Plasmas}  \bvol{23},  \pg{082517}.
+
+\bibitem[Pringle {\em et~al.\/}(2017)Pringle, Mcmillan \& Teaca]{pringle17}
+{\sc \au{Pringle, C. C.~T.}, \au{Mcmillan, B.~F.} \& \au{Teaca, B.}} \yr{2017}
+  \at{A nonlinear approach to transition in subcritical plasmas with sheared
+  flow}.  \jt{Phys. Plasmas}  \bvol{24}.
+
+\bibitem[{Roach} {\em et~al.\/}(2009){Roach}, {Abel}, {Akers}, {Arter},
+  {Barnes}, {Camenen}, {Casson}, {Colyer}, {Connor}, {Cowley}, {Dickinson},
+  {Dorland}, {Field}, {Guttenfelder}, {Hammett}, {Hastie}, {Highcock},
+  {Loureiro}, {Peeters}, {Reshko}, {Saarelma}, {Schekochihin}, {Valovic} \&
+  {Wilson}]{roach09}
+{\sc \au{{Roach}, C.~M.}, \au{{Abel}, I.~G.}, \au{{Akers}, R.~J.}, \au{{Arter},
+  W.}, \au{{Barnes}, M.}, \au{{Camenen}, Y.}, \au{{Casson}, F.~J.},
+  \au{{Colyer}, G.}, \au{{Connor}, J.~W.}, \au{{Cowley}, S.~C.},
+  \au{{Dickinson}, D.}, \au{{Dorland}, W.}, \au{{Field}, A.~R.},
+  \au{{Guttenfelder}, W.}, \au{{Hammett}, G.~W.}, \au{{Hastie}, R.~J.},
+  \au{{Highcock}, E.}, \au{{Loureiro}, N.~F.}, \au{{Peeters}, A.~G.},
+  \au{{Reshko}, M.}, \au{{Saarelma}, S.}, \au{{Schekochihin}, A.~A.},
+  \au{{Valovic}, M.} \& \au{{Wilson}, H.~R.}} \yr{2009}  \at{{Gyrokinetic
+  simulations of spherical tokamaks}}.  \jt{Plasma Phys.\ Control.\ Fusion}
+  \bvol{51},  \pg{124020}.
+
+\bibitem[{Rogers} {\em et~al.\/}(2000){Rogers}, {Dorland} \&
+  {Kotschenreuther}]{rogers00}
+{\sc \au{{Rogers}, B.~N.}, \au{{Dorland}, W.} \& \au{{Kotschenreuther}, M.}}
+  \yr{2000}  \at{{Generation and stability of zonal flows in
+  ion-temperature-gradient mode turbulence}}.  \jt{Phys.\ Rev.\ Lett.}
+  \bvol{85},  \pg{5336}.
+
+\bibitem[Sarazin {\em et~al.\/}(2021)Sarazin, Dif-Pradalier, Garbet, Ghendrih,
+  Berger, Gillot, Grandgirard, Obrejan, Varennes, Vermare \&
+  Cartier-Michaud]{sarazin21}
+{\sc \au{Sarazin, Y.}, \au{Dif-Pradalier, G.}, \au{Garbet, X.}, \au{Ghendrih,
+  P.}, \au{Berger, A.}, \au{Gillot, C.}, \au{Grandgirard, V.}, \au{Obrejan,
+  K.}, \au{Varennes, R.}, \au{Vermare, L.} \& \au{Cartier-Michaud, T.}}
+  \yr{2021}  \at{Key impact of phase dynamics and diamagnetic drive on reynolds
+  stress in magnetic fusion plasmas}.  \jt{Plasma Phys.\ Control.\ Fusion}
+  \bvol{63},  \pg{064007}.
+
+\bibitem[Schekochihin(2022)]{schekochihin22_mhd}
+{\sc \au{Schekochihin, A.~A.}} \yr{2022}  \at{{MHD} turbulence: a biased
+  review}.  \jt{J.\ Plasma Phys.}  \bvol{88},  \pg{155880501}.
+
+\bibitem[{Schekochihin} {\em et~al.\/}(2009){Schekochihin}, {Cowley},
+  {Dorland}, {Hammett}, {Howes}, {Quataert} \& {Tatsuno}]{sch09}
+{\sc \au{{Schekochihin}, A.~A.}, \au{{Cowley}, S.~C.}, \au{{Dorland}, W.},
+  \au{{Hammett}, G.~W.}, \au{{Howes}, G.~G.}, \au{{Quataert}, E.} \&
+  \au{{Tatsuno}, T.}} \yr{2009}  \at{{Astrophysical gyrokinetics: kinetic and
+  fluid turbulent cascades in magnetized weakly collisional plasmas}}.
+  \jt{Astrophys.\ J.\ Suppl.}  \bvol{182},  \pg{310}.
+
+\bibitem[{Schekochihin} {\em et~al.\/}(2012){Schekochihin}, {Highcock} \&
+  {Cowley}]{sch12}
+{\sc \au{{Schekochihin}, A.~A.}, \au{{Highcock}, E.~G.} \& \au{{Cowley},
+  S.~C.}} \yr{2012}  \at{{Subcritical fluctuations and suppression of
+  turbulence in differentially rotating gyrokinetic plasmas}}.  \jt{Plasma
+  Phys.\ Control.\ Fusion}  \bvol{54},  \pg{055011}.
+
+\bibitem[Seiferling {\em et~al.\/}(2019)Seiferling, Peeters, Grosshauser, Rath
+  \& Weikl]{seiferling19}
+{\sc \au{Seiferling, F.}, \au{Peeters, A.~G.}, \au{Grosshauser, S.~R.},
+  \au{Rath, F.} \& \au{Weikl, A.}} \yr{2019}  \at{{The interplay of an external
+  torque and E×B structure formation in tokamak plasmas}}.  \jt{Phys.\
+  Plasmas}  \bvol{26},  \pg{102306}.
+
+\bibitem[Shaing {\em et~al.\/}(1990)Shaing, Crume \& Houlberg]{shaing90}
+{\sc \au{Shaing, K.~C.}, \au{Crume, E.~C., Jr.} \& \au{Houlberg, W.~A.}}
+  \yr{1990}  \at{{Bifurcation of poloidal rotation and suppression of turbulent
+  fluctuations: A model for the L–H transition in tokamaks}}.  \jt{Phys.\
+  Fluids B}  \bvol{2},  \pg{1492}.
+
+\bibitem[Smolyakov {\em et~al.\/}(2000)Smolyakov, Diamond \&
+  Medvedev]{smolyakov00}
+{\sc \au{Smolyakov, A.~I.}, \au{Diamond, P.~H.} \& \au{Medvedev, M.~V.}}
+  \yr{2000}  \at{{Role of ion diamagnetic effects in the generation of large
+  scale flows in toroidal ion temperature gradient mode turbulence}}.
+  \jt{Phys.\ Plasmas}  \bvol{7},  \pg{3987--3992}.
+
+\bibitem[St-Onge {\em et~al.\/}(2022)St-Onge, Barnes \& Parra]{stonge22}
+{\sc \au{St-Onge, D.~A.}, \au{Barnes, M.} \& \au{Parra, F.~I.}} \yr{2022}
+  \at{A novel approach to radially global gyrokinetic simulation using the
+  flux-tube code stella}.  \jt{J. Comput. Phys.}  \bvol{468},  \pg{111498}.
+
+\bibitem[{Sugama} {\em et~al.\/}(2011){Sugama}, {Watanabe}, {Nunami} \&
+  {Nishimura}]{sugama11}
+{\sc \au{{Sugama}, H.}, \au{{Watanabe}, T.~H.}, \au{{Nunami}, M.} \&
+  \au{{Nishimura}, S.}} \yr{2011}  \at{{Momentum balance and radial electric
+  fields in axisymmetric and nonaxisymmetric toroidal plasmas}}.  \jt{Plasma
+  Phys.\ Control.\ Fusion}  \bvol{53},  \pg{024004}.
+
+\bibitem[Synakowski {\em et~al.\/}(1997)Synakowski, Batha, Beer, Bell, Bell,
+  Budny, Bush, Efthimion, Hammett, Hahm, LeBlanc, Levinton, Mazzucato, Park,
+  Ramsey, Rewoldt, Scott, Schmidt, Tang, Taylor \& Zarnstorff]{synakowski97}
+{\sc \au{Synakowski, E.~J.}, \au{Batha, S.~H.}, \au{Beer, M.~A.}, \au{Bell,
+  M.~G.}, \au{Bell, R.~E.}, \au{Budny, R.~V.}, \au{Bush, C.~E.}, \au{Efthimion,
+  P.~C.}, \au{Hammett, G.~W.}, \au{Hahm, T.~S.}, \au{LeBlanc, B.},
+  \au{Levinton, F.}, \au{Mazzucato, E.}, \au{Park, H.}, \au{Ramsey, A.~T.},
+  \au{Rewoldt, G.}, \au{Scott, S.~D.}, \au{Schmidt, G.}, \au{Tang, W.~M.},
+  \au{Taylor, G.} \& \au{Zarnstorff, M.~C.}} \yr{1997}  \at{Roles of electric
+  field shear and {Shafranov} shift in sustaining high confinement in enhanced
+  reversed shear plasmas on the {TFTR} tokamak}.  \jt{Phys. Rev. Lett.}
+  \bvol{78},  \pg{2972--2975}.
+
+\bibitem[Tirkas {\em et~al.\/}(2023)Tirkas, Chen, Merlo, Jenko \&
+  Parker]{tirkas23}
+{\sc \au{Tirkas, S.}, \au{Chen, H.}, \au{Merlo, G.}, \au{Jenko, F.} \&
+  \au{Parker, S.}} \yr{2023}  \at{Zonal flow excitation in electron-scale
+  tokamak turbulence}.  \jt{Nucl.\ Fusion}  \bvol{63},  \pg{026015}.
+
+\bibitem[Told(2012)]{told_thesis12}
+{\sc \au{Told, D.}} \yr{2012}  \at{Gyrokinetic microturbulence in transport
+  barriers}. PhD thesis, Universit\"at Ulm.
+
+\bibitem[Volčokas {\em et~al.\/}(2022)Volčokas, Ball \& Brunner]{volcokas22}
+{\sc \au{Volčokas, A.}, \au{Ball, J.} \& \au{Brunner, S.}} \yr{2022}
+  \at{Ultra long turbulent eddies, magnetic topology, and the triggering of
+  internal transport barriers in tokamaks}.  \jt{Nucl.\ Fusion}  \bvol{63},
+  \pg{014003}.
+
+\bibitem[{Waelbroeck} \& {Chen}(1991)]{waelbroeck91}
+{\sc \au{{Waelbroeck}, F.~L.} \& \au{{Chen}, L.}} \yr{1991}  \at{{Ballooning
+  instabilities in tokamaks with sheared toroidal flows}}.  \jt{Physics of
+  Fluids B}  \bvol{3},  \pg{601--610}.
+
+\bibitem[Waltz {\em et~al.\/}(2007)Waltz, Candy \& Fahey]{waltz07}
+{\sc \au{Waltz, R.~E.}, \au{Candy, J.} \& \au{Fahey, M.}} \yr{2007}
+  \at{{Coupled ion temperature gradient and trapped electron mode to electron
+  temperature gradient mode gyrokinetic simulations}}.  \jt{Phys.\ Plasmas}
+  \bvol{14},  \pg{056116}.
+
+\bibitem[Waltz {\em et~al.\/}(1998)Waltz, Dewar \& Garbet]{waltz98}
+{\sc \au{Waltz, R.~E.}, \au{Dewar, R.~L.} \& \au{Garbet, X.}} \yr{1998}
+  \at{{Theory and simulation of rotational shear stabilization of turbulence}}.
+   \jt{Phys.\ Plasmas}  \bvol{5},  \pg{1784}.
+
+\bibitem[Waltz {\em et~al.\/}(1994)Waltz, Kerbel \& Milovich]{waltz94}
+{\sc \au{Waltz, R.~E.}, \au{Kerbel, G.~D.} \& \au{Milovich, J.}} \yr{1994}
+  \at{Toroidal {gyro‐Landau} fluid model turbulence simulations in a
+  nonlinear ballooning mode representation with radial modes}.  \jt{Phys.
+  Plasmas}  \bvol{1},  \pg{2229}.
+
+\bibitem[van Wyk {\em et~al.\/}(2017)van Wyk, Highcock, Field, Roach,
+  Schekochihin, Parra \& Dorland]{vanwyk2017}
+{\sc \au{van Wyk, F.}, \au{Highcock, E.~G.}, \au{Field, A.~R.}, \au{Roach,
+  C.~M.}, \au{Schekochihin, A.~A.}, \au{Parra, F.~I.} \& \au{Dorland, W.}}
+  \yr{2017}  \at{{Ion-scale turbulence in MAST: anomalous transport,
+  subcritical transitions, and comparison to BES measurements}}.  \jt{{Plasma
+  Phys. Control. Fusion}}  \bvol{59},  \pg{114003}.
+
+\bibitem[van Wyk {\em et~al.\/}(2016)van Wyk, Highcock, Schekochihin, Roach,
+  Field \& Dorland]{vanwyk2016}
+{\sc \au{van Wyk, F.}, \au{Highcock, E.~G.}, \au{Schekochihin, A.~A.},
+  \au{Roach, C.~M.}, \au{Field, A.~R.} \& \au{Dorland, W.}} \yr{2016}
+  \at{Transition to subcritical turbulence in a tokamak plasma}.
+  \jt{{J.~Plasma Phys.}}  \bvol{82},  \pg{905820609}.
+
+\bibitem[Zhang \& Mahajan(1992)]{zhang92}
+{\sc \au{Zhang, Y.~Z.} \& \au{Mahajan, S.~M.}} \yr{1992}  \at{{Edge turbulence
+  scaling with shear flow}}.  \jt{Phys.\ Fluids B}  \bvol{4},  \pg{1385--1387}.
+
+\bibitem[Zhang \& Mahajan(1993)]{zhang93}
+{\sc \au{Zhang, Y.~Z.} \& \au{Mahajan, S.~M.}} \yr{1993}  \at{{Correlation
+  theory of a two‐dimensional plasma turbulence with shear flow}}.
+  \jt{Phys.\ Fluids B}  \bvol{5},  \pg{2000--2020}.
+
+\bibitem[{Zhou} {\em et~al.\/}(2020){Zhou}, {Loureiro} \& {Uzdensky}]{zhou20}
+{\sc \au{{Zhou}, M.}, \au{{Loureiro}, N.~F.} \& \au{{Uzdensky}, D.~A.}}
+  \yr{2020}  \at{{Multi-scale dynamics of magnetic flux tubes and inverse
+  magnetic energy transfer}}.  \jt{J.\ Plasma Phys.}  \bvol{86},
+  \pg{535860401}.
+
+\bibitem[Zhou {\em et~al.\/}(2019)Zhou, Zhu \& Dodin]{zhou19_zf}
+{\sc \au{Zhou, Y.}, \au{Zhu, H.} \& \au{Dodin, I.~Y.}} \yr{2019}  \at{Formation
+  of solitary zonal structures via the modulational instability of drift
+  waves}.  \jt{Plasma Phys. Control. Fusion}  \bvol{61},  \pg{075003}.
+
+\bibitem[Zhu {\em et~al.\/}(2020{\natexlab{{\em a\/}}})Zhu, Zhou \&
+  Dodin]{zhu20_prl}
+{\sc \au{Zhu, H.}, \au{Zhou, Y.} \& \au{Dodin, I.~Y.}} \yr{2020{\natexlab{{\em
+  a\/}}}}  \at{Theory of the tertiary instability and the {Dimits} shift from
+  reduced drift-wave models}.  \jt{Phys.\ Rev.\ Lett.}  \bvol{124},
+  \pg{055002}.
+
+\bibitem[Zhu {\em et~al.\/}(2020{\natexlab{{\em b\/}}})Zhu, Zhou \&
+  Dodin]{zhu20_jpp}
+{\sc \au{Zhu, H.}, \au{Zhou, Y.} \& \au{Dodin, I.~Y.}} \yr{2020{\natexlab{{\em
+  b\/}}}}  \at{Theory of the tertiary instability and the {Dimits} shift within
+  a scalar model}.  \jt{J.\ Plasma Phys.}  \bvol{86},  \pg{905860405}.
+
+\end{thebibliography}

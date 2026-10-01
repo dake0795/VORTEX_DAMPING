@@ -1,0 +1,131 @@
+% Generic
+\newcommand{\order}[1]{O\left(#1\right)}
+\newcommand{\orderinline}[1]{O(#1)}
+\newcommand{\rmd}{\text{d}}
+
+\ifdefined\closesymbol
+	\relax
+\else
+	\def\closesymbol{\relax}
+\fi
+
+% Partial derivatives
+\newcommand{\pt}{\partial_t}
+\newcommand{\px}{\partial_x}
+\newcommand{\py}{\partial_y}
+\newcommand{\pz}{\partial_z}
+
+\ifdefined\partd
+	\renewcommand{\partd}[3][]{\frac{{\partial^{#1} #2}}{{\partial #3}^{#1}}}
+\else
+	\newcommand{\partd}[3][]{\frac{{\partial^{#1} #2}}{{\partial #3}^{#1}}}
+\fi
+
+% Vectors and tensorsS
+\ifdefined\vec  % Make sure we got bold vectors
+	\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\else
+	\newcommand{\vec}[1]{\boldsymbol{#1}}
+\fi
+
+\newcommand{\uvec}[1]{\hat{\boldsymbol{#1}}}
+\providecommand{\bcdot}{\vec{\cdot}}
+
+% Vector derivatives
+\newcommand{\grad}{{\vec{\nabla}}}
+\ifdefined\div
+	\renewcommand{\div}{{\vec{nabla}}}
+\else
+	\newcommand{\div}{{\vec{nabla}}}
+\fi
+
+% Generic vectors
+\ifdefined\vr
+	\renewcommand{\vr}{{\vec{r}}}
+\else
+	\newcommand{\vr}{{\vec{r}}}
+\fi
+\newcommand{\vp}{{\vec{p}}}
+\newcommand{\vq}{{\vec{q}}}
+\newcommand{\vk}{{\vec{k}}}
+
+\ifdefined\vv
+	\renewcommand{\vv}{{\vec{v}}}
+\else
+	\newcommand{\vv}{{\vec{v}}}
+\fi
+
+\newcommand{\vkperp}{{\vk_\perp}}
+\newcommand{\kperp}{k_\perp}
+\newcommand{\kpar}{k_\parallel}
+\newcommand{\vperp}{v_\perp}
+\newcommand{\vvperp}{\vv_\perp}
+\newcommand{\vpar}{v_\parallel}
+\newcommand{\hvpar}{\hat v_\parallel}
+
+% Integrals
+\newcommand{\intr}[1][3]{{\int \rmd^{#1} \vec{r} \ }}
+\newcommand{\intR}[1][3]{{\int \rmd^{#1} \vec{R} \ }}
+\newcommand{\intv}[1][3]{{\int \rmd^{#1} \vec{v} \ }}
+\newcommand{\intw}[1][3]{{\int \rmd^{#1} \vec{w} \ }}
+
+
+% Plasma-specific stuff
+
+% Species parameters
+\newcommand{\s}{s}
+\newcommand{\vth}{v_\text{th}}
+\newcommand{\vths}{v_{\text{th}\s}}
+\newcommand{\vthi}{v_{\text{th}i}}
+\newcommand{\vthe}{v_{\text{th}e}}
+\newcommand{\mfp}{\lambda_\text{mfp}}
+\newcommand{\ope}{\omega_{\text{p}e}}
+\newcommand{\lDe}{\lambda_{\text{D}e}}
+\newcommand{\rhoi}{\rho_i}
+\newcommand{\rhoe}{\rho_e}
+\newcommand{\rhos}{\rho_s}
+
+% distributions
+\newcommand{\fs}{f_{\s}}
+\newcommand{\fos}{f_{0\s}}
+\newcommand{\Fs}{F_{\s}}
+\newcommand{\Fos}{F_{0\s}}
+\newcommand{\dfs}{\delta \closesymbol f_{\s}}
+
+\newcommand{\fe}{f_{e}}
+\newcommand{\foe}{f_{0e}}
+\newcommand{\Fe}{F_{e}}
+\newcommand{\Foe}{F_{0e}}
+\newcommand{\dfe}{\delta \closesymbol f_{e}}
+
+\newcommand{\fion}{f_{i}}  % annoying but \fi is the endif statement in TeX...
+\newcommand{\foi}{f_{0i}}
+\newcommand{\Fi}{F_{i}}
+\newcommand{\Foi}{F_{0i}}
+\newcommand{\dfi}{\delta \closesymbol f_{i}}
+
+% GK
+\newcommand{\kperprhoisq}{\kperp^2\rhoi^2}
+\newcommand{\kperprhoisqq}{\kperp^4\rhoi^4}
+\newcommand{\kperprhoesq}{\kperp^2\rhoe^2}
+\newcommand{\kperprhoesqq}{\kperp^4\rhoe^4}
+\newcommand{\pbra}[2]{\left\lbrace #1, #2 \right\rbrace}
+\newcommand{\pbrainline}[2]{\lbrace #1, #2 \rbrace}
+
+% Vectors
+\newcommand{\vR}{{\vec{R}}}
+\newcommand{\vE}{\vec{E}}
+\newcommand{\vB}{\vec{B}}
+\newcommand{\exb}{\(\vE\times\vB\)}
+
+% Averages
+\newcommand{\avgR}[1]{\left\langle #1 \right\rangle_\vec{R}}
+\newcommand{\avgRs}[1]{\left\langle #1 \right\rangle_{\vec{R}_\s}}
+\newcommand{\avgRinline}[1]{\langle #1 \rangle_\vec{R}}
+\newcommand{\avgr}[1]{\left\langle #1 \right\rangle_{\vec{r}}}
+\newcommand{\avgrinline}[1]{\langle #1 \rangle_\vec{r}}
+
+
+
+
+	

@@ -1,0 +1,72 @@
+\begin{tikzpicture}[scale=1, thick, every node/.style={scale=1}]
+	\def\N{16}
+	\def\halfN{8}
+	\def\n{10}
+	\def\halfn{5}
+	\def\L{20}
+	\def\Period{2*pi*\N/\L}
+	\def\period{2*pi*\n/\L}
+	\def\Kmax{2*pi*\halfN/\L}
+	\def\kmax{2*pi*\halfn/\L}
+	\def\xlim{1.2*\Kmax}
+	\def\ylim{1.5}
+	\def\kone{-0.55}
+	\def\ktwo{-0.25}
+	\def\ksum{\kone+\ktwo}
+	
+	\def\dx{1}
+	
+	\def\axisshift{-1cm}
+	
+	\begin{axis}[width=3.7in, height=1in, clip mode=individual, name=topaxis,
+		axis lines=center,
+		axis line style={thick},
+		xmin=-\xlim,xmax=\xlim,
+		xlabel=$k_x'$,
+		ymin=0,ymax=\ylim,
+		xtick={\kone-\dx, \ktwo-\dx,\ksum-2*\dx+\period}, ytick={\empty},
+		xticklabels={$k_1$, $k_2$, ${\color{red} k_3}$},
+		xlabel style={at={(ticklabel* cs:1)},anchor=north west}
+		]
+		
+		\def\axislabeloffset{0}
+		% Subplot label
+		\node at (-\xlim, \ylim+\axislabeloffset) {(c)};
+%		\node[anchor=south] at (-\xlim, \ylim) {\(k_y\)};
+		
+		% Main curve
+		
+		\addplot[samples=200,domain=-\kmax:\kmax-\dx,black,thick] {exp(-(x+0.2+\dx)^2-(x+\dx)^4)};
+		\addplot[samples=200,domain=\kmax-\dx:\kmax,black,thick] {exp(-(x+0.2+\dx-\period)^2-(x+\dx-\period)^4)};
+		
+		% Dotted vertical lines at special ks
+		\draw[-, solid, thick] (-\Kmax, 0) -- (-\Kmax, \ylim);
+		\draw[-, solid, thick] (\Kmax, 0) -- (\Kmax, \ylim);
+		
+		% These are both the same line
+%		\draw[-, dashed, thick] (-\kmax-\dx+\period, 0) -- (-\kmax-\dx+\period, \ylim);
+		\draw[-, dashed, thick] (\kmax-\dx, 0) -- (\kmax-\dx, \ylim);
+		
+		\draw[-, dotted, thick] (\kone-\dx, 0) -- (\kone-\dx, \ylim);
+		\draw[-, dotted, thick] (\ktwo-\dx, 0) -- (\ktwo-\dx, \ylim);
+		\draw[-, dotted, thick] (\ksum-2*\dx, 0) -- (\ksum-2*\dx, \ylim);
+		\draw[-, dotted, thick] (\ksum-2*\dx+\Period, 0) -- (\ksum-2*\dx+\Period, \ylim);
+		
+		\def\yoffset{0.1}
+		\draw[-stealth, solid] (\kone-\dx, \ylim-\yoffset) to [out=210,in=-30] (\ksum-2*\dx, \ylim-\yoffset);
+		\draw[-stealth, solid] (\ktwo-\dx, \ylim) to [out=150,in=30] (\ksum-2*\dx, \ylim);
+		\draw[-stealth, solid] (\ksum-2*\dx, \ylim) to [out=10,in=170] (\ksum-2*\dx+\Period, \ylim);
+		
+		% 2ky curve
+		\addplot[samples=200,domain=-\kmax:\kmax-2*\dx,red,thick] {exp(-(x+0.2+2*\dx)^2-(x+2*\dx)^4)};
+		\addplot[samples=200,domain=\kmax-2*\dx:\kmax,red,thick] {exp(-(x+0.2+2*\dx-\period)^2-(x+2*\dx-\period)^4)};
+		\draw[-, dashed, thick, red] (\kmax-2*\dx, 0) -- (\kmax-2*\dx, \ylim);
+		\draw[-, dotted, thick, red] (\ksum-2*\dx+\period, 0) -- (\ksum-2*\dx+\period, \ylim);
+	
+		
+		% Shaded regions for dealiased wavenumbers
+		\fill [gray, opacity=0.5] (-\Kmax, 0) rectangle (-\kmax,\ylim);
+		\fill [gray, opacity=0.5] (\kmax, 0) rectangle (\Kmax,\ylim);
+	\end{axis}
+	
+\end{tikzpicture}

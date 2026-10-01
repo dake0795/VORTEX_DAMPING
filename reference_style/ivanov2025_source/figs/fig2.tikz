@@ -1,0 +1,98 @@
+\small
+\begin{tikzpicture}[scale=1, thick, every node/.style={scale=1}]
+		\coordinate (origin) at (-1,0,0);    
+		
+		% horizontal axis
+		\def\xaxislength{6}
+		\coordinate (xaxis) at ($ (\xaxislength,0,0) $);
+		\draw[-latex] (0,0) -- (xaxis);
+		\draw (xaxis) node[anchor=north,scale=0.9] {$\log{k_y}$};
+		
+		% vertical axis
+		\def\yaxislength{4}
+		\coordinate (yaxis) at ($ (0,\yaxislength,0) $);
+		\draw[-latex] (0,0) -- (yaxis);
+		\draw (yaxis) node[anchor=south east,scale=0.9,rotate=90] {};
+		
+		
+		% coordinates
+		\def\yhorizontal{3.5}
+		
+		% gamma line coords
+		\def\xa{1.5}
+		\def\ya{1.5}
+		\coordinate (a) at ($ (origin) + (\xa, \ya, 0) $);
+		
+		\def\xb{6}
+		\def\yb{3}
+		\node (b) at ($ (origin) + (\xb, \yb, 0) $){};
+		
+		\node[anchor=north west] at (b) {\(\gamma_\vk \propto k_y\)};
+		
+		% taunl line coords (unsheared)
+		\def\xc{2}
+		\def\yc{1}
+		\coordinate (c) at ($ (origin) + (\xc, \yc, 0) $);
+
+		
+		\def\xd{5}
+		\def\yd{4}
+%		\node[gray] (d) at ($ (origin) + (\xd, \yd, 0) $) {\(\taunl^{-1}\)};
+		\node[gray] (d) at ($ (origin) + (\xd, \yd, 0) $) {};
+		
+		% taunl line coords (sheared)
+		\def\xcnew{3.5}
+		\def\ycnew{1.5}
+		\coordinate (cnew) at ($ (origin) + (\xcnew, \ycnew, 0) $);
+		
+		\def\xdnew{6}
+		\def\ydnew{4}
+		\node (dnew) at ($ (origin) + (\xdnew, \ydnew, 0) $) {\(\quad \taunl^{-1}\propto k_y^{4/3}\)};
+		
+		% x and y of the intersection (unsheared)
+		\def\xint{3}
+		\def\yint{2}
+		\node (int) at ($ (origin) + (\xint, \yint, 0) $) {};
+		
+		% x and y of the intersection
+		\def\xintnew{4.5}
+		\def\yintnew{2.5}
+		\node (intnew) at ($ (origin) + (\xintnew, \yintnew, 0) $) {};
+		
+		% inertial range text and fill
+		\def\yIR{1}
+		\node[anchor=west] (IRtext) at ($ (origin) + (\xintnew, \yIR, 0) $) {\(\mathrel{\mathop\vdash}\)inertial range\(\rightarrow\)};
+		
+		
+		% kyo
+		\node[anchor=north, gray] (kyo) at ($ (origin) + (\xint, 0, 0) $) {\(\kyoO\)};
+		\node[anchor=north] (kyonew) at ($ (origin) + (\xintnew, 0, 0) $) {\(\kyo(\gammaE)\)};
+		
+		% lines
+		\draw[-, solid, thick] (a) -- (intnew.center);
+		\draw[-, solid, dashed] (intnew.center) -- (b);
+		\draw[-, solid, dashed, gray] (c) -- (int.center);
+		\draw[-, solid, thick, gray] (int.center) -- (d);
+		\draw[-, solid, dashed] (cnew) -- (intnew.center);
+		\draw[-, solid, thick] (intnew.center) -- (dnew);
+		
+		\draw[-, dotted, gray] (int) -- (kyo) {};
+		\draw[-, dotted] (intnew) -- (kyonew) {};
+		 
+		
+		% intersection marker
+		\node[circle,inner sep=2pt,fill=gray] at (int) {};
+		\node[circle,inner sep=2pt,fill=black] at (intnew) {};
+%		\node[anchor=south east] at (int) {outer scale};
+
+		% Shear line and label
+		\node[anchor=east] (shear) at (0, \yintnew, 0) {\(\gammao(\gammaE)\)};
+		\draw[-, dotted, thick] (shear) -- (intnew);
+
+		% gammaoO line and label
+		\node[anchor=east, gray] (gammaoO) at (0, \yint, 0) {\(\gammaoO\)};
+		\draw[-, dotted, thick, gray] (gammaoO) -- (int);		 
+		
+		\node[label={[align=center,shift={(1,0.3)},fill=white,fill opacity=1]below:shear-suppressed\\eddies}] at (c) {};
+
+	\end{tikzpicture}

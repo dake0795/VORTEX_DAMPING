@@ -1,0 +1,87 @@
+\begin{tikzpicture}[scale=1, thick, every node/.style={scale=1}]
+    \coordinate (origin) at (0,0,0);
+    
+    % horizontal axis
+    \def\xaxislength{4.8}
+    \coordinate (xaxis) at ($ (origin) + (\xaxislength,0,0) $);
+    \draw[-latex] (0,0) -- (xaxis);
+    \draw (xaxis) node[anchor=north] {$\log{\gammaE}$};
+    
+    % vertical axis
+    \def\yaxislength{4}
+    \coordinate (yaxis) at ($ (origin) + (0,\yaxislength,0) $);
+    \draw[-latex] (0,0) -- (yaxis);
+    \draw (yaxis) node[anchor=east] {$\log{Q}$};
+    
+    % styles
+    \def\fluxstyle{solid}
+    \def\fluxthickness{thick}
+    \def\vertstyle{dotted}
+
+    % coordinates
+    \def\yhorizontal{3.5}
+    
+    \def\ya{\yhorizontal}
+    \def\xa{0}
+    \coordinate (a) at ($ (origin) + (\xa, \ya, 0) $);
+    \node[anchor=east] at (a) {\(Q(0)\)};
+    
+    \def\yb{\yhorizontal}
+    \def\xb{1.5}
+    \coordinate (b) at ($ (origin) + (\xb, \yb, 0) $);
+    
+    \def\yc{\yhorizontal-1.5}
+    \def\xc{2.5}
+    \coordinate (c) at ($ (origin) + (\xc, \yc, 0) $);
+    
+    \def\yd{\yhorizontal-2}
+    \def\xd{3.75}
+    \coordinate (d) at ($ (origin) + (\xd, \yd, 0) $);
+    
+    \def\ye{0.0}
+    \def\xe{4.75}
+    \coordinate (e) at ($ (origin) + (\xe, \ye, 0) $);
+    
+    \coordinate (QgammaoO) at (0, \yc, 0); 
+    
+    \def\gammamaxx{4}
+    \node[anchor=north] at ($ (origin) + (\gammamaxx, 0, 0) $) {\(\gamma_\text{max}\)};
+    
+    % Q lines and labels
+    
+    \node[anchor=west, rotate=0] at ($(b) - (0.1, 0.2, 0)$) {\(Q \propto (1 + \gammaE/\gammaani)^{-2}\)};
+    \node[circle,inner sep=2pt,fill=black] at (c) {};
+    
+    \draw[-, \fluxstyle, \fluxthickness] (c) -- (d);
+    \node[anchor=west, rotate=0] at ($(c) + (0.5, 0, 0)$)  {\(Q \propto \gammaE^{-1}\)};
+
+	\draw [black,rounded corners=5ex] (d) -- ($(d) + (0.8, -0.4, 0)$) -- (e);
+     
+    % labels and dotted lines
+    \node[anchor=north] (gammaani) at (0.6*\xb, 0, 0) {\(\gammaani\)};
+    \draw[-, \vertstyle] (gammaani) -- (0.6*\xb, 0.94*\yb, 0);    
+    
+    \node[anchor=north] (gammaoO) at (\xc, 0, 0) {\(\gammaoO\)}; 
+    \draw[-, \vertstyle] (gammaoO) -- (c);    
+    \draw[-, \vertstyle] (QgammaoO) -- (c);
+    
+    \draw[<->, >=stealth, \vertstyle] ($ (QgammaoO) + (0.2, 0, 0) $) -- node[midway, right, scale=1,fill=white, anchor=north west] {
+    	$\begin{aligned}
+    		\propto \left[\AoO\right]^2
+    	\end{aligned}$
+    } ($ (a) + (0.2, 0, 0) $);
+    
+    % put here to be on top of the bounding box of A^2
+    \draw [black,rounded corners=10ex] (a) -- (b) -- (c);
+    
+    \node[anchor=south] at ({0.5*(\xa+\xc)}, 0, 0) {(i)};
+    \node[anchor=south] at ({0.5*(\xc+\gammamaxx)}, 0, 0) {(ii)};
+
+%	\draw[dotted, \fluxthickness] (\gammamaxx, 0, 0) -- (\gammamaxx, \yaxislength, 0);  % full-length dotted line
+	\draw[dotted, \fluxthickness] (\gammamaxx, 0, 0) -- (\gammamaxx, 0.33*\yaxislength, 0);
+
+	% subplot label
+	\def\ysp{4.2};
+	\def\xsp{-0.95};
+    \node[anchor=south] at ($ (origin) + (\xsp, \ysp, 0) $) {(a)};
+\end{tikzpicture}

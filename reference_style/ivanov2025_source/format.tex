@@ -1,0 +1,8 @@
+\usepackage{amsmath} 
+\usepackage{amssymb}
+\usepackage{import}
+
+% Annyoing matplotlib pgf stuff
+\def\mathdefault#1{#1}
+% Erase matplotlib's font sizes
+\newcommand{\importpgf}[2]{\begingroup\import{#1}{#2}\endgroup}

@@ -1,0 +1,45 @@
+\begin{tikzpicture}[scale=1, thick, every node/.style={scale=1}]
+	\def\N{16}
+	\def\halfN{8}
+	\def\n{10}
+	\def\halfn{5}
+	\def\L{20}
+	\def\Period{2*pi*\N/\L}
+	\def\period{2*pi*\n/\L}
+	\def\Kmax{2*pi*\halfN/\L}
+	\def\kmax{2*pi*\halfn/\L}
+	\def\xlim{1.2*\Kmax}
+	\def\ylim{1.5}
+	
+	\begin{axis}[width=3.7in, height=1in, clip mode=individual,
+		axis lines=center,
+		axis line style={thick},
+		xmin=-\xlim,xmax=\xlim,
+		xlabel=$k_x'$,
+		ymin=0,ymax=\ylim,
+		xtick={-\Kmax, -\kmax-\dx+\Period, \kmax-\dx, \Kmax}, ytick={\empty},
+		xticklabels={$-K_{x}$, $-k_{x, \text{max}}$, $k_{x, \text{max}}$, $$},
+		xlabel style={at={(ticklabel* cs:1)},anchor=north west}
+		]
+		
+		% Subplot label
+		\node at (-\xlim, \ylim) {(b)};
+		
+		% Main curve
+		\def\dx{1}
+		\addplot[samples=200,domain=-\Kmax:\Kmax-\dx,black,thick] {exp(-(x+0.2+\dx)^2-(x+\dx)^4)};
+		\addplot[samples=200,domain=\Kmax-\dx:\Kmax,black,thick] {exp(-(x+0.2+\dx-\Period)^2-(x+\dx-\Period)^4)};
+		
+		% Dotted vertical lines at special ks
+		\draw[-, solid, thick] (-\Kmax, 0) -- (-\Kmax, \ylim);
+		\draw[-, solid, thick] (\Kmax, 0) -- (\Kmax, \ylim);
+		
+		\draw[-, dashed, thick] (-\kmax-\dx+\Period, 0) -- (-\kmax-\dx+\Period, \ylim);
+		\draw[-, dashed, thick] (\kmax-\dx, 0) -- (\kmax-\dx, \ylim);
+		
+		% Shaded regions for dealiased wavenumbers
+		\fill [gray, opacity=0.5] (-\Kmax, 0) rectangle (-\kmax,\ylim);
+		\fill [gray, opacity=0.5] (\kmax, 0) rectangle (\Kmax,\ylim);
+	\end{axis}
+\end{tikzpicture}
+
