@@ -15,8 +15,9 @@ simulations (house rule, `STYLE_GUIDE.md` section 7a).
 - **Their damping is linear and kinetic**: Landau damping, along the field line, of the part of the vortex potential
   that is not flute-like, at a rate independent of amplitude.
 - **They decay because the jets slowly lose their instability**, and collapse when the jets become stable.
-- **Open:** the kinetic loss from first principles (in progress); what erodes the jets' corrugation; grid scale
-  against Debye scale. Five restarts that bear on these are running
+- **The loss rate is calculated** (no adjustable parameter) and matches the measured one in the reduced box, its
+  restarts and the production box.
+- **Open:** the constant C; what erodes the jets' corrugation (the lifetime); grid scale against Debye scale. Five restarts that bear on these are running
   (`DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_hxy_sinktest`).
 
 ## Build
@@ -48,21 +49,22 @@ env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 
 | Figure | File | What to learn from it |
 |---|---|---|
-| 1 | `figures/cartoon.tex` | The mechanism: jets feed the vortices; phase mixing along the field line drains them. |
+| 1 | `figures/cartoon.tex` | The mechanism: the vortices live on the instability of their jets and die of Landau damping when it fails. |
 | 2 | `history` | The vortices decay ever faster and collapse; the zonal flow barely changes. |
 | 3 | `amplitude` | A vortex made smaller on unchanged jets regrows, then decays faster. |
 | 4 | `geometry` | Critical layers on the jet flanks, with a cat's eye at each. |
 | 5 | `rayleigh` | The vortices are the unstable shear mode of their corrugated jets. |
-| 6 | `saturation` | The vortex amplitude follows the jets' growth rate: omega_tr = alpha gamma_R. |
+| 6 | `saturation` | Trapping frequency and Rayleigh growth rate decay together: omega_tr = C gamma_R. |
 | 7 | `exchange` | The loss to entropy is steady and linear; the supply from the jets fades and reverses. |
 | 8 | `channels` | The loss is carried by the streaming of particles along the field line. |
-| 9 | `flute` | The vortices are flute-like at the box scale, not at the Debye scale. |
-| 10 | `dissipation` | The perpendicular sink belongs to the zonal flow, the velocity-space sink to the vortices. |
+| 9 | `landau` | The loss is Landau damping of the non-flute part, at the calculated rate, with no adjustable parameter, in every run. |
+| 10 | `dissipation` | The perpendicular sink acts on the zonal flow, the velocity-space sink on the vortices. |
 | 11 | `euler` | A fluid with the same jets has the same vortices but not their kinetic loss. |
 | 12 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
 
-Appendices (`appendices/*.tex`): step-by-step derivations at undergraduate level (Euler limit and Rayleigh's equation;
-trapping and saturation; Landau damping of the non-flute part - in preparation).
+Appendices (`appendices/*.tex`): step-by-step derivations at undergraduate level - A: Euler limit and Rayleigh's
+equation; B: trapping and saturation; C: Landau damping of the non-flute part (the loss formula).
+`figures/flute` (non-flute power of the vortices by radial scale) is kept as a measurement but is not in the notes.
 
 ## Data
 
