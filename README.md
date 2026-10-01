@@ -16,7 +16,7 @@ env -u LD_LIBRARY_PATH pdflatex notes
 ```
 
 `env -u LD_LIBRARY_PATH` is needed on the CSD3 login nodes so that TeX finds its fonts. The build has no errors,
-no undefined references and no overfull boxes. The output is 21 pages.
+no undefined references and no overfull boxes. The output is 22 pages.
 
 ## Contents
 
