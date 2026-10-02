@@ -7,6 +7,10 @@ Sinks (GENE's perpendicular hyperdiffusion, nu_k = hyp [(dx kx/2)^4 + (dy ky/2)^
                   the vorticity is damped at nu_k (1 + 1/(lambda_D^2 K)) - the Boltzmann part of h is damped too;
   sink = 'vort' : nu_k on the vorticity alone;
   sink = 'none'.
+Separate radial / binormal coefficients: hypx, hypy (default: both = hyp).
+Landau damping of the vortices (2 Oct 2026): landau = nu_L, the energy loss rate of every k_y >= 1 mode given by the
+loss formula of the notes (linear, independent of amplitude); the vorticity of those modes is damped at nu_L / 2.
+zeps scales the zonal part of the initial condition as eps scales the rest.
 Usage: python euler.py NAME [key=value ...]   keys: eps, T, dt, nx, nky, hyp, sink, dxfac (dx = DX_G*dxfac),
        dyfac, run (GENE run of the initial condition), frame, kind (phi_avg|phi_mid), tout
 Output: cache/euler_NAME.npz  (t, Ezon, Enz, Eky[1..4], enstrophy, psi samples at GENE's 64 x 16 modes every tsamp)
@@ -22,12 +26,13 @@ LAMD2 = 5000.0          # lambda_D^2 = debye2/2 in rho_ref^2
 
 
 def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac=1.0, dyfac=1.0, run="leg4", frame=0,
-        kind="phi_avg", tout=0.5, tsamp=1.0, zonal_from=None, quiet=False):
+        kind="phi_avg", tout=0.5, tsamp=1.0, zonal_from=None, quiet=False, hypx=None, hypy=None, landau=0.0, zeps=1.0):
     t0g, psig = M.load(run, kind)
     p_in = psig[frame].copy()
     if zonal_from is not None:                   # zonal part from another (run, frame)
         p_in[:, 0] = M.load(zonal_from[0], kind)[1][zonal_from[1]][:, 0]
     p_in[:, 1:] *= eps
+    p_in[:, 0] *= zeps
     nxg, nyg = 3 * nx // 2, 3 * nky
     hx = nx // 2
     m = sf.fftfreq(nxg, 1.0 / nxg)
@@ -36,11 +41,14 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
     keep = (np.abs(m)[:, None] <= hx - 1) & (n[None, :] <= nky - 1)
     K = M.GXX * kx ** 2 + M.GYY * ky ** 2
     K[0, 0] = 1.0
-    nu = hyp * ((DX_G * dxfac * kx / 2) ** 4 + (DY_G * dyfac * ky / 2) ** 4)
+    hypx = hyp if hypx is None else hypx
+    hypy = hyp if hypy is None else hypy
+    nu = hypx * (DX_G * dxfac * kx / 2) ** 4 + hypy * (DY_G * dyfac * ky / 2) ** 4
     if sink == "h":
         nu = nu * (1.0 + 1.0 / (LAMD2 * K))
     elif sink == "none":
         nu = 0.0 * nu
+    nu = nu + 0.5 * landau * (n[None, :] >= 1)
     nu = np.where(keep, nu, 0.0)
     # initial condition: GENE's 64 x 16 coefficients into the padded array
     psi = np.zeros((nxg, nyg // 2 + 1), complex)
@@ -88,7 +96,7 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
             print("blew up at", i * dt); break
     out = dict(t=np.array(ts), Ezon=np.array(EZ), Enz=np.array(EN), Eky=np.array(EK), ens=np.array(ENS),
                tsamp=np.array(tsm), psi=np.array(PS), t0=t0g[frame],
-               par=str(dict(eps=eps, T=T, dt=dt, nx=nx, nky=nky, hyp=hyp, sink=sink, dxfac=dxfac, dyfac=dyfac, run=run, frame=frame, kind=kind)))
+               par=str(dict(eps=eps, zeps=zeps, landau=landau, hypx=hypx, hypy=hypy, T=T, dt=dt, nx=nx, nky=nky, hyp=hyp, sink=sink, dxfac=dxfac, dyfac=dyfac, run=run, frame=frame, kind=kind)))
     os.makedirs(CACHE, exist_ok=True)
     np.savez(f"{CACHE}/euler_{name}.npz", **out)
     return out

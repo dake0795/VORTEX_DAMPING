@@ -1,4 +1,26 @@
-# Status (1 Oct 2026, 19:30)
+# Status (2 Oct 2026, 23:40) - overnight work, see the block at the top
+
+## 2 Oct 2026, night: what the slow drain is (work in progress; notes.tex not yet rewritten)
+
+1. The slow drain is physical: `rb_c0p3_hxoff` (hyp_x = 0) drains like the reference to t 4,400; only the late
+   acceleration and the collapse need the radial hyperdiffusion (and the coarse grid).
+2. The supply budget closes in four runs with no free constant (`figures/supply.pdf`).
+3. 2D Euler + the predicted Landau damping applied as a friction on the vortices does NOT reproduce GENE: the vortices
+   decay at nu_L and the jets keep their energy (`scripts/rayleigh/batch_drain.sh`, cache/euler_dr_*.npz).
+4. Why: in GENE the jets are forced by more than the Euler Reynolds stress. Breathing-averaged, the Euler stress of the
+   vortices would ACCELERATE the jets; the jets decelerate (`scripts/rayleigh/zonal_forcing2.py`).
+5. The missing force is the momentum the resonant particles absorb from the Landau-damped vortices, f(x) = k P(x)/wt(x),
+   deposited in the zonal charge by the radial current it drives (`figures/landau/deposit.py`; P from the verified loss
+   formula, no free constant). It accounts for the jets' non-Euler energy loss (8.8 vs 9.4, 3.65 vs 3.59, 2.0 vs 2.5 in
+   three windows of 1000 t.u.) and for the forcing of the dominant jet harmonic m = 1 (amplitude 1.1, 1.1, 0.7; phase
+   -3, -10, -32 deg). Higher harmonics (m >= 5) carry a large Euler stress cancelled by something not yet identified.
+6. Where wt and w have opposite signs (resonance beyond the critical layer), absorption in the local frame is a GAIN of
+   vortex energy in the lab frame: the damping moves energy from the jets to the vortices and to heat.
+7. Next: a fluid model with this kinetic damping in each vortex's local frame and the momentum deposited in the jets
+   (closed, no free constant), against `rb_c0p3_hxoff` and the drain tests in `rb_c0p3_draintest`.
+8. Note: `figures/landau/predict.py`'s bounce.G estimate is 10x the verified rate; the verified formula is the one in
+   `figures/landau/figure.py` (response.Response, D(wt)).
+
 
 Take-over document for the whole project: `PROJECT_DIPOLE/audit/reports/HANDOVER_20261001.md` (rules, every job, what
 to do when each test reports). This file is the state of the notes.
