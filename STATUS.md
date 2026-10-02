@@ -63,6 +63,18 @@
        singularity (the vortex advecting the jets' pitch-angle-dependent distribution); on GENE's 64-point grid it
        spoils the predicted stress at m >= 3. Regularisation to implement next: flattening of the jets' distribution,
        every pitch-angle class, inside the cat's eye (half-width w = 2 (|psi_1|/|U'|)^(1/2), measured, no free constant).
+   (f) 3 Oct, later in the night (`figures/landau/nonflute_collapse.py`, `bump_vs_vorticity.py`): CORRECTION to (e):
+       term (ii) is antisymmetric across each critical layer, while GENE's non-flute part is a symmetric bump there; the
+       earlier agreement came from points on one side. What the data show instead: the non-flute ratio phi_1/phi_0
+       (projection on g^yy - <g^yy>) is ONE function of the Doppler-shifted frequency for both vortices, both runs and
+       all amplitudes: universal away from the critical layers (-0.17 at wt -1.4, -0.07 at -1.0, +0.06 at +1.4) and a
+       bump at the critical layer, about +-0.4 wide in wt (one Debye length in x), deepening through the decay
+       (-0.25, -0.36, -0.43, -0.50, -0.54 at t 2000-9800). The bump is proportional to the vortex's own vorticity at its
+       critical layer: bump / (lambda_D^2 zeta_1/phi_0) = 6.0-8.1 in every run, stage and amplitude.
+       Physics: at the critical layer the fluid co-moves with the vortex, so the vortex's vorticity is a charge spread
+       along the field line by the local metric; the static kinetic response to (g^xx/<g^xx> - 1) gives coefficient 4.85
+       (prediction -0.23 vs measured -0.43 at t 6100): right sign and form, a factor ~2 low (in the linear phase,
+       without critical layers, the same response matches to 10 %).
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
