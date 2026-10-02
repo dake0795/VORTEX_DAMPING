@@ -50,6 +50,19 @@
        given by the linear theory, although its dissipative part (the loss formula) is.
    (d) Models: closed fluid model with deposition + flute stress fails (vortices grow); freezing the jets' response
        above k_x lambda_D ~ 0.5 also fails (jets gain energy): the local stress is needed at all harmonics.
+   (e) 3 Oct, night (`figures/landau/nonflute_amp.py`, `nonflute_linear.py`, `nonflute_jets.py`, `stress_predicted.py`):
+       the vortices' non-flute structure is LINEAR (identical in the eps = 0.03 and 0.3 restarts and the reference:
+       -0.39 to -0.44 at the critical layers, -0.137+0.058i mid-jet). In the linear phase from noise (no jets) it is the
+       appH response in magnitude and k_y^2 scaling (-0.067 vs 0.063 at k_y = 1; the sign is a Fourier-convention
+       flip, fixed consistently: response conjugated). With jets, a NEW linear term is needed: (ii) the jets' own
+       non-flute polarisation charge Q_z1 = -lambda_D^2 [g^xx d_x^2 phi_z1]_nf advected radially by the vortex,
+       phi_1 - rho[phi_1] = -(k/wt) psi_0 d_x Q_z1 (sign per the convention), plus (iii) the vortex's charge advected by
+       the jets' non-flute flow U_1 (small). Terms (i)+(ii)+(iii) reproduce the measured structure with best scale
+       0.84-1.09 for both vortices in both runs (no free constant; residual ~0.5, from a missing real part mid-jet).
+       At the critical layer itself (ii) is singular (1/wt): the kinetic analogue of the Rayleigh critical-layer
+       singularity (the vortex advecting the jets' pitch-angle-dependent distribution); on GENE's 64-point grid it
+       spoils the predicted stress at m >= 3. Regularisation to implement next: flattening of the jets' distribution,
+       every pitch-angle class, inside the cat's eye (half-width w = 2 (|psi_1|/|U'|)^(1/2), measured, no free constant).
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
