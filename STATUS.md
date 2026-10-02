@@ -19,9 +19,19 @@
    Same test on the reference (t 6000-9400, its zonal hyperdiffusion added to the Euler forcing): phase again locked
    (0 to -4 deg on m = 1, 3), energy 72 %, 55 %, 34 % of the non-Euler loss as the collapse approaches; the remainder
    grows where the hyperdiffusion and the Debye-scale grid act on the fine structure of the jets.
-7. Next: a fluid model with this kinetic damping in each vortex's local frame and the momentum deposited in the jets
+7. Closed fluid model (`scripts/rayleigh/euler.py kin=1`): 2D Euler + the kinetic damping in each vortex's local frame
+   (vortices split with the linear Rayleigh tendency) + the deposited momentum. Its kinetic terms reproduce GENE's
+   ratios (lab-frame vortex gain / absorbed power -0.73 vs -0.72; jets' loss / absorbed power -1.73 vs -1.72) but the
+   model vortices GROW (6.5e3 -> 2e4) while GENE's decay: the Euler stress acts on the jets' radial harmonics at
+   k_x lambda_D >~ 0.5, where in GENE it is cancelled (measured: the observed tendency there is ~0, residual = -Euler).
+   Diagnostic runs with the jets' Euler response removed above k_x lambda_D = 0.5 / 1.0 bracket GENE (vortices die too
+   fast / stay steady). So the drain is decided by the zonal response at the Debye scale, where the flute limit
+   fails; the missing piece is the kinetic zonal response (and kinetic stress) at k_x lambda_D ~ 0.5-1.
+8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
+   orbit-averaged potentials), put it in the model, then test against rb_c0p3_hxoff and the drain tests.
+9. (superseded) 7. Next: a fluid model with this kinetic damping in each vortex's local frame and the momentum deposited in the jets
    (closed, no free constant), against `rb_c0p3_hxoff` and the drain tests in `rb_c0p3_draintest`.
-8. Note: `figures/landau/predict.py`'s bounce.G estimate is 10x the verified rate; the verified formula is the one in
+10. Note: `figures/landau/predict.py`'s bounce.G estimate is 10x the verified rate; the verified formula is the one in
    `figures/landau/figure.py` (response.Response, D(wt)).
 
 
