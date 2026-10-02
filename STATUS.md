@@ -27,6 +27,13 @@
    Diagnostic runs with the jets' Euler response removed above k_x lambda_D = 0.5 / 1.0 bracket GENE (vortices die too
    fast / stay steady). So the drain is decided by the zonal response at the Debye scale, where the flute limit
    fails; the missing piece is the kinetic zonal response (and kinetic stress) at k_x lambda_D ~ 0.5-1.
+   Later the same evening: GENE's own k_y = 0 budget (`figures/drain/zonal_budget_gene.py`) shows that at m >= 5
+   (k_x lambda_D >= 0.6) the exact nonlinear input to the jets' electrostatic energy is cancelled by the
+   parallel-streaming term (m = 5: -737 / +747; m = 7: -686 / +714), up to m = 15; at m = 3 streaming is the main loss.
+   Tested and REJECTED: Landau damping of jet harmonics oscillating at the breathing frequency (`figures/landau/
+   zonal_landau.py`): wrong sign at m >= 5, 14-100x too small at m = 1, 3. The per-harmonic comparison of the flute-Euler
+   stress with GENE's exact transfer is too noisy above m = 3 to support any reduction factor (earlier 'Euler cancelled at
+   m >= 5' from the flute analysis is therefore not established; GENE's internal nonlinear/streaming cancellation is).
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
    orbit-averaged potentials), put it in the model, then test against rb_c0p3_hxoff and the drain tests.
 9. (superseded) 7. Next: a fluid model with this kinetic damping in each vortex's local frame and the momentum deposited in the jets
