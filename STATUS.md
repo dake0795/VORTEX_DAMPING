@@ -34,6 +34,24 @@
    zonal_landau.py`): wrong sign at m >= 5, 14-100x too small at m = 1, 3. The per-harmonic comparison of the flute-Euler
    stress with GENE's exact transfer is too noisy above m = 3 to support any reduction factor (earlier 'Euler cancelled at
    m >= 5' from the flute analysis is therefore not established; GENE's internal nonlinear/streaming cancellation is).
+   2 Oct, ~22:00-23:45 (`figures/landau/local_stress.py`, `compare_budget.py`, `nonflute_check.py`, `nonflute_shape.py`):
+   (a) The stress of the vortices on the jets must be computed LOCALLY along the field line (local potential, local
+       metric) and then averaged: the stress of the averaged potential is wrong on the jets' (odd) harmonics, by sign at
+       m = 3 and by factors 3-40 at m >= 5; even harmonics agree. The local metric alone changes nothing: the whole
+       difference comes from the ~2 % non-flute part of the vortices.
+   (b) THEORY = local stress + momentum deposited by the Landau damping reproduces GENE's exact jet budget
+       (E_nonlinear + E_parallel at k_y = 0) on the dominant harmonics: m = 1: -2.9e-5 vs -2.0e-5 (t 1000-2000),
+       -1.08e-5 vs -1.21e-5 (t 3400-4400); m = 3: -2.30e-4 vs -2.71e-4, -1.45e-4 vs -1.49e-4. (Rates per unit energy.)
+   (c) The measured non-flute part of each vortex is a single shape along the line (98.9 %, ~ g^yy - <g^yy>), real and
+       in antiphase with phi_0, largest at the critical layers (|phi_1/phi_0| ~ 0.28 per unit shape). The linear response
+       of appH (chi_s, used by the loss formula) predicts +0.06 there (wrong sign, 4.5x too small); a static local
+       metric source gives the right sign at the critical layers but half the size and fails inside the jets.
+       So the reactive non-flute structure of the vortices near their (trapped, nonlinear) critical layers is not
+       given by the linear theory, although its dissipative part (the loss formula) is.
+   (d) Models: closed fluid model with deposition + flute stress fails (vortices grow); freezing the jets' response
+       above k_x lambda_D ~ 0.5 also fails (jets gain energy): the local stress is needed at all harmonics.
+   OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
+   cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
    orbit-averaged potentials), put it in the model, then test against rb_c0p3_hxoff and the drain tests.
 9. (superseded) 7. Next: a fluid model with this kinetic damping in each vortex's local frame and the momentum deposited in the jets

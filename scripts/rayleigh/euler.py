@@ -31,7 +31,7 @@ LAMD2 = 5000.0          # lambda_D^2 = debye2/2 in rho_ref^2
 
 
 def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac=1.0, dyfac=1.0, run="leg4", frame=0,
-        kind="phi_avg", tout=0.5, tsamp=1.0, zonal_from=None, quiet=False, hypx=None, hypy=None, landau=0.0, zeps=1.0, kin=0, zcut=0.0):
+        kind="phi_avg", tout=0.5, tsamp=1.0, zonal_from=None, quiet=False, hypx=None, hypy=None, landau=0.0, zeps=1.0, kin=0, zcut=0.0, ztot=0.0):
     t0g, psig = M.load(run, kind)
     p_in = psig[frame].copy()
     if zonal_from is not None:                   # zonal part from another (run, frame)
@@ -112,7 +112,11 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
             NL = np.where(keep, sf.rfft2(lin), 0.0)
             if zcut > 0:                         # diagnostic: no Euler response of zonal modes with |k_x| lambda_D > zcut
                 N[:, 0] = np.where(np.abs(kx1) * np.sqrt(LAMD2) > zcut, 0.0, N[:, 0])
-            return N - nu * z + kinetic(z, NL)
+            kz = kinetic(z, NL)
+            if ztot > 0:                         # GENE's measured budget: above ztot the jets' total nonlinear input is returned by streaming
+                frz = np.abs(kx1) * np.sqrt(LAMD2) > ztot
+                N[:, 0] = np.where(frz, 0.0, N[:, 0]); kz[:, 0] = np.where(frz, 0.0, kz[:, 0])
+            return N - nu * z + kz
         return N - nu * z
 
     norm = 1.0 / (nxg * nyg) ** 2
@@ -146,7 +150,7 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
             print("blew up at", i * dt); break
     out = dict(t=np.array(ts), Ezon=np.array(EZ), Enz=np.array(EN), Eky=np.array(EK), ens=np.array(ENS),
                tsamp=np.array(tsm), psi=np.array(PS), t0=t0g[frame], kstat=np.array(KS),
-               par=str(dict(kin=kin, zcut=zcut, eps=eps, zeps=zeps, landau=landau, hypx=hypx, hypy=hypy, T=T, dt=dt, nx=nx, nky=nky, hyp=hyp, sink=sink, dxfac=dxfac, dyfac=dyfac, run=run, frame=frame, kind=kind)))
+               par=str(dict(kin=kin, zcut=zcut, ztot=ztot, eps=eps, zeps=zeps, landau=landau, hypx=hypx, hypy=hypy, T=T, dt=dt, nx=nx, nky=nky, hyp=hyp, sink=sink, dxfac=dxfac, dyfac=dyfac, run=run, frame=frame, kind=kind)))
     os.makedirs(CACHE, exist_ok=True)
     np.savez(f"{CACHE}/euler_{name}.npz", **out)
     return out
