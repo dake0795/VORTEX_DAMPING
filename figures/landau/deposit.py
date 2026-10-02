@@ -14,18 +14,20 @@ sys.path.insert(0, os.path.join(HERE, "..", "lib")); sys.path.insert(0, HERE)
 import vortex_field as vf
 import bounce, predict
 vf.RUNS["hxoff"] = [f"{vf.RB}/rb_c0p3_hxoff/leg_0001/out"]
+RUN = sys.argv[1] if len(sys.argv) > 1 else "hxoff"; ZF = sys.argv[2] if len(sys.argv) > 2 else "zforce2_hxoff.npz"
+WINS = [tuple(float(v) for v in x.split(":")) for x in sys.argv[3:]] or [(1000, 2000), (2200, 3200), (3400, 4400)]
 RAY = os.path.join(HERE, "..", "..", "scripts", "rayleigh", "cache")
 geo = bounce.geometry(f"{vf.RB}/rb_c0p3_hxoff/leg_0001/out/dipole_fix.dat")
 O = bounce.Orbits(geo)
 wz = geo["J"] / geo["J"].sum(); GXX = (wz * geo["gxx"]).sum(); GYY = (wz * geo["gyy"]).sum()
 NXF = predict.NXF; LAMD2 = predict.LAMD2; K2L2 = LAMD2 * vf.KYMIN ** 2
 LC = np.load(os.path.join(HERE, "cache.npz"))
-Zc = np.load(os.path.join(RAY, "zforce2_hxoff.npz")); rows, F, Z = Zc["rows"], Zc["F"], Zc["Z"]
+Zc = np.load(os.path.join(RAY, ZF)); rows, F, Z = Zc["rows"], Zc["F"], Zc["Z"]
 tcz = rows[:, 0]; kxg = np.fft.fftfreq(vf.NX, 1.0 / vf.NX) * 2 * np.pi / vf.LX
 out = {}
-for (a, b) in ((1000, 2000), (2200, 3200), (3400, 4400)):
+for (a, b) in WINS:
     tc = 0.5 * (a + b)
-    t, p0, p1 = predict.window_field("hxoff", tc)
+    t, p0, p1 = predict.window_field(RUN, tc)
     j = np.argmin(abs(rows[:, 0] - tc)); w0 = (rows[j, 1], -rows[j, 1])
     w, amid, res = vf.two_freq_fit(t, p1[:, :, vf.ZMID], w0)
     M = np.exp(-1j * np.outer(t - t.mean(), w))
@@ -61,4 +63,4 @@ for (a, b) in ((1000, 2000), (2200, 3200), (3400, 4400)):
         r = dzeta_kin[mm] / resid[mm]
         print(f"   m {mm}: kinetic / non-Euler residual = {abs(r):.2f} at phase {np.degrees(np.angle(r)):+5.0f} deg   (|resid| {abs(resid[mm]):.2e}, |Euler| {abs(eul[mm]):.2e})")
     out[f"{a}"] = dict(f=f, U=U, dzk=dzeta_kin, resid=resid, eul=eul, obs=obs)
-np.save(os.path.join(HERE, "deposit_cache.npy"), out, allow_pickle=True)
+np.save(os.path.join(HERE, f"deposit_cache_{RUN}.npy"), out, allow_pickle=True)

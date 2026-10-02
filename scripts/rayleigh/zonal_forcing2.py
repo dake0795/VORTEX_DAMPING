@@ -29,6 +29,10 @@ for c in np.arange(T0, T1 + 1e-6, STEP):
         sol, *_ = np.linalg.lstsq(B, psi[w, :, nn], rcond=None)
         bp[:, nn], bm[:, nn] = sol[0], sol[1]
     f = zonal_euler_tendency(bp) + zonal_euler_tendency(bm)
+    HXZ = float(sys.argv[7]) if len(sys.argv) > 7 else 0.0       # radial hyperdiffusion of the run: its zonal damping is added to the "Euler" forcing
+    if HXZ > 0:
+        nuz = HXZ * (DX_G * kxg / 2) ** 4 * (1 + 1 / (5000.0 * np.where(kxg == 0, 1, kxg ** 2)))
+        f = f - nuz * (-(GXX * kxg ** 2) * p0) * (kxg != 0)
     F.append(f); Z.append(-(GXX * kxg ** 2) * p0)
     rate = float(np.sum((np.conj(p0) * (-f)).real))
     rows.append((t[w].mean(), ww, r, rate, 0.5 * np.sum(GXX * kxg ** 2 * np.abs(p0) ** 2), M.energies(psi[w])[1].mean()))
@@ -47,4 +51,4 @@ p0 = -Z.mean(0) / np.where(kxg == 0, 1, GXX * kxg ** 2) * (kxg != 0)
 print(f"WHOLE {tc[0]:.0f}-{tc[-1]:.0f}: dE_zon/dt observed {np.sum((np.conj(p0)*(-obs)).real):+.3e}, Euler {np.sum((np.conj(p0)*(-eul)).real):+.3e}; "
       f"|obs| {np.linalg.norm(obs):.2e} |eul| {np.linalg.norm(eul):.2e} proj {np.vdot(eul,obs).real/np.vdot(eul,eul).real:+.2f} "
       f"resid {np.linalg.norm(obs-np.vdot(eul,obs).real/np.vdot(eul,eul).real*eul)/np.linalg.norm(obs):.2f}")
-np.savez(f"{CACHE}/zforce2_{sys.argv[1].split('gene_')[1].split('.')[0]}.npz", rows=rows, F=F, Z=Z)
+np.savez(f"{CACHE}/zforce2_{sys.argv[1].split('gene_')[1].split('.')[0]}{'_h' if len(sys.argv) > 7 else ''}.npz", rows=rows, F=F, Z=Z)

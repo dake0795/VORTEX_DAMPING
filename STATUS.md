@@ -16,6 +16,9 @@
    -3, -10, -32 deg). Higher harmonics (m >= 5) carry a large Euler stress cancelled by something not yet identified.
 6. Where wt and w have opposite signs (resonance beyond the critical layer), absorption in the local frame is a GAIN of
    vortex energy in the lab frame: the damping moves energy from the jets to the vortices and to heat.
+   Same test on the reference (t 6000-9400, its zonal hyperdiffusion added to the Euler forcing): phase again locked
+   (0 to -4 deg on m = 1, 3), energy 72 %, 55 %, 34 % of the non-Euler loss as the collapse approaches; the remainder
+   grows where the hyperdiffusion and the Debye-scale grid act on the fine structure of the jets.
 7. Next: a fluid model with this kinetic damping in each vortex's local frame and the momentum deposited in the jets
    (closed, no free constant), against `rb_c0p3_hxoff` and the drain tests in `rb_c0p3_draintest`.
 8. Note: `figures/landau/predict.py`'s bounce.G estimate is 10x the verified rate; the verified formula is the one in
