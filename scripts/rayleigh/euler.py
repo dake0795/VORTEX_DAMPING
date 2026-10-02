@@ -31,7 +31,7 @@ LAMD2 = 5000.0          # lambda_D^2 = debye2/2 in rho_ref^2
 
 
 def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac=1.0, dyfac=1.0, run="leg4", frame=0,
-        kind="phi_avg", tout=0.5, tsamp=1.0, zonal_from=None, quiet=False, hypx=None, hypy=None, landau=0.0, zeps=1.0, kin=0, zcut=0.0, ztot=0.0):
+        kind="phi_avg", tout=0.5, tsamp=1.0, zonal_from=None, quiet=False, hypx=None, hypy=None, landau=0.0, zeps=1.0, kin=0, zcut=0.0, ztot=0.0, lst=0.0):
     t0g, psig = M.load(run, kind)
     p_in = psig[frame].copy()
     if zonal_from is not None:                   # zonal part from another (run, frame)
@@ -71,6 +71,42 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
     K2L2 = LAMD2 * KYMIN ** 2
     kx1 = kx[:, 0]; K1 = K[:, 1]; keep1 = keep[:, 1]; keep0 = keep[:, 0] & (m != 0)
     kstat = dict(n=0, P=0.0, Wlab=0.0, Uf=0.0, w=0.0)
+    # local stress (lst = C > 0): the vortices' non-flute part in rank-one form A(x) sh(z), sh = g^yy - <g^yy>,
+    # A = C lam^2 zeta_1 near the critical layer (static response, C = 4.85 predicted) and the appH response elsewhere;
+    # the jets are forced by the field-line average of the local stress instead of the flute stress of k_y = 1.
+    G = np.loadtxt(f"{RB}/rb_c0p3_hxy/leg_0004/out/dipole_fix.dat", skiprows=19)
+    gzx, gzy, Jz = G[:, 0], G[:, 3], G[:, 10]; wzz = Jz / Jz.sum()
+    shz = gzy - (wzz * gzy).sum(); shz = shz - (wzz * shz).sum()
+    CT = np.load(os.path.join(HERE, "..", "..", "figures", "landau", "chi_tables.npz")); WTt = CT["WT"]
+    pcs = np.array([np.conj((c * wzz * shz).sum() / (wzz * shz ** 2).sum()) for c in CT["chis"]])
+    kxr = kx1                                    # radial wavenumbers on the padded grid (FFT order)
+
+    def zon_ky1(f, gxx_, gyy_):
+        """zonal (k_y = 0) tendency of the charge rho = (g^xx k_x^2 + g^yy k^2) psi from the k_y = 1 pattern f(x)[, z]
+        (real-space complex profile of the k_y = +1 coefficient, psi = f e^{iky} + c.c.): -[psi_x rho_y - psi_y rho_x]_0"""
+        F = np.fft.fft(f, axis=0)
+        fx = np.fft.ifft(1j * kxr[:, None] * F, axis=0) if f.ndim == 2 else np.fft.ifft(1j * kxr * F)
+        r = -(gxx_ * np.fft.ifft(-(kxr[:, None] ** 2 if f.ndim == 2 else kxr ** 2) * F, axis=0) - gyy_ * KYMIN ** 2 * f)
+        rx = np.fft.ifft(1j * (kxr[:, None] if f.ndim == 2 else kxr) * np.fft.fft(r, axis=0), axis=0)
+        # psi_x rho_y - psi_y rho_x, zonal part: 2 Re[ fx * conj(i k r) - (i k f) * conj(rx) ]
+        return -2 * np.real(fx * np.conj(1j * KYMIN * r) - 1j * KYMIN * f * np.conj(rx))
+
+    def local_correction(x1, dx1, w, U):
+        out = 0
+        f_tot = np.zeros((nxg, len(shz)), complex)
+        for sgn in (1, -1):
+            ps = 0.5 * (x1 + sgn * 1j * dx1 / w)
+            wt = sgn * w - KYMIN * U
+            d2 = np.fft.ifft(-(kxr ** 2) * np.fft.fft(ps))
+            zeta = LAMD2 * (M.GXX * d2 - M.GYY * KYMIN ** 2 * ps)
+            app = -LAMD2 * KYMIN ** 2 * (np.interp(wt, WTt, pcs.real) + 1j * np.interp(wt, WTt, pcs.imag)) * ps
+            crit = np.exp(-(wt / 0.25) ** 2)
+            A = lst * zeta * crit + app * (1 - crit)
+            f_tot += ps[:, None] + A[:, None] * shz[None, :]
+        Tloc = (zon_ky1(f_tot, gzx[None, :], gzy[None, :]) * wzz[None, :]).sum(1)
+        Tflu = zon_ky1(f_tot @ wzz, M.GXX, M.GYY)
+        return Tloc - Tflu                       # real-space zonal charge tendency correction
+
 
     def kinetic(z, N):
         """kinetic damping tendency for zeta (k_y = 0 and 1 columns) given z and its Euler tendency N"""
@@ -96,6 +132,9 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
         kstat["n"] += 1; kstat["w"] += w
         out[:, 1] = np.where(keep1, -K1 * np.fft.fft(g) * nyg, 0)
         out[:, 0] = np.where(keep0, 1j * kx1 * np.fft.fft(f) * nyg, 0)
+        if lst > 0:
+            corr = local_correction(x1, dx1, w, U)       # zonal charge (vorticity) tendency correction in real space
+            out[:, 0] += np.where(keep0, -np.fft.fft(corr) * nyg, 0)
         return out
 
     def rhs(z):
@@ -150,7 +189,7 @@ def run(name, eps=1.0, T=800.0, dt=0.02, nx=64, nky=16, hyp=HYP, sink="h", dxfac
             print("blew up at", i * dt); break
     out = dict(t=np.array(ts), Ezon=np.array(EZ), Enz=np.array(EN), Eky=np.array(EK), ens=np.array(ENS),
                tsamp=np.array(tsm), psi=np.array(PS), t0=t0g[frame], kstat=np.array(KS),
-               par=str(dict(kin=kin, zcut=zcut, ztot=ztot, eps=eps, zeps=zeps, landau=landau, hypx=hypx, hypy=hypy, T=T, dt=dt, nx=nx, nky=nky, hyp=hyp, sink=sink, dxfac=dxfac, dyfac=dyfac, run=run, frame=frame, kind=kind)))
+               par=str(dict(kin=kin, zcut=zcut, ztot=ztot, lst=lst, eps=eps, zeps=zeps, landau=landau, hypx=hypx, hypy=hypy, T=T, dt=dt, nx=nx, nky=nky, hyp=hyp, sink=sink, dxfac=dxfac, dyfac=dyfac, run=run, frame=frame, kind=kind)))
     os.makedirs(CACHE, exist_ok=True)
     np.savez(f"{CACHE}/euler_{name}.npz", **out)
     return out

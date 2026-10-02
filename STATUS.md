@@ -75,6 +75,14 @@
        along the field line by the local metric; the static kinetic response to (g^xx/<g^xx> - 1) gives coefficient 4.85
        (prediction -0.23 vs measured -0.43 at t 6100): right sign and form, a factor ~2 low (in the linear phase,
        without critical layers, the same response matches to 10 %).
+   (g) 3 Oct, ~00:00 (`figures/landau/stress_rank1.py`, `scripts/rayleigh/euler.py lst=C`): the non-flute part in rank-one
+       form A(x) sh(z) reproduces the stress of GENE's full non-flute part at every harmonic (m = 1-9), so the problem
+       reduces to A(x). A predicted (C lam^2 zeta_1 at the critical layer, C = 4.85 from the static response, appH
+       response elsewhere) gives the stress on the jets' dominant harmonics m = 1, 3 to 0-40 % with the right phase
+       (flute: wrong phase); m >= 5 still flute-like. Closed fluid model with this local stress on the jets only: the
+       jets lose 13 % (GENE 4 %), the vortices grow (C = 4.85) or the run goes unstable (C = 7): the jet-vortex
+       interaction must be local along the field line on BOTH sides (the vortex's exchange term too), which needs the
+       jets' non-flute structure as well.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
