@@ -3,27 +3,21 @@
 Working notes by D. Kennedy (UKAEA) and G. G. Plunk (IPP Greifswald) on why the two breathing vortices of the
 strongly driven (eta = 1) dipole pair-plasma condensate decay. `notes.pdf` is the compiled document.
 
-## Where the notes stand (1 Oct 2026)
+## Where the notes stand (3 Oct 2026)
 
-The notes give the theory of the vortices and test it; they present only the calculation that describes the
-simulations (house rule, `STYLE_GUIDE.md` section 7a).
+Full record, with every retraction: `STATUS.md`, items (a)-(j). The notes open with a list of explanations ruled out.
 
-- **The vortices are the saturated shear-flow instability of their own jets.** In the fluid limit the jets and
-  vortices obey the two-dimensional Euler equation; jets corrugated at the Debye scale are Rayleigh-unstable; the
-  instability saturates by trapping. Rayleigh's equation on the measured jets gives the vortex frequency and
-  structure, and omega_tr = alpha gamma_R holds through the decay.
-- **Their damping is linear and kinetic**: Landau damping, along the field line, of the part of the vortex potential
-  that is not flute-like, at a rate independent of amplitude.
-- **They decay because the jets slowly lose their instability**, and collapse when the jets become stable.
-- **The loss rate is calculated** (no adjustable parameter) and matches the measured one in the reduced box, its
-  restarts and the production box.
-- **The rate of the decay is set by the perpendicular sink** eroding the corrugation (sink tests): changing the
-  velocity-space sink changes nothing; with the radial hyperdiffusion 16 times weaker the vortices all but stop
-  decaying, while the jets pay for their Landau damping.
-- **Open:** the constant C; the stability threshold in the corrugation; what erodes the corrugation in a real
-  (collisional) plasma; the long-time state when the vortices persist. Runs that bear on these are in progress
-  (sink and resolution restarts with a control, a from-noise run without radial hyperdiffusion, a Debye-length
-  scan): their state and what to do as each reports are in `STATUS.md`.
+- **The vortices are the shear-flow instability of their own jets** (Rayleigh's equation on the measured jets gives
+  their frequency and structure); the instability saturates by trapping.
+- **Their loss is linear and kinetic**: Landau damping, along the field line, of their small non-flute part, at a
+  calculated rate with no adjustable parameter that matches the measured one in every run.
+- **The slow drain is physical** (the same without radial hyperdiffusion). **The jets pay** for most of the loss and
+  their energy budget closes; the exchange is carried by the momentum the damped vortices deposit in the jets and by
+  the stress of the vortices computed locally along the field line, where their non-flute part matters.
+- **The late acceleration and the collapse** of the reference run are numerical (radial hyperdiffusion and grid).
+- **Open:** the size of the vortices' non-flute part at their critical layers (the kinetic response gives it to within
+  a factor of two), hence the drain rate; a fluid model local on both sides; the end state. Drain tests in
+  `DIPOLE_TEST/nl_reducedbox_20260925/rb_c0p3_draintest` are running.
 
 ## Build
 
@@ -67,6 +61,7 @@ env -u LD_LIBRARY_PATH pdflatex notes && env -u LD_LIBRARY_PATH pdflatex notes
 | 11 | `dissipation` | The perpendicular sink acts on the zonal flow, the velocity-space sink on the vortices. |
 | 12 | `euler` | A fluid with the same jets has the same vortices but not their kinetic loss. |
 | 13 | `sinktests` | The decay follows the perpendicular sink, not the velocity-space one; with a weak perpendicular sink the vortices persist. |
+| 15 | `supply` | The jets pay for the part of the loss that the vortices do not drain (energy budget of the jets, no adjustable constant). |
 | 14 | `trapping` | The cat's eyes turn over many times during the decay; the collapse comes as they narrow to a grid cell. |
 
 Appendices (`appendices/*.tex`): step-by-step derivations at undergraduate level - A: Euler limit and Rayleigh's
