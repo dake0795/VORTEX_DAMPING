@@ -98,6 +98,12 @@
        at the same k_x lambda_D = 0.12) is UNEXPLAINED. Differences left between the two: box size (lx 3689 vs 14757),
        k_y,min (2e-3 vs 5e-4), nky0, stage of the decay. Treat the equilibrium static response as giving shape and sign,
        and the size to within a factor 1-1.7.
+   (j) Drain tests at 3 Oct 04:20 (rb_c0p3_draintest, restarts from t 2500, hyp_x = 0):
+       - rb_c0p3_hxoff vs reference: E_nz ratio 1.10-1.11 at t 3000-4000, then 1.39 (t 5000) and 1.25 (5500): the radial
+         hyperdiffusion matters from t ~ 4500, not only at the collapse (correction to item 1 of the 2 Oct block).
+       - vort0p5_hxoff (vortices halved, jets unchanged): NO regrowth over 500 t.u. (4.1e6 -> 3.8e6 vs 1.1-1.3e7 unscaled):
+         the vortex amplitude is NOT slaved to the jets (against the drain-law reading and the early 'regrowing' remark).
+       - all0p5_hxoff (everything halved): drains 5x slower (Gamma_E 1.0e-4 vs 5.3e-4); Euler scaling alone gives 2x.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
