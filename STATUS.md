@@ -91,6 +91,13 @@
        does not relax to the equilibrium response, so the non-flute structure keeps memory of how the structure formed;
        the equilibrium response gives the shape and 0.6-1x the size. The vortices' critical-layer coefficient (6-8
        measured vs 4.85 predicted) is the same effect.
+   (i) 3 Oct, ~02:00, correction to (h): the reduced-box factor (1.5-1.65) is constant from t 800 (just after the burst)
+       to t 8000 while the vortex energy falls ~100x, and both the reduced box and eta1_production_NEW_sep26 (factor
+       0.96-1.38) are collisionless with the same hzmask binary, hyp_z 0.05 and identical geometry. So the 'collisionless
+       memory' reading of (h) is not supported by anything specific, and the box dependence of the factor (1.63 vs 1.22
+       at the same k_x lambda_D = 0.12) is UNEXPLAINED. Differences left between the two: box size (lx 3689 vs 14757),
+       k_y,min (2e-3 vs 5e-4), nky0, stage of the decay. Treat the equilibrium static response as giving shape and sign,
+       and the size to within a factor 1-1.7.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the

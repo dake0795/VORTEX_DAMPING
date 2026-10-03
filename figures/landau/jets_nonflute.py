@@ -11,7 +11,7 @@ Gxx = (wz * geo["gxx"]).sum(); L2 = 5000.0
 R = response.Response(geo); R.source = lambda k2: k2 * (geo["gxx"] - Gxx)
 chi = np.conj(R.solve(0.02, 1.0))                          # response per unit lambda^2 k_x^2 ... source = k2 * (gxx - <gxx>)
 kxg = np.fft.fftfreq(vf.NX, 1.0 / vf.NX) * 2 * np.pi / vf.LX
-for run, tc in (("orig", 4000.0), ("orig", 8000.0), ("hxoff", 3900.0)):
+for run, tc in [(a.split(":")[0], float(a.split(":")[1])) for a in sys.argv[1:]] or [("orig", 4000.0), ("orig", 8000.0), ("hxoff", 3900.0)]:
     t, p0, p1 = predict.window_field(run, tc)
     pz = p0.mean(0); pz0 = (pz * wz[None, :]).sum(1); pz1 = pz - pz0[:, None]
     print(f"\n{run} t {tc:.0f}:  m   kx lamD   |phi_z1|/|phi_z0|   measured/predicted (best complex scale)   shape match")
