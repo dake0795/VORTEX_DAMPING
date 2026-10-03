@@ -83,6 +83,14 @@
        jets lose 13 % (GENE 4 %), the vortices grow (C = 4.85) or the run goes unstable (C = 7): the jet-vortex
        interaction must be local along the field line on BOTH sides (the vortex's exchange term too), which needs the
        jets' non-flute structure as well.
+   (h) 3 Oct, ~01:30 (`figures/landau/jets_nonflute.py`, `jets_nonflute_prod.py`): the JETS' non-flute part is the
+       static kinetic response to (g^xx(l) - <g^xx>) d_x^2 phi_z0 in shape (0.98-0.999 for m = 1-5) and sign, with
+       magnitude 1.5-1.7x the prediction in the reduced box (every time, both runs) but 0.96-1.38x in the newer
+       production run (same hyp_z 0.05; nz0 32): not geometry (g^xy = 0; GENE's k_perp^2 is the file's metric) and
+       not hyp_z. Reading: in static or co-moving structures (jets; the vortices' critical layers) a collisionless plasma
+       does not relax to the equilibrium response, so the non-flute structure keeps memory of how the structure formed;
+       the equilibrium response gives the shape and 0.6-1x the size. The vortices' critical-layer coefficient (6-8
+       measured vs 4.85 predicted) is the same effect.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
