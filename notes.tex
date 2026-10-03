@@ -233,6 +233,20 @@ $^{2}$Max-Planck-Institut f\"ur Plasmaphysik, Greifswald, Germany}
 The two box-scale vortices which breathe on the zonal condensate of a strongly driven, temperature-gradient-dominated dipole pair plasma do not persist: in a reduced-box simulation, they decay, ever faster, until they collapse. In these working notes, we give the theory of their existence and of their decay, and test it against the simulation. The vortices are the shear-flow instability of their own jets. In the fluid limit of the kinetic equations, the jets and the vortices obey the two-dimensional Euler equation; jets whose shear layers are corrugated are unstable, in the sense of Rayleigh, to perturbations of the scale of the box; the instability saturates when the fluid at its critical layers is trapped; and the corrugation, which sits on those critical layers, is maintained by the vortices and leaves the jets only just unstable. Rayleigh's equation on the measured jets predicts the frequency and the radial structure of the vortices, and their amplitude obeys the trapping law, viz., the trapping frequency is a constant multiple of the Rayleigh growth rate, while their energy falls by orders of magnitude. The vortices are damped kinetically: the part of their potential that varies along the magnetic field does work on particles streaming along it, and this Landau damping converts their electrostatic energy into entropy at a rate that does not depend on their amplitude; we calculate the rate, which has no adjustable parameter, and it is the measured one, in boxes of different sizes. The jets make up for the loss as long as they are unstable. The vortices and the corrugation of their jets therefore decay together, and the vortices collapse when the jets become stable. In the simulation, the corrugation is eroded by the perpendicular hyperdiffusion, which, therefore, sets the lifetime of the vortices: where it is weak, the vortices persist, and their Landau damping is a slow drain on their jets.
 \end{abstract}
 
+\paragraph{Ruled out.} The following explanations of the decay have been tested against the simulations and fail:
+\begin{itemize}
+\item the velocity-space sink setting the rate of decay;
+\item the vortex energy slaved to a single invariant of the jets (their energy, enstrophy or fine-scale enstrophy);
+\item saturation by trapping, \(\omega_\text{tr} = C\gamma_\text{R}\), setting the rate of the slow drain;
+\item a cat's-eye momentum balance between the vortices and their jets;
+\item the two-dimensional Euler equation with the kinetic loss treated as a friction on the vortices;
+\item the jets' response cut off above a fixed radial scale near the Debye length;
+\item Landau damping of the jets' radial harmonics oscillating at the breathing frequency;
+\item the vortices' non-flute part at their critical layers as the linear kinetic response, with or without the advection of the jets' own non-flute charge;
+\item the radial resolution setting the slow drain;
+\item collisionless memory, the parallel hyperdiffusion or the geometry as the cause of the size of the jets' non-flute part.
+\end{itemize}
+
 % ===========================================================================
 \section{Introduction}\label{sec:intro}
 % ===========================================================================
