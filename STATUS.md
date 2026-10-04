@@ -265,6 +265,14 @@
        resolution - it is set by their fine radial structure near the critical layers (Debye scale), which the grid
        resolves differently. So the drain's resolution dependence is the Reynolds stress of the resolved vortex
        structure; nx256 decides whether that stress converges. Theory (stress + deposition) tracks GENE across the change.
+   (cc) 4 Oct, ~23:55: (bb) WITHDRAWN - its stress numbers were window-sampling scatter. With 25 windows (every 60, t
+       2800-4300; `stress_m1_stats.py`): m = 1 flute Reynolds stress +0.727 +- 0.145 (nx64; per-window scatter 0.72)
+       vs +0.745 +- 0.065 (nx128) - no resolution difference; deposition -2.309 +- 0.095 vs -2.212 +- 0.106; sum
+       -1.582 +- 0.118 vs -1.467 +- 0.084 against GENE -1.653 / -1.310 (t 3000-4000). So stress + deposition reproduces
+       the jets' m = 1 forcing within errors at nx64 (and to ~2 sigma at nx128), but GENE's resolution change (0.34)
+       is NOT captured (theory change 0.11 +- 0.14). Earlier single-number comparisons of the m = 1 stress (e.g. the
+       -1.87 vs -1.65 of jet_budget_clean.py, 6 windows) carry this +-0.15-0.3 scatter. `stress_where.py` (masking the
+       critical layers) is inconclusive for the same reason.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
