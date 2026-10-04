@@ -257,6 +257,14 @@
        1.665) - good to a few %. NOTE GENE debye2 = 2 lambda_D^2 for the pair plasma (rho = k^2 debye2 g^xx phi).
        `burst_analysis.py` runs the whole burst test (prediction from legA t 700, linear lin_m1/3, nonlinear legB,
        reference) once the jobs finish.
+   (bb) 4 Oct, ~23:30: WHY THE DRAIN DEPENDS ON RESOLUTION (`jets_nl_by_m_res.py`, `jet_budget_clean_res.py`, t 3000-4000).
+       Jets' nonlinear E input by harmonic per P1: the whole difference is at m = 1 (-1.08 nx64 vs -0.83 nx128; m >= 3
+       the same). m = 1 forcing (fluid units): GENE -1.653 / -1.310; flute Reynolds stress +0.408 / +0.896;
+       deposition f = kP/wt -2.277 / -2.245; stress + deposition -1.869 / -1.350 (13 % / 3 %). The deposition is
+       resolution-independent (loss formula); the vortices' flute Reynolds stress on the jets doubles at doubled
+       resolution - it is set by their fine radial structure near the critical layers (Debye scale), which the grid
+       resolves differently. So the drain's resolution dependence is the Reynolds stress of the resolved vortex
+       structure; nx256 decides whether that stress converges. Theory (stress + deposition) tracks GENE across the change.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
