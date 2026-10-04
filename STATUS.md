@@ -160,6 +160,16 @@
        (rb_c0p1_hxy, Courant 0.1: m = 1 factor 1.60/1.63 vs 1.58/1.61 at Courant 0.3, t 1200/1800). Decisive test queued:
        zonal_static/m1 (linear, nx0 3, ky0 only, reduced-box grid; job 37268642, 1 core pinned cpu-r-hbm-37, waits on
        Dan's cs450p ~6 h) - GENE's own linear static non-flute part of one zonal harmonic vs theory.
+   (q) 4 Oct, night: linear GENE test of the jets' factor (zonal_static/m1_chpt, job 37270554, 18 min on 1 core): the
+       m = 1 jet (k_y = 0, k_x = +-1) cut from the rb_c0p3_hxoff checkpoint at t 9360.8, evolved LINEARLY for 200 time
+       units: |phi_1|/|phi_0| = 7.765e-3 and meas/pred = 1.667 (shape 0.997) at every frame, unchanged to 1e-4 - the same
+       as the nonlinear run at that time (1.667). (`figures/landau/zonal_static_gene.py`.) So a collisionless k_y = 0
+       structure is linearly stationary with the non-flute part it has: the size is a property of the distribution
+       (any function of the invariants on each line is stationary), not fixed by phi_0, and the 'equilibrium static
+       response' is one member of that family. This is specific support for the memory reading of (h), withdrawn in (i)
+       for lack of a test; with it the constancy from t 800 and the box dependence (different bursts) are consistent.
+       Open: what the burst selects (1.6 reduced box, 1.0-1.4 production). First try m1 (ppj init) gave phi = 0: equal
+       species init carries no charge; the first job also failed on an srun cpus-per-task clash (fixed in the sbatch).
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
