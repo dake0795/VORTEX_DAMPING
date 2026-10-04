@@ -224,6 +224,14 @@
        Next: what made the pitch-angle structure (candidate: the interchange burst, h ~ F0 (w - w*T)/(w - wd(eps,lam)),
        through the bounce-averaged drift; check on burst_rerun legA at t 700), and whether the vortices' critical-layer
        excess (6-8 vs 4.85) is the same thing.
+   (x) 4 Oct, night, follow-up to (w): the deposit I = <h> - F0 phibar (`jet_charge_tperp2.py`) reproduces the extra
+       non-flute part directly (+0.661 vs +0.689 from n[h] - rho0[phi]). Profile in pitch angle (high energy): I/F0
+       rises across the passing range (lambda 0 -> 1 = 1/B_max) and is flat over the trapped range, amplitude ~ eps
+       (low energy: flat). Smooth models fit the shape but not the integral: linear in mu (T_perp) R^2 0.88 -> +1.58;
+       mu, mu*eps, mu^2 R^2 0.92 -> +1.24; deposit proportional to the orbit-averaged magnetic drift R^2 0.89 -> +0.23
+       (`jet_charge_aniso.py`, `jet_charge_driftdep.py`). So the exact statement stands (the factor is the
+       pitch-angle structure of the jets' charge, closed to 1.5 %), but its origin is not pinned by a one-parameter
+       model; the burst_rerun legA checkpoint at t 700 (and lin_m1/lin_m3) is the test of where it is made.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
