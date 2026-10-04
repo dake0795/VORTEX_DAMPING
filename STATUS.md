@@ -136,6 +136,15 @@
          nearly cancelling; measured drain 15-35 % of the absorbed power; with each term uncertain by 10-50 % the
          predicted sum has the wrong sign in 3 of 6 windows. Predicting the drain needs both to a few per cent; it also
          explains the resolution sensitivity of the drain.
+   (n) 4 Oct, late afternoon: Debye scan added to figure `landau`; new appendix `app:momentum` (appI_momentum.tex:
+       energy/momentum ratio omega/k of a travelling wave, radial displacement dx = dp_y/(q B), current f/B, force on
+       the jets f = kP/wt; the damping conserves the momentum of jets + vortices); new figure `balance` (the two
+       exchanges and the measured drain, nx 64 and 128) with the momentum-budget explanation of the near-cancellation.
+       At nx 128 the Reynolds stress alone matches the measured drain; the estimate of the damping exchange is too large
+       by ~0.5 P there. Collisional restart queued (rb_c0p3_draintest/coll_hxoff 37267574 + leg 2 37267575, Landau
+       1e-2, hyp_x = 0, cpu-r-hbm-[78-79] after debye_x4 leg 2). Literature search delegated (LITERATURE.md, pending).
+       Not done: pitch-angle-resolved (g1.dat) stress diagnostic (judged non-predictive); the missing static factor;
+       the m = 3 harmonic.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
