@@ -212,6 +212,18 @@
        parallel is RAW: embedded hyp_v/hyp_z must be subtracted conditionally' (schema) - entropy-side statements need
        that subtraction and are NOT for the paper. Note also 'reduced dipole E = Eplunk/2 + Ebounce; distinct from
        native electrostatic E': all budget statements in the paper use the native electrostatic E.
+   (w) 4 Oct, night: THE JETS' EXTRA NON-FLUTE FACTOR IS EXPLAINED (`figures/landau/jet_charge_pitch.py`, linear-run
+       checkpoint t 9560.8, k_y = 0, m = 1). GENE grids reproduced (int F0 d^3v = 1); exact zonal Poisson
+       k^2 lam^2 g^xx phi = rho holds (rho/(phi g^xx) = 0.02901 = 2 k^2 lam^2 at every z). h/F0 is orbit-constant to
+       < 2 % (stationary), ~0.99 phi_f at low energy, but at high energy it rises with pitch angle (0.97 -> 1.14 phi_f
+       from passing to deeply trapped). Exact decomposition of the field equation: phi_1 - rho0[phi_1] =
+       -k^2 lam^2 (g^xx - <g^xx>) phi_f  [static]  +  (n[I] - <n[I]>)  [pitch-angle structure of the deposit
+       I = <h> - F0 phibar]. Projected on the static shape: static 1.000 + pitch-angle part 0.689 (shape match 0.985)
+       = 1.689 vs measured 1.665, residual 1.5 %. So the factor is the pitch-angle distribution of the jets' charge,
+       which a collisionless zonal state keeps (linear test (q)); the 'equilibrium' response assumes a Maxwellian deposit.
+       Next: what made the pitch-angle structure (candidate: the interchange burst, h ~ F0 (w - w*T)/(w - wd(eps,lam)),
+       through the bounce-averaged drift; check on burst_rerun legA at t 700), and whether the vortices' critical-layer
+       excess (6-8 vs 4.85) is the same thing.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
