@@ -237,6 +237,12 @@
        collapse), while the jets' m = 1 factor is 1.56 at t 1000 and 1.62-1.66 thereafter. The bump does NOT track the
        jets' pitch-angle factor in the slow phase; it rises to the jets' value only as the cat's eyes narrow towards the
        grid / Debye scale. Separate, eye-width-dependent effect; the (w) mechanism does not explain the slow-phase bump.
+   (z) 4 Oct, 21:45 (`bump_coef_freq.py`): the fluid in a cat's eye circulates at omega_tr, so its charge is forced
+       at ~omega_tr, not at wt = 0. The response coefficient falls with frequency (4.86 at 0.002, 4.73 at 0.1, 4.08 at
+       0.3, 3.41 at 0.5), so a finite trapping frequency LOWERS the bump below 4.85; measured is above. Ruled out.
+       The slow-phase bump excess (1.27) remains unexplained; candidates: pitch-angle structure of the eye's charge
+       (as (w) for the jets) - needs the distribution function at the critical layer, which a single checkpoint
+       mixes with the other vortex.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
