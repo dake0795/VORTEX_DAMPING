@@ -16,7 +16,9 @@ LC = np.load(os.path.join(HERE, "cache.npz")); WG, DTH = LC["wg"], LC["Dth"]
 geo = bounce.geometry(f"{RB}/rb_c0p3_hxy/leg_0004/out/dipole_fix.dat"); wz = geo["J"] / geo["J"].sum()
 Gxx, Gyy = (wz * geo["gxx"]).sum(), (wz * geo["gyy"]).sum()
 NXF = predict.NXF; dx = vf.LX / NXF; k = vf.KYMIN
+SAVE = {}
 for name, (dirs, L2, tcs) in RUNS.items():
+    rows = []
     # measured parallel-channel rate, k_y >= 1
     T, F, P = [], [], []
     for d in dirs:
@@ -61,3 +63,6 @@ for name, (dirs, L2, tcs) in RUNS.items():
             den += (Gxx * np.abs(dph0) ** 2 + Gyy * k ** 2 * np.abs(ph0) ** 2).sum() * dx
         pred = num / den
         print(f"   t {tc:7.0f}: w {w[0]:+.3f} {w[1]:+.3f} (fit resid {res:.3f}); loss rate measured {meas:.3e}, predicted {pred:.3e}, ratio {meas/pred:.2f}")
+        rows.append((tc, meas, pred, w[0]))
+    SAVE[name.split()[0]] = np.array(rows)
+np.savez(os.path.join(HERE, "cache_debye.npz"), **SAVE)

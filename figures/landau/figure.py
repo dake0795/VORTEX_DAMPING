@@ -100,6 +100,12 @@ def draw():
     for run, mk in (("a03", "s"), ("a003", "^")):
         rr = C[f"rows_{run}"]
         b.loglog(np.interp(rr[:, 0], M[f"tc_{run}"], M[f"par_{run}"]), rr[:, 1], mk, c=ns.PAL[run], mfc="w", ms=5, mew=1.0, zorder=4)
+    if os.path.exists(os.path.join(HERE, "cache_debye.npz")):          # Debye-length scan (4 Oct 2026): runs from noise, lambda_D x2 and /2
+        Db = np.load(os.path.join(HERE, "cache_debye.npz"))
+        for key, mk, col in (("debye_x4", "D", ns.PAL["W"]), ("debye_d4", "v", ns.PAL["Z"])):
+            if key in Db.files:
+                b.loglog(Db[key][:, 1], Db[key][:, 2], mk, c=col, mfc=col, ms=5, mew=0.8, zorder=4)
+        traces.label(b, 1.15e-4, 6.0e-4, r"$\lambda_D\times2$", c=ns.PAL["W"]); traces.label(b, 1.9e-3, 9.0e-4, r"$\lambda_D/2$", c=ns.PAL["Z"])
     Pr = np.load(os.path.join(HERE, "cache_production.npz"))
     b.loglog([float(Pr["measured_parallel"])], [float(Pr["predicted"])], "*", c=ns.PAL["aux"], ms=10, zorder=5)
     b.set_xlim(*lim); b.set_ylim(*lim)
