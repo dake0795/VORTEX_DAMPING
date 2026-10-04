@@ -1,0 +1,46 @@
+% ===========================================================================
+\section{The momentum that the damping deposits in the jets}\label{app:momentum}
+% ===========================================================================
+
+Here we show that the particles which absorb energy from a vortex also absorb its binormal momentum, and that they hand it to the jets. The calculation has three steps: the ratio of the energy to the momentum that a particle takes from a travelling wave, the radial displacement that the momentum produces in a strong magnetic field, and the force on the zonal flow that follows.
+
+\subsection{Energy and momentum taken from a travelling wave}
+
+Let the vortex be \(\phi = \varphi(x, l)\,\rme^{\rmi ky - \rmi\omega t}\), a pattern that travels in \(y\) at the phase speed \(c = \omega/k\). In the frame that moves with the pattern, the potential does not depend on time, so the energy of a particle measured in that frame is conserved. If, in the frame of the box, the particle gains energy \(\Delta\varepsilon\) and binormal momentum \(\Delta p_y\), then its energy in the frame of the pattern changes by \(\Delta\varepsilon - c\,\Delta p_y\), and this must vanish:
+\begin{equation}
+\Delta\varepsilon = c\,\Delta p_y = \frac{\omega}{k}\,\Delta p_y .
+\label{eq:Iratio}
+\end{equation}
+This is true for any particle and any interaction with a single travelling wave; it is the reason why the energy and the momentum of a wave are absorbed together.
+
+The power \(P\) of \cref{eq:Hpower} is the rate at which the resonant particles gain energy in the frame of the zonal flow, which moves at \(U(x)\). In that frame, the energy gained is \(\Delta\varepsilon - U\,\Delta p_y = (c - U)\,\Delta p_y = (\wt/k)\,\Delta p_y\), with \(\wt = \omega - kU\) the Doppler-shifted frequency \cref{eq:Hdoppler}. Hence the particles at the radius \(x\) gain binormal momentum at the rate
+\begin{equation}
+f(x) = \frac{k\,P(x)}{\wt(x)},
+\label{eq:Iforce}
+\end{equation}
+per unit volume, and the vortex loses it at the same rate. In the frame of the box, the vortex loses energy at the rate \(\omega f/k = (\omega/\wt)P\): an amount \(P\) goes into the random motion of the particles, which is the loss of \cref{sec:loss}, and the rest, \(Uf\), goes with the momentum.
+
+\subsection{From momentum to a radial current}
+
+In a strong magnetic field, the binormal momentum of a guiding centre is tied to its radial position. The canonical momentum conjugate to \(y\) is \(p_y = mv_y + q_aA_y\), and in the slab coordinates of the flux tube \(A_y = Bx\) to the order needed here; the kinetic part \(mv_y\) is negligible for the slow motions considered. A particle of charge \(q_a\) that gains binormal momentum \(\Delta p_y\) is therefore displaced radially by
+\begin{equation}
+\Delta x = \frac{\Delta p_y}{q_a B}.
+\label{eq:Idisplacement}
+\end{equation}
+The same result follows from the drift of a particle under a force \(F_y\) in a magnetic field, \(v_x = F_y/(q_aB)\). The resonant electrons and positrons both gain momentum in the same direction, so they are displaced in opposite directions, and together they carry the radial current
+\begin{equation}
+J_x = \sum_a q_a n_a\,\frac{\Delta x_a}{\Delta t} = \frac{f}{B},
+\label{eq:Icurrent}
+\end{equation}
+whatever the share of the momentum taken by each species.
+
+\subsection{The force on the jets}
+
+A radial current that varies with \(x\) changes the charge density, \(\partial_t\rho = -\partial_x J_x = -\partial_x f/B\). In the flute-like zonal state, the charge is the polarisation charge of the zonal flow, which, in the units of \cref{eq:poisson}, is proportional to the zonal vorticity \(\partial_x U\), with \(U\) the \(\vE\times\vB\) velocity. The change of charge is therefore a change of the zonal flow,
+\begin{equation}
+\frac{\partial U}{\partial t} = f ,
+\label{eq:Ijets}
+\end{equation}
+in the fluid units of \cref{sec:euler}: the momentum that the particles take from the vortex is given to the jets. The jets gain energy at the rate \(\int U f\,\rmd x\), which is the remainder of the energy lost by the vortex in the frame of the box; the particles keep \(\int P\,\rmd x\) as heat. The momentum of the jets and the vortices together is thus conserved by the damping, while their energy decreases by the absorbed power.
+
+Where \(\wt\) has the sign of \(\omega\), i.e. between the critical layers of a vortex, \(f\) has the sign of the momentum of the vortex, and the damping takes energy from the vortex. Where \(\wt\) and \(\omega\) have opposite signs, in the cores of the jets that move faster than the vortex, the same absorption gives the vortex energy in the frame of the box, \(-(\omega/\wt)P > 0\), and takes it from the jets. Since \(\Dfn(\wt)\) grows with \(|\wt|\) (\cref{fig:landau}), most of the absorption takes place in the cores of the jets, and the net effect of the damping on the energy of the vortices, in the frame of the box, is a gain.
