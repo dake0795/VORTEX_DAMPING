@@ -104,6 +104,17 @@
        - vort0p5_hxoff (vortices halved, jets unchanged): NO regrowth over 500 t.u. (4.1e6 -> 3.8e6 vs 1.1-1.3e7 unscaled):
          the vortex amplitude is NOT slaved to the jets (against the drain-law reading and the early 'regrowing' remark).
        - all0p5_hxoff (everything halved): drains 5x slower (Gamma_E 1.0e-4 vs 5.3e-4); Euler scaling alone gives 2x.
+   (k) 4 Oct (`figures/landau/debye_scan.py`): the LOSS FORMULA holds across the Debye scan with no free constant:
+       debye_x4 (lambda_D^2 x4, vortex frequency 0.43) measured/predicted 0.80-0.99; reference 1.01-1.08; debye_d4
+       (lambda_D^2 /4, frequency 3.4) 1.01-1.14. The measured rate changes only ~3x over 16x in lambda_D^2 because the
+       frequency (8x) enters D(wt); the formula captures both.
+   (l) 4 Oct: rb_c0p3_hxoff has NOT collapsed by t 10,216 (E_nz 8.4x the reference at t 10,000); its decay rate is
+       roughly constant, 2-4e-4 (about 0.15 nu_L), from t ~4500: near-exponential drain; the E^(7/4) drain law fitted
+       to t < 4400 fails after. hxyoff (both perpendicular sinks off) = hxoff (ratio 1.01 at t 3000). nx128_hxoff drains
+       ~2x faster than hxoff at t 3500-4400 while its jets lose ~25 % less: the split of the Landau loss between jets
+       and vortices is NOT converged in radial resolution (Debye scale ~1.2 dx at nx 64). nx256_hxoff queued
+       (37266546, + leg 2 37266547; starts ~5 Oct 15:00 on cpu-r-hbm-[2,4,5,35]). Control nx128_hx16: 1.23x the
+       reference at t 10,000, 1.98x at 10,500 (decays like the reference, collapse delayed).
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
