@@ -243,6 +243,10 @@
        The slow-phase bump excess (1.27) remains unexplained; candidates: pitch-angle structure of the eye's charge
        (as (w) for the jets) - needs the distribution function at the critical layer, which a single checkpoint
        mixes with the other vortex.
+   PRE-REGISTERED PREDICTION (4 Oct 2026, 21:50, before coll_hxoff has run): with Landau collisions nu = 0.01
+       (pitch-angle scattering time ~100), the jets' m = 1 non-flute factor relaxes from ~1.6 to ~1.0 (static response)
+       within a few hundred time units of the restart at t 2500, because it is the pitch-angle structure of the jets'
+       charge (STATUS (w)); the collisionless control stays at ~1.6. Check with `figures/landau/coll_prediction_check.py`.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
