@@ -232,6 +232,11 @@
        (`jet_charge_aniso.py`, `jet_charge_driftdep.py`). So the exact statement stands (the factor is the
        pitch-angle structure of the jets' charge, closed to 1.5 %), but its origin is not pinned by a one-parameter
        model; the burst_rerun legA checkpoint at t 700 (and lin_m1/lin_m3) is the test of where it is made.
+   (y) 4 Oct, 21:30 (`figures/landau/bump_vs_jets.py`, reference run): the vortices' critical-layer bump ratio / 4.85
+       is 1.27-1.28 for t 1000-3000, then 1.32, 1.39, 1.49, 1.60, 1.66-1.71 at t 4000-9800 (approaching the numerical
+       collapse), while the jets' m = 1 factor is 1.56 at t 1000 and 1.62-1.66 thereafter. The bump does NOT track the
+       jets' pitch-angle factor in the slow phase; it rises to the jets' value only as the cat's eyes narrow towards the
+       grid / Debye scale. Separate, eye-width-dependent effect; the (w) mechanism does not explain the slow-phase bump.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
