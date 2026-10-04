@@ -147,7 +147,6 @@ def main():
     ax.set_xlabel(r"$t\;(L_{\rm ref}/c_{\rm ref})$")
     ax.set_ylabel(r"$\dot E_{\rm nz}/E_{\rm nz}\;(10^{-3}\,c_{\rm ref}/L_{\rm ref})$")
     ns.style_axes(ax)
-    ns.tag(ax, "(a)", y=0.06, va="bottom")
 
     # (b) the one point: the exchange with the jet is a function of the vortex amplitude, the same in the restarts,
     # and it changes sign at small amplitude
@@ -165,7 +164,7 @@ def main():
     bx.set_xlabel(r"$(E_{\rm nz}/E_{\rm zon})^{1/2}$")
     bx.set_ylabel(r"from the jet $(10^{-3}\,c_{\rm ref}/L_{\rm ref})$")
     bx.legend(loc="lower left", handletextpad=0.1, borderaxespad=0.2)
-    ns.tag(bx, "(b)", x=0.955, ha="right")
+    fig.delaxes(bx); pa = ax.get_position(); ax.set_position([0.5 - pa.width / 2, pa.y0, pa.width, pa.height])  # panel (b) removed 4 Oct 2026: it read the numerical collapse as physics
     ns.save(fig, "exchange")
 
 

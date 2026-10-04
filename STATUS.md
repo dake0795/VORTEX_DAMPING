@@ -180,6 +180,14 @@
        700 -> 1500, lin_m1 / lin_m3 linear k_y = 0 from legA's checkpoint (1 core each, cpu-r-hbm-37). If linear
        reproduces the rise, the factor is the phase-mixed residual of the burst (a Rosenbluth-Hinton-type initial-value
        problem), computable from the state at formation.
+   (s) 4 Oct, evening, paper reframed (Dan: succinct, final answer, 30 pages max, important material in the main text,
+       'make this as strong as you can'): 36 -> 20 pages. Landau derivation and momentum in Sec. 3 (3.4, 3.5); new 3.6
+       energy budget with dE_v/dt = c dM_v/dt (balance-figure damping term is -<(w/wt)P> = -c int f, consistent);
+       predictions rewritten; Sec. 4 reordered (4.1 slow drain physical / collapse numerical first, then geometry,
+       Rayleigh, saturation, Landau, jets pay); intro, abstract, cartoon panel (b) and summary tell the momentum story;
+       ruled-out list, fluid-model-alone, channels, corrugation, dissipation, trapping figures and the old Rayleigh and
+       trapping appendices removed (files kept). Panels (b) of amplitude and exchange removed (they read the numerical
+       collapse as physics). Injection renamed I (P is the absorbed power).
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the

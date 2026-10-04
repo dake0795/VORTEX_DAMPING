@@ -102,7 +102,7 @@ def main():
     for ax in (a, b):
         ax.yaxis.set_minor_formatter(NullFormatter())
     b.xaxis.set_major_locator(LogLocator(base=10, numticks=6)); b.yaxis.set_major_locator(LogLocator(base=10, numticks=6))
-    ns.tag(a, "(a)"); ns.tag(b, "(b)")
+    fig.delaxes(b); pa = a.get_position(); a.set_position([0.5 - pa.width / 2, pa.y0, pa.width, pa.height])  # panel (b) removed 4 Oct 2026: it read the numerical collapse as physics
     ns.save(fig, "amplitude")
 
 

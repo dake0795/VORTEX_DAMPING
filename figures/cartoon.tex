@@ -57,11 +57,11 @@
   \node[box, minimum width=1.7cm] (V) at (5.55, 5.05) {vortices\\$E_\mathrm{nz}$};
   \node[box, draw=cent, minimum width=3.2cm] (F) at (4.80, 2.05) {fine structure in\\velocity space, $Z_\mathrm{nz}$};
   % exchange with the jets
-  \draw[->, csup, line width=1.6pt] ([yshift=5pt]J.east) -- node[above, text=black] {large vortices} ([yshift=5pt]V.west);
-  \draw[<-, csup, line width=1.0pt, densely dashed] ([yshift=-5pt]J.east) -- node[below, text=black] {small vortices} ([yshift=-5pt]V.west);
+  \draw[->, csup, line width=1.6pt] ([yshift=6pt]J.east) -- node[above, text=black, align=center] {momentum of\\the damping} ([yshift=6pt]V.west);
+  \draw[<-, csup!55!black, line width=1.6pt] ([yshift=-6pt]J.east) -- node[below, text=black] {Reynolds stress} ([yshift=-6pt]V.west);
   % kinetic removal
   \draw[->, cent, line width=1.6pt] (V.south) -- (V.south |- F.north);
-  \node[anchor=east, align=right] at (5.35, 3.55) {phase mixing along\\the field line, at a rate\\independent of amplitude};
+  \node[anchor=east, align=right] at (5.35, 3.55) {Landau damping of\\the non-flute part, at a\\rate independent of\\amplitude};
   \draw[->, crem, line width=1.6pt, decorate, decoration={snake, amplitude=1.2pt, segment length=6pt, post length=4pt}] (F.south) -- ++(0, -0.9);
   \node[anchor=north] at (4.80, 0.50) {velocity-space sink};
 \end{scope}
