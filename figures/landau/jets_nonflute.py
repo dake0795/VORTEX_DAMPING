@@ -6,6 +6,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "lib")); sys.path.insert(0, HERE)
 import vortex_field as vf, bounce, response, predict
 vf.RUNS["hxoff"] = [f"{vf.RB}/rb_c0p3_hxoff/leg_0001/out"]
+vf.RUNS["c0p1"] = [f"{vf.RB}/rb_c0p1_hxy/leg_0001/out"]
 geo = bounce.geometry(f"{vf.RB}/rb_c0p3_hxy/leg_0004/out/dipole_fix.dat"); wz = geo["J"] / geo["J"].sum()
 Gxx = (wz * geo["gxx"]).sum(); L2 = 5000.0
 R = response.Response(geo); R.source = lambda k2: k2 * (geo["gxx"] - Gxx)

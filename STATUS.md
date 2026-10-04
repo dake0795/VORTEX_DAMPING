@@ -155,6 +155,11 @@
        re-verified on Crossref): closest prior art Crooks & O'Neil 1995 (rotational pumping of the diocotron mode);
        related-work paragraph added to the introduction. NOTE: github.com/dake0795/VORTEX_DAMPING is PUBLIC (checked via
        the GitHub API, 4 Oct) - for Dan.
+   (p) 4 Oct, late: the jets' missing static factor (1.5-1.65) is NOT numerical in the kinetic solver (static response
+       converged in pitch-angle grid x4, bounce harmonics x2, npsi x2: 1.4588 unchanged) and NOT the GENE time step
+       (rb_c0p1_hxy, Courant 0.1: m = 1 factor 1.60/1.63 vs 1.58/1.61 at Courant 0.3, t 1200/1800). Decisive test queued:
+       zonal_static/m1 (linear, nx0 3, ky0 only, reduced-box grid; job 37268642, 1 core pinned cpu-r-hbm-37, waits on
+       Dan's cs450p ~6 h) - GENE's own linear static non-flute part of one zonal harmonic vs theory.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
