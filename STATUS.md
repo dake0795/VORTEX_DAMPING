@@ -201,6 +201,17 @@
        eyes (critical-layer flux), which this excludes: the cancellation moves into the critical layers, no prediction.
        NOT for the paper. Check of a paper claim (`core_fraction.py`): 76-80 % of the absorbed power is in the jet cores
        (wt, w opposite signs); lab-frame damping term +0.45-0.64 P (gain for the vortices). Claim in Sec. 3.6 holds.
+   (v) 4 Oct, night: E/W split of the exchange by k_y (`full_budget_EWZ.py`, `zonal_W_vs_E.py`, `quasilinear_check.py`).
+       Exact: the nonlinearity conserves E and W to < 1e-4 in every window. E side (closes to +-0.08 P1 at k_y = 1):
+       jets -1.25 / -0.96 P1, vortices +0.96 / +0.69, harmonics +0.29 / +0.27 (nx 64 / nx 128, t 3000-4400).
+       CORRECTION within the same hour: the Spectral_2D_W_* files are the NATIVE ENTROPY (diagnostic_schema.dat: 'W_fe =
+       native entropy; E_fe = native electrostatic; FE_fe = total W'; W_fe slope + E_fe slope = fe_time total), so my
+       'Z = W - E' and the 'entropy carried into the jets / quasilinear alpha ~ 1' reading were WRONG. Read correctly,
+       the nonlinearity moves almost no entropy into the jets (NL of the W file at k_y = 0: -0.02 / +0.17 P1); the
+       vortices' entropy goes to k_y >= 2. The entropy budget does not close (gap 0.77 P1 at k_y = 1) because 'spectral
+       parallel is RAW: embedded hyp_v/hyp_z must be subtracted conditionally' (schema) - entropy-side statements need
+       that subtraction and are NOT for the paper. Note also 'reduced dipole E = Eplunk/2 + Ebounce; distinct from
+       native electrostatic E': all budget statements in the paper use the native electrostatic E.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
