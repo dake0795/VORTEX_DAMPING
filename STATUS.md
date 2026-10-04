@@ -193,7 +193,7 @@
        vortices' total momentum, yet it exchanges energy (fig. balance). Delta E = c Delta p holds for particles in a
        steady pattern, not fluid-fluid exchange. Removed; 3.6 now states only what 3.5 derives (lab-frame energy of the
        damping and its sign) and that the stress returns energy, measured.
-   (u) 4 Oct, late: pseudomomentum (wave-activity) route to the drain (`figures/landau/drain_pseudomomentum.py`).
+   (u) 4 Oct, 18:42 [time corrected from 'late']: pseudomomentum (wave-activity) route to the drain (`figures/landau/drain_pseudomomentum.py`).
        The Rayleigh mode relation zeta = Z_x psi/(U - c) holds on the measured fields (coefficient 0.84-0.92, fit
        0.93-0.97; /tmp check). Kelvin's wave activity outside the cat's eyes has the sign of -c. With the damping as a
        local vorticity source of lab-frame power (w/wt)P, the outside-eye budget predicts GROWTH at ~2.2 L/E (cuts 0.5-2
@@ -201,7 +201,7 @@
        eyes (critical-layer flux), which this excludes: the cancellation moves into the critical layers, no prediction.
        NOT for the paper. Check of a paper claim (`core_fraction.py`): 76-80 % of the absorbed power is in the jet cores
        (wt, w opposite signs); lab-frame damping term +0.45-0.64 P (gain for the vortices). Claim in Sec. 3.6 holds.
-   (v) 4 Oct, night: E/W split of the exchange by k_y (`full_budget_EWZ.py`, `zonal_W_vs_E.py`, `quasilinear_check.py`).
+   (v) 4 Oct, 18:57 [time corrected from 'night']: E/W split of the exchange by k_y (`full_budget_EWZ.py`, `zonal_W_vs_E.py`, `quasilinear_check.py`).
        Exact: the nonlinearity conserves E and W to < 1e-4 in every window. E side (closes to +-0.08 P1 at k_y = 1):
        jets -1.25 / -0.96 P1, vortices +0.96 / +0.69, harmonics +0.29 / +0.27 (nx 64 / nx 128, t 3000-4400).
        CORRECTION within the same hour: the Spectral_2D_W_* files are the NATIVE ENTROPY (diagnostic_schema.dat: 'W_fe =
@@ -212,7 +212,7 @@
        parallel is RAW: embedded hyp_v/hyp_z must be subtracted conditionally' (schema) - entropy-side statements need
        that subtraction and are NOT for the paper. Note also 'reduced dipole E = Eplunk/2 + Ebounce; distinct from
        native electrostatic E': all budget statements in the paper use the native electrostatic E.
-   (w) 4 Oct, night: THE JETS' EXTRA NON-FLUTE FACTOR IS EXPLAINED (`figures/landau/jet_charge_pitch.py`, linear-run
+   (w) 4 Oct, 19:09 [time corrected from 'night']: THE JETS' EXTRA NON-FLUTE FACTOR IS EXPLAINED (`figures/landau/jet_charge_pitch.py`, linear-run
        checkpoint t 9560.8, k_y = 0, m = 1). GENE grids reproduced (int F0 d^3v = 1); exact zonal Poisson
        k^2 lam^2 g^xx phi = rho holds (rho/(phi g^xx) = 0.02901 = 2 k^2 lam^2 at every z). h/F0 is orbit-constant to
        < 2 % (stationary), ~0.99 phi_f at low energy, but at high energy it rises with pitch angle (0.97 -> 1.14 phi_f
@@ -224,7 +224,7 @@
        Next: what made the pitch-angle structure (candidate: the interchange burst, h ~ F0 (w - w*T)/(w - wd(eps,lam)),
        through the bounce-averaged drift; check on burst_rerun legA at t 700), and whether the vortices' critical-layer
        excess (6-8 vs 4.85) is the same thing.
-   (x) 4 Oct, night, follow-up to (w): the deposit I = <h> - F0 phibar (`jet_charge_tperp2.py`) reproduces the extra
+   (x) 4 Oct, 19:12 [time corrected from 'night'], follow-up to (w): the deposit I = <h> - F0 phibar (`jet_charge_tperp2.py`) reproduces the extra
        non-flute part directly (+0.661 vs +0.689 from n[h] - rho0[phi]). Profile in pitch angle (high energy): I/F0
        rises across the passing range (lambda 0 -> 1 = 1/B_max) and is flat over the trapped range, amplitude ~ eps
        (low energy: flat). Smooth models fit the shape but not the integral: linear in mu (T_perp) R^2 0.88 -> +1.58;
@@ -232,12 +232,12 @@
        (`jet_charge_aniso.py`, `jet_charge_driftdep.py`). So the exact statement stands (the factor is the
        pitch-angle structure of the jets' charge, closed to 1.5 %), but its origin is not pinned by a one-parameter
        model; the burst_rerun legA checkpoint at t 700 (and lin_m1/lin_m3) is the test of where it is made.
-   (y) 4 Oct, 21:30 (`figures/landau/bump_vs_jets.py`, reference run): the vortices' critical-layer bump ratio / 4.85
+   (y) 4 Oct, 21:03 [time corrected from '21:30'] (`figures/landau/bump_vs_jets.py`, reference run): the vortices' critical-layer bump ratio / 4.85
        is 1.27-1.28 for t 1000-3000, then 1.32, 1.39, 1.49, 1.60, 1.66-1.71 at t 4000-9800 (approaching the numerical
        collapse), while the jets' m = 1 factor is 1.56 at t 1000 and 1.62-1.66 thereafter. The bump does NOT track the
        jets' pitch-angle factor in the slow phase; it rises to the jets' value only as the cat's eyes narrow towards the
        grid / Debye scale. Separate, eye-width-dependent effect; the (w) mechanism does not explain the slow-phase bump.
-   (z) 4 Oct, 21:45 (`bump_coef_freq.py`): the fluid in a cat's eye circulates at omega_tr, so its charge is forced
+   (z) 4 Oct, 21:04 [time corrected from '21:45'] (`bump_coef_freq.py`): the fluid in a cat's eye circulates at omega_tr, so its charge is forced
        at ~omega_tr, not at wt = 0. The response coefficient falls with frequency (4.86 at 0.002, 4.73 at 0.1, 4.08 at
        0.3, 3.41 at 0.5), so a finite trapping frequency LOWERS the bump below 4.85; measured is above. Ruled out.
        The slow-phase bump excess (1.27) remains unexplained; candidates: pitch-angle structure of the eye's charge
@@ -246,18 +246,18 @@
    (y') correction to (y): in rb_c0p3_hxoff (no radial hyperdiffusion, no collapse) the bump ratio / 4.85 also rises,
        1.24-1.28 (t 2600-4000), 1.31 (5000), 1.44 (6000), 1.57 (7000), with the jets' factor flat at 1.66: the rise
        follows the weakening of the vortices (narrowing eyes), not the numerical collapse.
-   PRE-REGISTERED PREDICTION (4 Oct 2026, 21:50, before coll_hxoff has run): with Landau collisions nu = 0.01
+   PRE-REGISTERED PREDICTION (4 Oct 2026, 21:05 [time corrected from '21:50'; commit 48d7458], before coll_hxoff has run): with Landau collisions nu = 0.01
        (pitch-angle scattering time ~100), the jets' m = 1 non-flute factor relaxes from ~1.6 to ~1.0 (static response)
        within a few hundred time units of the restart at t 2500, because it is the pitch-angle structure of the jets'
        charge (STATUS (w)); the collisionless control stays at ~1.6. Check with `figures/landau/coll_prediction_check.py`.
-   (aa) 4 Oct, 23:00: phase-mixing (Rosenbluth-Hinton-type) predictor `figures/landau/rh_predict.py`: linear k_y = 0
+   (aa) 4 Oct, 21:41 [time corrected from '23:00']: phase-mixing (Rosenbluth-Hinton-type) predictor `figures/landau/rh_predict.py`: linear k_y = 0
        dynamics conserve I = <h>_orbit - F0 phibar on every orbit (eps, mu, sigma), so the final non-flute part follows
        from any checkpoint by solving (1 + k^2 lam^2 g^xx) phi_f - rho0[phi_f] = n[I]. Validated on the stationary m = 1
        checkpoint: predicted final 1.641 vs present 1.711 (from the checkpoint's own Poisson field; field.dat gives
        1.665) - good to a few %. NOTE GENE debye2 = 2 lambda_D^2 for the pair plasma (rho = k^2 debye2 g^xx phi).
        `burst_analysis.py` runs the whole burst test (prediction from legA t 700, linear lin_m1/3, nonlinear legB,
        reference) once the jobs finish.
-   (bb) 4 Oct, ~23:30: WHY THE DRAIN DEPENDS ON RESOLUTION (`jets_nl_by_m_res.py`, `jet_budget_clean_res.py`, t 3000-4000).
+   (bb) 4 Oct, 21:56 [time corrected from '~23:30']: WHY THE DRAIN DEPENDS ON RESOLUTION (`jets_nl_by_m_res.py`, `jet_budget_clean_res.py`, t 3000-4000).
        Jets' nonlinear E input by harmonic per P1: the whole difference is at m = 1 (-1.08 nx64 vs -0.83 nx128; m >= 3
        the same). m = 1 forcing (fluid units): GENE -1.653 / -1.310; flute Reynolds stress +0.408 / +0.896;
        deposition f = kP/wt -2.277 / -2.245; stress + deposition -1.869 / -1.350 (13 % / 3 %). The deposition is
@@ -265,7 +265,7 @@
        resolution - it is set by their fine radial structure near the critical layers (Debye scale), which the grid
        resolves differently. So the drain's resolution dependence is the Reynolds stress of the resolved vortex
        structure; nx256 decides whether that stress converges. Theory (stress + deposition) tracks GENE across the change.
-   (cc) 4 Oct, ~23:55: (bb) WITHDRAWN - its stress numbers were window-sampling scatter. With 25 windows (every 60, t
+   (cc) 4 Oct, 21:58 [time corrected from '~23:55']: (bb) WITHDRAWN - its stress numbers were window-sampling scatter. With 25 windows (every 60, t
        2800-4300; `stress_m1_stats.py`): m = 1 flute Reynolds stress +0.727 +- 0.145 (nx64; per-window scatter 0.72)
        vs +0.745 +- 0.065 (nx128) - no resolution difference; deposition -2.309 +- 0.095 vs -2.212 +- 0.106; sum
        -1.582 +- 0.118 vs -1.467 +- 0.084 against GENE -1.653 / -1.310 (t 3000-4000). So stress + deposition reproduces

@@ -1,4 +1,4 @@
-"""Pre-registered test (written 4 Oct 2026, 21:50, before coll_hxoff ran): if the jets' extra non-flute factor (~1.6 x the
+"""Pre-registered test (written 4 Oct 2026, 21:05 [corrected from 21:50], before coll_hxoff ran): if the jets' extra non-flute factor (~1.6 x the
 static response, STATUS (w)) is the pitch-angle structure of their charge, pitch-angle scattering (Landau collisions,
 nu = 0.01, 1/nu = 100) should relax it to the static value 1 within a few hundred time units of the restart at t 2500,
 while the collisionless control (rb_c0p3_hxoff) stays at ~1.6.  Also prints the critical-layer bump ratio / 4.85."""
