@@ -250,6 +250,13 @@
        (pitch-angle scattering time ~100), the jets' m = 1 non-flute factor relaxes from ~1.6 to ~1.0 (static response)
        within a few hundred time units of the restart at t 2500, because it is the pitch-angle structure of the jets'
        charge (STATUS (w)); the collisionless control stays at ~1.6. Check with `figures/landau/coll_prediction_check.py`.
+   (aa) 4 Oct, 23:00: phase-mixing (Rosenbluth-Hinton-type) predictor `figures/landau/rh_predict.py`: linear k_y = 0
+       dynamics conserve I = <h>_orbit - F0 phibar on every orbit (eps, mu, sigma), so the final non-flute part follows
+       from any checkpoint by solving (1 + k^2 lam^2 g^xx) phi_f - rho0[phi_f] = n[I]. Validated on the stationary m = 1
+       checkpoint: predicted final 1.641 vs present 1.711 (from the checkpoint's own Poisson field; field.dat gives
+       1.665) - good to a few %. NOTE GENE debye2 = 2 lambda_D^2 for the pair plasma (rho = k^2 debye2 g^xx phi).
+       `burst_analysis.py` runs the whole burst test (prediction from legA t 700, linear lin_m1/3, nonlinear legB,
+       reference) once the jobs finish.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
