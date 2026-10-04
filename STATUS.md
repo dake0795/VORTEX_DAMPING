@@ -170,6 +170,16 @@
        for lack of a test; with it the constancy from t 800 and the box dependence (different bursts) are consistent.
        Open: what the burst selects (1.6 reduced box, 1.0-1.4 production). First try m1 (ppj init) gave phi = 0: equal
        species init carries no charge; the first job also failed on an srun cpus-per-task clash (fixed in the sbatch).
+   (r) 4 Oct, 17:00-18:00, when the jets' factor is set (`jets_factor_history.py`, `jets_factor_vs_loss.py`, rb_c0p3_hxy):
+       the jets form at t 650-700 (m = 1 flute |phi_0| 1e3 -> 2.9e5, then constant to 0.3 %); right at formation the
+       factor is ~1 (t 600: m = 1 1.11, m = 5-9 1.05-1.17), at t 700 1.46, then the non-flute part keeps growing on its
+       own (1982 -> 2229, factor -> 1.59) and stops at t ~2100. Not the cumulative Landau loss (W doubles after t 2100
+       with no change; m = 3 decreases). The approach is ~1/(t - 700): (t - 700) x (gap to final) ~ 1.5e4 for t 900-1300,
+       the signature of collisionless phase mixing of a transient left by the abrupt burst. Test submitted (18:00):
+       burst_rerun/legA (rb_c0p3_hxy from t 0 to 700, 4 nodes after ref leg8 on cpu-r-hbm-[29,40-42]), legB nonlinear
+       700 -> 1500, lin_m1 / lin_m3 linear k_y = 0 from legA's checkpoint (1 core each, cpu-r-hbm-37). If linear
+       reproduces the rise, the factor is the phase-mixed residual of the burst (a Rosenbluth-Hinton-type initial-value
+       problem), computable from the state at formation.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
