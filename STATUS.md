@@ -273,7 +273,7 @@
        is NOT captured (theory change 0.11 +- 0.14). Earlier single-number comparisons of the m = 1 stress (e.g. the
        -1.87 vs -1.65 of jet_budget_clean.py, 6 windows) carry this +-0.15-0.3 scatter. `stress_where.py` (masking the
        critical layers) is inconclusive for the same reason.
-   (dd) 5 Oct, ~00:40 (`stress_by_ky.py`): stress into the jets' m = 1 from the RAW frames (no two-vortex fit) is
+   (dd) 4 Oct, 22:30 [timestamp corrected; first written as "5 Oct 00:40"] (`stress_by_ky.py`): stress into the jets' m = 1 from the RAW frames (no two-vortex fit) is
        useless - the instantaneous stress swings with the breathing (per-frame scatter ~ +-18 x the mean; 270 frames
        give +-1.1 s.e.), so only fitted (breathing-averaged) estimates are meaningful. k_y >= 3 contribute < 0.05;
        k_y = 2 is within noise (+0.03 +- 0.5, -0.13 +- 0.4). Resolution dependence of GENE's m = 1 forcing remains
