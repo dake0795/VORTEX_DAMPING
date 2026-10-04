@@ -188,6 +188,11 @@
        ruled-out list, fluid-model-alone, channels, corrugation, dissipation, trapping figures and the old Rayleigh and
        trapping appendices removed (files kept). Panels (b) of amplitude and exchange removed (they read the numerical
        collapse as physics). Injection renamed I (P is the absorbed power).
+   (t) 4 Oct, correction to (s): the relation dE_v/dt = c dM_v/dt for EVERY exchange (put in Sec. 3.6 in (s)) is
+       wrong for the Reynolds stress - the stress divergence integrates to zero over the box, so it cannot change the
+       vortices' total momentum, yet it exchanges energy (fig. balance). Delta E = c Delta p holds for particles in a
+       steady pattern, not fluid-fluid exchange. Removed; 3.6 now states only what 3.5 derives (lab-frame energy of the
+       damping and its sign) and that the stress returns energy, measured.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
