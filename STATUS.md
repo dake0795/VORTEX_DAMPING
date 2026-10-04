@@ -193,6 +193,14 @@
        vortices' total momentum, yet it exchanges energy (fig. balance). Delta E = c Delta p holds for particles in a
        steady pattern, not fluid-fluid exchange. Removed; 3.6 now states only what 3.5 derives (lab-frame energy of the
        damping and its sign) and that the stress returns energy, measured.
+   (u) 4 Oct, late: pseudomomentum (wave-activity) route to the drain (`figures/landau/drain_pseudomomentum.py`).
+       The Rayleigh mode relation zeta = Z_x psi/(U - c) holds on the measured fields (coefficient 0.84-0.92, fit
+       0.93-0.97; /tmp check). Kelvin's wave activity outside the cat's eyes has the sign of -c. With the damping as a
+       local vorticity source of lab-frame power (w/wt)P, the outside-eye budget predicts GROWTH at ~2.2 L/E (cuts 0.5-2
+       w: 1.5-2.3 L/E); measured is decay at 0.13-0.38 L/E. So the wave-activity exchange is dominated by the cat's
+       eyes (critical-layer flux), which this excludes: the cancellation moves into the critical layers, no prediction.
+       NOT for the paper. Check of a paper claim (`core_fraction.py`): 76-80 % of the absorbed power is in the jet cores
+       (wt, w opposite signs); lab-frame damping term +0.45-0.64 P (gain for the vortices). Claim in Sec. 3.6 holds.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
