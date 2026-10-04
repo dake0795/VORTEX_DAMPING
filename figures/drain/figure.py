@@ -17,7 +17,7 @@ supply  (a) the rate -dE_zon/dt at which the jets lose energy, measured in windo
             entropy of figures/channels (parallel + drift channel), plus the radial hyperdiffusion of the box-scale
             jet, nu_h = 3.4e-6 times the strength of the radial hyperdiffusion relative to the reference run (0 for
             rb_c0p3_hxoff, 1/16 for nx128, 1/4 for hxy_d4); no adjustable parameter;
-        (b) E_nz^{1/4} (proportional to the trapping frequency) against the electrostatic energy E_zon + E_nz of the
+        (b) [removed 4 Oct 2026: the E_nz^{1/4} drain law failed after t ~4500] E_nz^{1/4} against the electrostatic energy E_zon + E_nz of the
             run without radial hyperdiffusion: a straight line if the trapping frequency is proportional to the energy
             in excess of that of the stable state.
 """
@@ -143,16 +143,8 @@ def draw():
     a.set_xlabel(r"$[(\nu_{\rm L}-\Gamma_E)E_{\rm nz}+\nu_{\rm h}E_{\rm zon}]/E_0$"); a.set_ylabel(r"$-\dot E_{\rm zon}/E_0\;(c_{\rm ref}/L_{\rm ref})$")
     a.legend([Line2D([], [], ls="none", mew=1.0, **mk[r]) for r in ("ref", "hxy_d4", "nx128", "hxoff")],
              ["reference", r"$\nu_\perp/4$", r"$\Delta x/2$", r"$\nu_x=0$"], loc="lower right", labelspacing=0.15, handletextpad=0.2)
-    B = bins(C["hxoff"], T1 - WBIN / 2, 1e9)
-    x = (B[:, 2] + B[:, 1]) / E0; y = B[:, 1] ** 0.25 / E1 ** 0.25
-    q = np.polyfit(x, y, 1)
-    print(f"E_nz^(1/4) against E_zon + E_nz (nu_x = 0): slope {q[0]:.3f} per E_0, zero at E/E_0 = {-q[1]/q[0]:.4f}, rms residual {np.std(y - np.polyval(q, x)):.3f}; "
-          f"K implied 4 nu_L slope / (E_0 E_1^(-1/4)) = {4*nuL*q[0]*E1**0.25/E0:.3e}")
-    b.plot(x, y, "o", c=col["hxoff"], ms=4.2)
-    xl = np.array([x.min() - 0.004, x.max() + 0.004]); b.plot(xl, np.polyval(q, xl), "-", c=ns.PAL["theory"], lw=1.0, zorder=0)
-    b.set_xlabel(r"$(E_{\rm zon}+E_{\rm nz})/E_0$"); b.set_ylabel(r"$(E_{\rm nz}/E_1)^{1/4}$")
-    ns.style_axes(b)
-    ns.tag(a, "(a)"); ns.tag(b, "(b)")
+    fig.delaxes(b); pa = a.get_position(); a.set_position([0.5 - pa.width / 2, pa.y0, pa.width, pa.height])
+    ns.style_axes(a)
     ns.save(fig, "supply")
 
 
