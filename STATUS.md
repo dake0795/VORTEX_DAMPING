@@ -115,6 +115,27 @@
        and vortices is NOT converged in radial resolution (Debye scale ~1.2 dx at nx 64). nx256_hxoff queued
        (37266546, + leg 2 37266547; starts ~5 Oct 15:00 on cpu-r-hbm-[2,4,5,35]). Control nx128_hx16: 1.23x the
        reference at t 10,000, 1.98x at 10,500 (decays like the reference, collapse delayed).
+   (m) 4 Oct, evening (`figures/lib/fieldgen.py`; `figures/landau/bump_resolution.py`, `eye_charge.py`, `energy_norm.py`,
+       `jet_budget_clean.py`, `vortex_drain_pred.py`) - CORRECTIONS and new results:
+       - The critical-layer bump/vorticity ratio is resolution-independent (6.0-6.2 at nx 64 and 128, t 2800-4300;
+         8.0 both at t 9600-10000): the factor vs the static theory is physics, not numerics.
+       - At the critical layers the vortex CHARGE is nearly flute (its profile along the line has 0.2-0.4 of the
+         metric variation): parallel streaming equilibrates charge along the line; the potential carries the non-flute
+         part. Flat charge + static response gives ~80 % (early) to ~60 % (late) of the measured bump.
+       - GENE's E_fe(k_y = 0) = lambda^2 int J g^xx k_x^2 |phi|^2 / int J to 0.05 %: = 2 lambda^2 C^2 x the field-based fluid
+         energy (~8540, falling ~12 % to fine harmonics). The old '3.3x' side issue is not real.
+       - RETRACTION of (b), (g) and of the notes' 'local stress': (b)'s per-harmonic agreement had a factor-2 error
+         (energy of both +-m without the 1/2). With one normalisation, GENE's nonlinear forcing of the jets at m = 1 is
+         flute Reynolds stress + deposition (-1.87 vs -1.65 at t 3000-4000; -3.15 vs -2.05 at 1500-2500); the 'local'
+         stress (local phi and local metric) overshoots 2-3.5x and is the wrong object (particles are advected by their
+         orbit-averaged potential; the advected charge includes the non-adiabatic response). At m >= 5 GENE's
+         nonlinear forcing IS the flute stress (m 5: -0.032 vs -0.041; m 7: -0.090 vs -0.073), returned by parallel
+         streaming. m = 3 unexplained.
+       - The vortex drain = small difference of two large exchanges with the jets: flute stress (vortex -> jets) and the
+         lab-frame effect of the damping (jets -> vortex through the deposited momentum), each ~ the absorbed power,
+         nearly cancelling; measured drain 15-35 % of the absorbed power; with each term uncertain by 10-50 % the
+         predicted sum has the wrong sign in 3 of 6 windows. Predicting the drain needs both to a few per cent; it also
+         explains the resolution sensitivity of the drain.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
