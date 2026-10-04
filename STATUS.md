@@ -145,6 +145,16 @@
        1e-2, hyp_x = 0, cpu-r-hbm-[78-79] after debye_x4 leg 2). Literature search delegated (LITERATURE.md, pending).
        Not done: pitch-angle-resolved (g1.dat) stress diagnostic (judged non-predictive); the missing static factor;
        the m = 3 harmonic.
+   (o) 4 Oct, evening: GENE's exact budget by k_y (`figures/landau/ky_budget.py`, figure `partition`): per unit of the
+       vortices' Landau loss P1, the jets supply ~1.1-1.4 P1 nonlinearly; the vortices receive ~0.9-1.1, their harmonics
+       (k_y >= 2) ~0.2-0.25, which are Landau damped as fast; drift loss 0.075; the vortices drain by 0.26 (nx 64) and 0.31
+       (nx 128) on average. NL sums to zero over k_y in every window. The missing channel in (m)/(n) was the harmonics.
+       Loss formula on the harmonics (`harmonics_loss.py`, extended D table `cache_Dext.npz`): k_y = 3 about right, k_y = 2
+       at 55-65 %; total 60-85 % of GENE's harmonic loss, no free constant. Measured local D instead of theory D changes
+       the damping exchange by only 2-6 % (`drain_measuredD.py`). Literature (`LITERATURE.md`, sub-agent, key entries
+       re-verified on Crossref): closest prior art Crooks & O'Neil 1995 (rotational pumping of the diocotron mode);
+       related-work paragraph added to the introduction. NOTE: github.com/dake0795/VORTEX_DAMPING is PUBLIC (checked via
+       the GitHub API, 4 Oct) - for Dan.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
