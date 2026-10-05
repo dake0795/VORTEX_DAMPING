@@ -285,6 +285,16 @@
        if lin_m1 stays at 1.50, the post-burst rise of m = 1 is nonlinear, not phase mixing. legB delayed (ref leg 9
        took cpu-r-hbm-[29,40-42] at 02:25; legB est. start 6 Oct 14:25) - the original run serves as the nonlinear
        comparison.
+   (ff) 5 Oct, 03:50: BURST TEST RESULT (burst_analysis.py; lin_m1 37272568, lin_m3 37272620, 70 min each).
+       m = 3 linear: 1.195 (t 700) -> 1.396 by t 764 and flat to t 1500 (1.397); predicted 1.381 from legA: CONFIRMED
+       (1 %). m = 1 linear: 1.461, 1.467, 1.493, 1.537, 1.541, 1.539, 1.503, 1.467, 1.528 at t 700-1500 (every 100): a slow
+       oscillation (period ~500-700, +-0.04) whose MEAN 1.504 equals the prediction 1.504 (the 'drift' noted at 03:10 was
+       this oscillation). At t 1500 the checkpoint's own Poisson field gives 1.572, RH-final 1.475. Original NONLINEAR
+       run: m = 1 1.477 (700) -> 1.555 (900) -> 1.58 (1200) -> 1.59 (1500) -> 1.66 (late); m = 3 1.17 -> 1.49 (1500).
+       Reading: the burst lays down the pitch-angle structure (factor ~1.5 at t 700); phase mixing then gives exactly the
+       predicted state (m = 3 rise; m = 1 mean); the later rise of the nonlinear run above the linear prediction is
+       nonlinear. Control lin_m1_nohyp (37295830, hyp_z = hyp_v = 0) running: is the slow m = 1 oscillation damped by
+       the hyperdiffusion? legB (nonlinear) still waits for nodes (ref leg 9).
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
