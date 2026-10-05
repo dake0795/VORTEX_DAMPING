@@ -295,6 +295,10 @@
        predicted state (m = 3 rise; m = 1 mean); the later rise of the nonlinear run above the linear prediction is
        nonlinear. Control lin_m1_nohyp (37295830, hyp_z = hyp_v = 0) running: is the slow m = 1 oscillation damped by
        the hyperdiffusion? legB (nonlinear) still waits for nodes (ref leg 9).
+   (gg) 5 Oct, 05:10: control lin_m1_nohyp (37295830, hyp_z = hyp_v = 0): 1.461, 1.485, 1.502, 1.563, 1.569, 1.556,
+       1.540, 1.482, 1.561 at t 700-1500 - the slow m = 1 oscillation persists with the same period and slightly larger
+       amplitude (mean 1.524 vs 1.504 with hyperdiffusion; prediction 1.504). So it is physical (unmixed slow orbits),
+       lightly damped by the numerical dissipation; the phase-mixing prediction gives its mean to ~1 %.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the

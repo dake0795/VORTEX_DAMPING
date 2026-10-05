@@ -15,15 +15,15 @@ geo = bounce.geometry(f"{BR}/legA/out/dipole_fix.dat"); wz = geo["J"] / geo["J"]
 Rs = response.Response(geo); Rs.source = lambda k2: k2 * (geo["gxx"] - Gxx); chi = np.conj(Rs.solve(0.02, 1.0))
 def factor(pk, kx):
     p0 = (pk * wz).sum(); pred = 5000.0 * kx ** 2 * chi * p0; return abs(np.vdot(pred * wz, pk - p0) / np.vdot(pred * wz, pred))
-for m in (1, 3):
-    out = f"{BR}/lin_m{m}/out"
-    if not os.path.exists(out + "/field.dat"): print(f"lin_m{m}: no output"); continue
+for m, tag in ((1, ""), (3, ""), (1, "_nohyp")):
+    out = f"{BR}/lin_m{m}{tag}/out"
+    if not os.path.exists(out + "/field.dat"): print(f"lin_m{m}{tag}: no output"); continue
     N = 3 * nz; FR = 16 + 4 + N * 16 + 4; b = open(out + "/field.dat", "rb").read(); n = len(b) // FR
     kx = 2 * np.pi * m / vf.LX; rows = []
     for j in np.linspace(0, n - 1, 9).astype(int):
         f = b[j * FR:(j + 1) * FR]; t = np.frombuffer(f[4:12], "<f8")[0]
         pk = np.frombuffer(f[20:20 + N * 16], "<c16").reshape((3, nz), order="F")[1]; rows.append((t, factor(pk, kx)))
-    print(f"lin_m{m} (linear):  " + "  ".join(f"t {t:.0f}: {x:.3f}" for t, x in rows))
+    print(f"lin_m{m}{tag} (linear):  " + "  ".join(f"t {t:.0f}: {x:.3f}" for t, x in rows))
 import fieldgen as fg
 for name, dirs in (("legB (nonlinear rerun)", [f"{BR}/legA/out", f"{BR}/legB/out"]), ("reference", [fg.RB + "/rb_c0p3_hxy/leg_0001/out"])):
     dirs = [d for d in dirs if os.path.exists(d + "/field.dat")]
