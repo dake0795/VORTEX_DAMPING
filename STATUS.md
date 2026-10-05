@@ -278,6 +278,13 @@
        give +-1.1 s.e.), so only fitted (breathing-averaged) estimates are meaningful. k_y >= 3 contribute < 0.05;
        k_y = 2 is within noise (+0.03 +- 0.5, -0.13 +- 0.4). Resolution dependence of GENE's m = 1 forcing remains
        unexplained (cc).
+   (ee) 5 Oct, 02:45: burst_rerun legA done (t 700, 23:58-02:34). PREDICTION from its checkpoint (rh_predict.py, before
+       lin_m1/lin_m3 report): m = 1 now 1.505 -> final 1.504 (already orbit-constant to 0.25 %); m = 3 now 1.196 ->
+       final 1.381 (2.9 % not yet mixed). Rerun vs original at t 700: m = 1 1.505 vs 1.457, m = 3 1.196 vs 1.176 (burst
+       reproduced). Original NONLINEAR run continues to m = 1 1.59 (t 2100) / 1.66 (t 9000) and m = 3 ~1.44 (t 1200):
+       if lin_m1 stays at 1.50, the post-burst rise of m = 1 is nonlinear, not phase mixing. legB delayed (ref leg 9
+       took cpu-r-hbm-[29,40-42] at 02:25; legB est. start 6 Oct 14:25) - the original run serves as the nonlinear
+       comparison.
    OPEN, the next calculation: the non-flute structure of a vortex at a trapped critical layer (static limit inside the
    cat's eye, with the metric source acting on the eye's fine radial structure), to put the local stress into the model.
 8. Next: derive that response (zonal mode with its non-flute part s(l) k_x^2 lambda_D^2 phi_0; stress with the
